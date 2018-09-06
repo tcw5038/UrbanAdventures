@@ -1,0 +1,94 @@
+body {
+  background-color: #274251;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+/*
+---------------------------------
+NAV STYLING
+---------------------------------
+*/
+
+/* Nav color */
+.topnav {
+  background-color: #2B99AE;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Nav hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Active/current link */
+.topnav a.active {
+  background-color: #27425185;
+  color: white;
+}
+
+/*
+---------------------------------
+BRANDING AND SUBTITLE STYLING
+---------------------------------
+*/
+
+/* Position the name and logo */
+.centered {
+  height:400px;
+  width:auto;
+  position: fixed;
+  top: 40%;/*changed from 50% */
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+#subtitle{
+  font-size:1.4em;
+  color:white;
+  position:relative;
+  width: 50%;
+  margin-right:0;
+  margin-left:0;
+}
+
+.buttoncontainer {
+  display:block;
+  text-align:center;
+}
+
+button{
+  margin-left:10px;
+  margin-right:10px;
+  padding-left:30px;
+  padding-right:30px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+/*
+---------------------------------
+PITCH STYLING
+---------------------------------
+*/
+
+.main-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 60vh;
+  margin-top: 40px;
+}
+
