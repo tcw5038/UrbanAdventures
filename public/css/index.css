@@ -119,7 +119,7 @@ BRANDING AND SUBTITLE STYLING
   padding-right:30px;
   padding-top:10px;
   padding-bottom:10px;
-  font-size:1.4em;
+  font-size:1.3em;
   color:white;
   background-color:#2b99ae;
   border:none;
@@ -149,17 +149,35 @@ PITCH STYLING
 
 .main-container {
   width: 100%;
-  height: 60vh;
+  height: 100vh;
   margin-top: 40px;
   background-color:#f1e9d8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding:40px;
 }
 
-.descriptionimgs{
-  width:40%;
+.descriptcontainer{
+  width:100%;
+  height:200px;
+}
+
+#descriptionimg1{
+  width:50%;
+  height:auto;
+  float:left;
+}
+
+#descriptionimg2{
+  width:50%;
   height:auto;
   float:right;
 }
 
 .descriptiontext{
-  width:40%;
+  width:25%;
+  height:auto;
+  text-align:center;
 }
