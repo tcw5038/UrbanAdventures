@@ -10,6 +10,8 @@ form {
   text-align:center;
 }
 
+
+
 input{
   display:block;
   text-align:center;
@@ -54,11 +56,9 @@ NAV STYLING
   font-weight:300;
   color:white;
   text-decoration: none;
-  height:50px;
-  width:100px;
-
+  height:45px;
+  width:120px;
 }
-
 /* Nav hover */
 .navbutton:hover {
   background-color: white;

@@ -40,16 +40,19 @@ NAV STYLING
   font-family: 'Source Sans Pro', sans-serif;
   margin-left:10px;
   background-color: #274251;
-  border:none;
+  border-color:white;
   border-radius: 6px;
   cursor:pointer;
   font-size:1.2em;
   font-weight:300;
   color:white;
   text-decoration: none;
-  height:50px;
-  width:100px;
+  height:45px;
+  width:120px;
+}
 
+#dashboard{
+  float:left;
 }
 
 /* Nav hover */

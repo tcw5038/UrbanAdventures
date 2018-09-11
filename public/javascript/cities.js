@@ -20,5 +20,3 @@ function initMap(data) {
     gestureHandling: 'greedy'
   });
 }
-
-initMap();
