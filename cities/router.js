@@ -13,8 +13,8 @@ const jsonParser = bodyParser.json();
 router.get('/', (req, res) => {
   City
     .find()
-    .then(posts => {
-      res.json(posts.map(post => post.serialize()));
+    .then(cities => {
+      res.json(cities.map(city => city.serialize()));
     })
     .catch(err => {
       console.error(err);
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   City
     .findById(req.params.id)
-    .then(post => res.json(post.serialize()))
+    .then(city => res.json(city.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something went horribly awry' });
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const requiredFields = ['title', 'content', 'author'];
+  const requiredFields = ['cityName', 'country', 'yearVisited', 'notes', 'tags'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -45,11 +45,14 @@ router.post('/', (req, res) => {
 
   City
     .create({
-      title: req.body.title,
-      content: req.body.content,
-      author: req.body.author
+      cityName: req.body.cityName,
+      country: req.body.country,
+      yearVisited: req.body.yearVisited,
+      notes:req.body.notes,
+      tags:req.body.tags,
+      imageURL:req.body.imageURL
     })
-    .then(blogPost => res.status(201).json(blogPost.serialize()))
+    .then(city => res.status(201).json(city.serialize()))
     .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'Something went wrong' });
@@ -79,7 +82,7 @@ router.put('/:id', (req, res) => {
   }
 
   const updated = {};
-  const updateableFields = ['title', 'content', 'author'];
+  const updateableFields = ['cityName', 'country', 'yearVisited', 'notes', 'tags', 'imageURL'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
@@ -88,7 +91,7 @@ router.put('/:id', (req, res) => {
 
   City
     .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
-    .then(updatedPost => res.status(204).end())
+    .then(updatedcity => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
 

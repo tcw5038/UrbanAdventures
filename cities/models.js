@@ -21,9 +21,12 @@ const CitySchema = mongoose.Schema({
 
 CitySchema.methods.serialize = function() {
   return {
-    username: this.username || '',
-    firstName: this.firstName || '',
-    lastName: this.lastName || ''
+    cityName: this.cityName || '',
+    country: this.country || '',
+    yearVisited: this.yearVisited || 0,
+    notes:this.notes || '',
+    tags:this.tags || [],
+    imageURL:this.imageURL || ''
   };
 };
 
