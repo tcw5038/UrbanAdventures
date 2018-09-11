@@ -1,9 +1,15 @@
 body {
   background-color: #274251;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   box-sizing: border-box;
-  margin: 0;
+  margin-top: 100px;
+  margin-left:0;
+  margin-right:0;
   padding: 0;
+}
+
+form{
+  text-align:center;
 }
 
 /*
@@ -12,46 +18,46 @@ NAV STYLING
 ---------------------------------
 */
 
-/* Nav color */
+/* Nav bar */
 .topnav {
+  position:fixed;
+  top:0;
+  width:100%;
   background-color: #f1e9d8;
   overflow: hidden;
-  margin-bottom:5%;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+/* Style the button surrounding the links */
+
+.navbutton{
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-left:10px;
+  background-color: #274251;
+  border:none;
+  border-radius: 6px;
+  cursor:pointer;
+  font-size:1.2em;
+  font-weight:300;
   color:white;
+  text-decoration: none;
+  height:50px;
+  width:100px;
+
 }
 
 /* Nav hover */
-.topnav a:hover {
-  background-color: #ddd;
+.topnav  .navbutton:hover {
+  background-color: white;
   color: #274251;
 }
 
-/* Active/current link */
-.topnav a.active {
-  background-color: #27425185;
-  color: white;
-}
-
-.navbutton{
-  margin-top:5px;
-  margin-left:10px;
-  font-size:1.4em;
-  color:white;
-  background-color:#2b99ae;
-  border:none;
-  border-radius: 2px;
-  box-shadow: 0 1px white;
-  cursor:pointer;
-}
 
 /*
 ---------------------------------
@@ -100,7 +106,7 @@ BRANDING AND SUBTITLE STYLING
 }
 
 #subtitle{
-  font-size:1.4em;
+  font-size:1.6em;
   color:#f1e9d8;
   text-align:center;
   
@@ -113,25 +119,23 @@ BRANDING AND SUBTITLE STYLING
 }
 
 .bodybutton{
-  margin-left:10px;
-  margin-right:10px;
-  padding-left:30px;
-  padding-right:30px;
-  padding-top:10px;
-  padding-bottom:10px;
-  font-size:1.3em;
-  color:#274251;
-  background-color:white;
-  border:none;
-  border-radius: 2px;
-  box-shadow: 0 3px white;
+  height:70px;
+  width:180px;
+  font-size:1.2em;
+  font-weight:300;
+  color:white;
+  background-color:#274251;
+  border-color:white;
+  border-width: 3px;
+  border-radius: 6px;
   cursor:pointer;
+  margin:10px;
 }
 
 /* Button hover */
-.button a:hover {
-  background-color: #ddd;
- 
+.bodybutton:hover {
+  background-color: white;
+  color: #274251;
 }
 
 
@@ -174,6 +178,18 @@ PITCH STYLING
   font-size: 1.6em;
   float:left;
   font-weight:300;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 
+}
+
+/*
+---------------------------------
+FOOTER
+---------------------------------
+*/
+
+footer{
+  height:75px;
+  color:white;
+  text-align:center;
 }

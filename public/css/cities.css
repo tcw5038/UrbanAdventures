@@ -1,8 +1,9 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: #f1e9d8;
 }
 
 /*
@@ -11,72 +12,78 @@ NAV STYLING
 ---------------------------------
 */
 
-/* Nav color */
+/* Nav bar */
 .topnav {
-  background-color: #f1e9d8;
+  background-color: #274251;
   overflow: hidden;
-  margin-bottom:5%;
+  margin-bottom:3%;
+  
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+/* Style the button surrounding the links */
+
+.navbutton{
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-left:10px;
+  background-color: #274251;
+  border-color:white;
+  border-radius: 6px;
+  cursor:pointer;
+  font-size:1.2em;
+  font-weight:300;
   color:white;
+  text-decoration: none;
+  height:50px;
+  width:100px;
+
 }
 
 /* Nav hover */
-.topnav a:hover {
-  background-color: #ddd;
+.navbutton:hover {
+  background-color: white;
   color: #274251;
-}
-
-/* Active/current link */
-.topnav a.active {
-  background-color: #27425185;
-  color: white;
-}
-
-.navbutton{
-  margin-top:5px;
-  margin-left:10px;
-  font-size:1.4em;
-  color:white;
-  background-color:#2b99ae;
-  border:none;
-  border-radius: 2px;
-  box-shadow: 0 1px white;
-  cursor:pointer;
 }
 
 
 /*
 ---------------------------------
-DARK LIGHT BOX
+MAP AND CITY LISTING
 ---------------------------------
 */
 
-.dark-box{
-  background-color:rgba(0,0,0,0.5);
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
+
+#map{
+  position:fixed;
+  width:100%;
+  height:100%;
+}
+body, html{
+  height:100%;
+  margin:0px;
+  padding:0px;
 }
 
-.white-box{
+.button{
+  position: fixed;
+  top: 10px;
+  right:10px;
+}
+
+.citiescontainer{
   background-color:white;
-  width: 80%;
-  height: 400px;
-  margin: 50px auto;
-  padding: 10%;
-  box-sizing: border-box;
-  max-width: 600px;
-  position: relative;
+  position: fixed;
+  height:90%;
+  width: 30%;
+  bottom: 0px;
+  left: 0px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 .x{
    position: absolute;
@@ -84,10 +91,32 @@ DARK LIGHT BOX
    right:10px;
 }
 
+h1{
+  margin-left:75px;
+  position:sticky;
+}
+
+.cityname{
+  margin-left:75px;
+}
+
+.testcities{
+  width:70%;
+  height:15%;
+  border: 1px solid black;
+  margin:20px;
+  margin-left:75px;
+}
+
+
+@media(max-width:600px){
+  .white-box{
+    width: 50%;
+  }
+}
+
 @media(max-width:300px){
   .white-box{
     width: 100%;
-    height: 100%;
-    margin: 0 auto;
   }
 }

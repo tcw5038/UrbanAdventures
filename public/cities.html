@@ -6,24 +6,38 @@
     <title>Cities Page - Logged In</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/cities.css" rel="stylesheet" type="text/css" />
 </head>
 <div class="topnav">
-  <button class="navbutton" type="submit" ><a href="signup.html">Sign up</a></button>
-  <button class="navbutton" type= "submit"><a href="login.html">Log in</a></button>
+  <a href="signup.html"><button class="navbutton" type="submit" >Sign up</button></a>
+  <a href="login.html"><button class="navbutton" type= "submit">Log in</button></a>
 </div>
 <body>
-<div class="dark-box"><!--outer box which will darken everything outside of the white box-->
-  <div class="white-box">
-     <span class="x">X</span>
-     <p>
-        Lorem ipsum dolor sit amet, 
-        consectetur adipiscing elit, 
-        sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua.
-    <p>
-  </div>
-</div>
+        <div id="map"></div>
+       
+         <button class="button open">open</button>
+         <div class="citiescontainer">
+           <h1>My Cities</h1>
+            <button class="button close">close</button>
+              <p class="cityname">City 1</p>
+              <div class="testcities"></div>
+              <p class="cityname">City 2</p>
+              <div class="testcities"></div>
+              <p class="cityname">City 3</p>
+              <div class="testcities"></div>
+              <p class="cityname">City 4</p>
+              <div class="testcities"></div>
+              <p class="cityname">City 5</p>
+              <div class="testcities"></div>
+              <p class="cityname">City 6</p>
+              <div class="testcities"></div>
+         </div>
 
 <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+<script src="javascript/cities.js"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBFS9idTST4tUs0nrbqRRUOo1OVyJN_DU&callback=initMap">
+    </script>
+
 </body>
 </html>
