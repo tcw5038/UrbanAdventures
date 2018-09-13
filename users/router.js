@@ -10,7 +10,7 @@ const jsonParser = bodyParser.json();
 
 // Post to register a new user
 router.post('/', jsonParser, (req, res) => {
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['firstName', 'lastName','email', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
 
   if (missingField) {
@@ -22,7 +22,7 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  const stringFields = ['username', 'password', 'firstName', 'lastName'];
+  const stringFields = ['firstName', 'lastName','email', 'password' ];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
   );
@@ -43,7 +43,7 @@ router.post('/', jsonParser, (req, res) => {
   // trimming them and expecting the user to understand.
   // We'll silently trim the other fields, because they aren't credentials used
   // to log in, so it's less of a problem.
-  const explicityTrimmedFields = ['username', 'password'];
+  const explicityTrimmedFields = ['firstName', 'lastName','email', 'password'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -58,7 +58,13 @@ router.post('/', jsonParser, (req, res) => {
   }
 
   const sizedFields = {
-    username: {
+    firstName:{
+      min:1
+    },
+    lastName:{
+      min:1
+    },
+    email: {//how should i handle email validation later?
       min: 1
     },
     password: {

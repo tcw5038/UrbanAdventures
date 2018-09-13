@@ -150,39 +150,55 @@ PITCH STYLING
 
 .main-container {
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   margin-top: 40px;
   background-color:#f1e9d8; 
 }
 
 .descriptcontainer{
-  height:30vh;
+  height:28vh;
   padding-left:20%;
   padding-right:20%;
   padding-top:50px;
 }
 
-#descriptionimg1{
-  width:30%;
+#descriptionimg1, #descriptionimg2, #descriptionimg3{
+  width:25%;
   height:auto;
   float:right;
 
+}
+
+#descriptionimg1{
+  float:right;
 }
 
 #descriptionimg2{
-  width:30%;
-  height:auto;
+  float:left;
+}
+
+#descriptionimg3{
   float:right;
 }
 
-.descriptiontext{
-  width:50%;
+#descriptiontext1, #descriptiontext2, #descriptiontext3{
+  width:60%;
   height:auto;
   font-size: 1.6em;
-  float:left;
   font-weight:300;
   font-family: 'Source Sans Pro', sans-serif;
+}
 
+#descriptiontext1{
+float:left;
+}
+
+#descriptiontext2{
+float:right;
+}
+
+#descriptiontext3{
+  float:left;
 }
 
 /*
