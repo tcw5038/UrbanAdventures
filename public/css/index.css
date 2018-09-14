@@ -22,8 +22,8 @@ NAV STYLING
   position:fixed;
   top:0;
   width:100%;
-  background-color: white;
   overflow: hidden;
+  background-color:#27212444;
 }
 
 /* Style the links inside the navigation bar */
@@ -31,16 +31,27 @@ NAV STYLING
   float: left;
   padding-top:10px;
   padding-bottom:10px;
+
 }
 
 /* Style the button surrounding the links */
 
-.navbutton{
+.navitem{
+  color:white;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-left:30px;
+  font-size:1.2em;
+  text-decoration:none;
+  font-weight:300;
+}
+
+/*.navbutton{
   font-family: 'Source Sans Pro', sans-serif;
   margin-left:10px;
-  background-color: #274251;
+  background-color:#274251b0;
   border-color:white;
   border-radius: 6px;
+  border-width:thin;
   cursor:pointer;
   font-size:1.2em;
   font-weight:300;
@@ -48,16 +59,16 @@ NAV STYLING
   text-decoration: none;
   height:45px;
   width:120px;
-}
+
+}*/
 
 #dashboard{
   float:left;
 }
 
 /* Nav hover */
-.topnav  .navbutton:hover {
-  background-color: white;
-  color: #274251;
+.topnav  .navitem:hover {
+  font-size:1.4em;
 }
 
 
@@ -122,14 +133,15 @@ BRANDING AND SUBTITLE STYLING
 }
 
 .bodybutton{
-  height:70px;
+  font-family: 'Source Sans Pro', sans-serif;
+  height:60px;
   width:180px;
   font-size:1.2em;
   font-weight:300;
   color:white;
-  background-color:#274251;
+  background-color:#272124d0;
   border-color:white;
-  border-width: 3px;
+  border-width: 1px;
   border-radius: 6px;
   cursor:pointer;
   margin:10px;

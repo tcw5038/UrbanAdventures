@@ -1,6 +1,7 @@
 'use strict';
 /* global $ */
 
+/*FOR HIDING AND SHOWING THE CITIES BESIDE THE MAP */
 $(".close").click(function(e){
   $(".citiescontainer").hide();
 })
@@ -9,6 +10,8 @@ $(".open").click(function(e){
   $(".citiescontainer").show();
 })
 
+/*FOR INITIALIZING GOOGLE MAPS */
+let map;
 function initMap(data) {
   let lat = 0;
   let lng = 0;
@@ -21,3 +24,13 @@ function initMap(data) {
     gestureHandling: 'greedy'
   });
 }
+
+
+/* FOR OPENING AND CLOSING CITY DETAIL PAGES */
+$(".x").click(function(e){
+  $(".darken").hide();
+})
+
+$(".opencity").click(function(e){
+  $(".darken").show();
+})

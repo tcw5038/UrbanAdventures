@@ -90,7 +90,7 @@ body, html{
    right:10px;
 }
 
-h1{
+.citylabel{
   margin-left:75px;
   position:sticky;
 }
@@ -118,4 +118,68 @@ h1{
   .citiescontainer{
     width: 100%;
   }
+}
+
+
+/*
+---------------------------------
+LIGHT/DARK BOXES FOR CITY DETAIL PAGES
+---------------------------------
+*/
+
+
+
+
+.darken{
+  background-color:rgba(0,0,0,0.5);
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.citydetail{
+  background-color:white;
+  width: 80%;
+  height: 800px;
+  margin: 50px auto;
+  padding: 10%;
+  box-sizing: border-box;
+  max-width: 600px;
+  position: relative;
+  text-align:center;
+}
+.x{
+   position: absolute;
+   top:10px;
+   right:10px;
+}
+
+@media(max-width:300px){
+  .white-box{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+  }
+}
+
+/*
+---------------------------------
+CITY DETAIL PAGES
+---------------------------------
+*/
+
+.detailimg{
+width:100%;
+height:auto;
+}
+
+ul{
+  display:flex;
+  list-style-type: none;
+}
+
+li{
+  margin-left:10px;
 }

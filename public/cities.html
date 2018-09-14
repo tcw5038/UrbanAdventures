@@ -12,15 +12,16 @@
     <a href="cities.html"><button class="navbutton" type="submit" >Dashboard</button></a>
     <a href="signup.html"><button class="navbutton" type="submit" >Sign up</button></a>
     <a href="login.html"><button class="navbutton" type= "submit">Log in</button></a>
+    <a href=#><button class="navbutton" type= "submit">Add a city</button></a>
+    <button class="opencity">open city details</button>
+    <button class="open">open</button>
 </div>
 <body>
-        <div id="map">
-            <button class="open">open</button>
-        </div>
-       
+        <div id="map"></div>
          <div class="citiescontainer">
-           <h1>My Cities</h1>
+           <h1 class="citylabel">My Cities</h1>
             <button class="close">close</button>
+
               <p class="cityname">City 1</p>
               <div class="testcities"></div>
               <p class="cityname">City 2</p>
@@ -34,14 +35,58 @@
               <p class="cityname">City 6</p>
               <div class="testcities"></div>
          </div>
+         
+
+         <div class="darken">
+            <div class="citydetail">
+               <span class="x">X</span>
+               <h1 class="cityName">City Name</h1>
+               <h2 class="cityCountry">Country</h2>
+               <h3 class="yearVisited">Visited in 2012</h3>
+               <img class="detailimg" src="/images/background.jpg"><!--Uploaded image goes here-->
+               <div class="tags">  <!--Chosen tags for this city go here-->
+                 <ul>
+                   <li>Food</li>
+                   <li>Sports</li>
+                   <li>Nature</li>
+                 </ul>
+                 </div>
+                 <div class="notes">Lorem ipsum dolor sit amet, <!--TEXT FOR TESTING TO MAKE SURE THAT THE LIGHT AND DARK BOXES WORK-->
+                  consectetur adipiscing elit, 
+                  sed do eiusmod tempor incididunt
+                  ut labore et dolore magna aliqua. <!--Notes for the city go here-->
+                </div>
+               </div>
+              </div>
+
+  <!--FORM FOR CREATING NEW CITIES
+  <form>
+        <div class="formcontainer">
+            <h1>Add a new city</h1>
+            <label for="cityName">City Name:</label>
+            <input type="text" placeholder="Enter city name" name="cityName" required>
+            <label for="country">Country:</label>
+            <input type="text" placeholder="Enter country" name="country" required>
+            <label for="date">Date of visit:</label>
+            <input type="date">
+            <label for="tags">Tag this city with things you will remember it for:</label>
+            <input type="text" placeholder="Enter tags" name="tags" required>
+            <label for="image">Add a link to an image of this city:</label>
+            <input type="url" placeholder="Paste image link" name="image" required>
+            <label for="notes">Add any notes about this city:</label>
+            <input type="text" placeholder="Enter notes" name="notes">
+
+            <button type="submit" class="createcitybutton">Create this city</button>
+        </div>
+    </form>
+  
+  
+  -->
+        
 
 <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 <script src="javascript/cities.js"></script>
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?
-    AIzaSyCYqSMPg7wuNs9C-vmqu1qRflDlUau2L48    
-    &callback=initMap">
-    </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI2A8_VzuQHiqaxv9L4mKuYkA7AFFTehk&callback=initMap"  async defer></script>
 
 </body>
 </html>
