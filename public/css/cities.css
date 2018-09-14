@@ -1,5 +1,5 @@
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -16,32 +16,35 @@ NAV STYLING
 .topnav {
   background-color: #274251;
   overflow: hidden;
-  margin-bottom:3%;
-  
+  position: fixed;
+  z-index: 3;
+  top: 0px;
+  right: 0px;
+  left: 0px;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Style the button surrounding the links */
 
-.navbutton{
-  font-family: 'Source Sans Pro', sans-serif;
-  margin-left:10px;
+.navbutton {
+  font-family: "Source Sans Pro", sans-serif;
+  margin-left: 10px;
   background-color: #274251;
-  border-color:white;
+  border-color: white;
   border-radius: 6px;
-  cursor:pointer;
-  font-size:1.2em;
-  font-weight:300;
-  color:white;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: 300;
+  color: white;
   text-decoration: none;
-  height:45px;
-  width:120px;
+  height: 45px;
+  width: 120px;
 }
 
 /* Nav hover */
@@ -50,76 +53,73 @@ NAV STYLING
   color: #274251;
 }
 
-
 /*
 ---------------------------------
 MAP AND CITY LISTING
 ---------------------------------
 */
 
-
-#map{
-  position:fixed;
-  width:100%;
-  height:100%;
+#map {
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
-body, html{
-  height:100%;
-  margin:0px;
-  padding:0px;
+body,
+html {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
-.button{
+.button {
   position: fixed;
   top: 10px;
-  right:10px;
+  right: 10px;
 }
 
-.citiescontainer{
-  background-color:white;
+.citiescontainer {
+  background-color: white;
   position: fixed;
-  height:90%;
-  width: 30%;
+  top: 65px;
   bottom: 0px;
   left: 0px;
-  font-family: 'Source Sans Pro', sans-serif;
+  width: 30%;
+  font-family: "Source Sans Pro", sans-serif;
+  overflow: auto;
 }
-.x{
-   position: absolute;
-   top:10px;
-   right:10px;
-}
-
-.citylabel{
-  margin-left:75px;
-  position:sticky;
+.x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.cityname{
-  margin-left:75px;
+.citylabel {
+  margin-left: 75px;
+  position: sticky;
 }
 
-.testcities{
-  width:70%;
-  height:15%;
+.cityname {
+  margin-left: 75px;
+}
+
+.testcities {
+  width: 70%;
+  height: 15%;
   border: 1px solid black;
-  margin:20px;
-  margin-left:75px;
+  margin: 20px auto;
 }
 
-
-@media(max-width:600px){
-  .citiescontainer{
+@media (max-width: 600px) {
+  .citiescontainer {
     width: 50%;
   }
 }
 
-@media(max-width:300px){
-  .citiescontainer{
+@media (max-width: 300px) {
+  .citiescontainer {
     width: 100%;
   }
 }
-
 
 /*
 ---------------------------------
@@ -127,11 +127,8 @@ LIGHT/DARK BOXES FOR CITY DETAIL PAGES
 ---------------------------------
 */
 
-
-
-
-.darken{
-  background-color:rgba(0,0,0,0.5);
+.darken {
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0px;
   right: 0px;
@@ -139,25 +136,26 @@ LIGHT/DARK BOXES FOR CITY DETAIL PAGES
   left: 0px;
 }
 
-.citydetail{
-  background-color:white;
+.citydetail {
+  z-index: 4;
+  background-color: white;
   width: 80%;
   height: 800px;
-  margin: 50px auto;
+  margin: 65px auto;
   padding: 10%;
   box-sizing: border-box;
   max-width: 600px;
   position: relative;
-  text-align:center;
+  text-align: center;
 }
-.x{
-   position: absolute;
-   top:10px;
-   right:10px;
+.x {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-@media(max-width:300px){
-  .white-box{
+@media (max-width: 300px) {
+  .white-box {
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -170,16 +168,16 @@ CITY DETAIL PAGES
 ---------------------------------
 */
 
-.detailimg{
-width:100%;
-height:auto;
+.detailimg {
+  width: 100%;
+  height: auto;
 }
 
-ul{
-  display:flex;
+ul {
+  display: flex;
   list-style-type: none;
 }
 
-li{
-  margin-left:10px;
+li {
+  margin-left: 10px;
 }

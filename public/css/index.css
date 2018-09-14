@@ -1,15 +1,13 @@
 body {
   background-color: #274251;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   box-sizing: border-box;
   margin-top: 100px;
-  margin-left:0;
-  margin-right:0;
+  margin-left: 0;
+  margin-right: 0;
   padding: 0;
-    background: url(/images/background.jpg);
+  background: url(/images/background.jpg);
 }
-
-
 
 /*
 ---------------------------------
@@ -19,30 +17,29 @@ NAV STYLING
 
 /* Nav bar */
 .topnav {
-  position:fixed;
-  top:0;
-  width:100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
   overflow: hidden;
-  background-color:#27212444;
+  background-color: #27212444;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  padding-top:10px;
-  padding-bottom:10px;
-
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 /* Style the button surrounding the links */
 
-.navitem{
-  color:white;
-  font-family: 'Source Sans Pro', sans-serif;
-  margin-left:30px;
-  font-size:1.2em;
-  text-decoration:none;
-  font-weight:300;
+.navitem {
+  color: white;
+  font-family: "Source Sans Pro", sans-serif;
+  margin-left: 30px;
+  font-size: 1.2em;
+  text-decoration: none;
+  font-weight: 300;
 }
 
 /*.navbutton{
@@ -62,15 +59,14 @@ NAV STYLING
 
 }*/
 
-#dashboard{
-  float:left;
+#dashboard {
+  float: left;
 }
 
 /* Nav hover */
-.topnav  .navitem:hover {
-  font-size:1.4em;
+.topnav .navitem:hover {
+  font-size: 1.4em;
 }
-
 
 /*
 ---------------------------------
@@ -79,7 +75,7 @@ BRANDING AND SUBTITLE STYLING
 */
 
 .wrapper {
-  display: flex;  
+  display: flex;
   flex-flow: row wrap;
   text-align: center;
 }
@@ -91,60 +87,57 @@ BRANDING AND SUBTITLE STYLING
 
 /* Position name and logo */
 .logoContainer {
-  height:400px;
-  width:auto;
-  /*top: 40%; 
+  height: 400px;
+  width: auto;
+  /*top: 40%;
   left: 50%;*/
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
-  margin-left:auto;
-  margin-right:auto;
-  
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Format name and logo */
 .centered {
-  display:block;
-  height:auto;
-  width:60%;
-  margin-left:auto;
-  margin-right:auto;
+  display: block;
+  height: auto;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 
 .subtitlecontainer {
-  margin-top:3%;
-  display:block;
-  margin:auto;
-  height:auto;
+  margin-top: 3%;
+  display: block;
+  margin: auto;
+  height: auto;
 }
 
-#subtitle{
-  font-size:1.6em;
-  color:white;
-  text-align:center;
-  
+#subtitle {
+  font-size: 1.6em;
+  color: white;
+  text-align: center;
 }
 
 .buttoncontainer {
-  margin-top:3%;
-  display:block;
-  text-align:center;
+  margin-top: 3%;
+  display: block;
+  text-align: center;
 }
 
-.bodybutton{
-  font-family: 'Source Sans Pro', sans-serif;
-  height:60px;
-  width:180px;
-  font-size:1.2em;
-  font-weight:300;
-  color:white;
-  background-color:#272124d0;
-  border-color:white;
+.bodybutton {
+  font-family: "Source Sans Pro", sans-serif;
+  height: 60px;
+  width: 180px;
+  font-size: 1.2em;
+  font-weight: 300;
+  color: white;
+  background-color: #272124d0;
+  border-color: white;
   border-width: 1px;
   border-radius: 6px;
-  cursor:pointer;
-  margin:10px;
+  cursor: pointer;
+  margin: 10px;
 }
 
 /* Button hover */
@@ -152,7 +145,6 @@ BRANDING AND SUBTITLE STYLING
   background-color: white;
   color: #274251;
 }
-
 
 /*
 ---------------------------------
@@ -162,57 +154,36 @@ PITCH STYLING
 
 .main-container {
   width: 100%;
-  height: 120vh;
   margin-top: 40px;
-  background-color:white; 
+  background-color: white;
 }
 
-.descriptcontainer{
-  height:28vh;
-  padding-left:20%;
-  padding-right:20%;
-  padding-top:50px;
+.descriptcontainer {
+  min-height: 200px;
+  padding: 50px 20% 0 20%;
 }
 
-#descriptionimg1, #descriptionimg2, #descriptionimg3{
-  width:25%;
-  height:auto;
-  float:right;
-  margin:auto;
-
+.description-img {
+  width: 25%;
+  margin: auto;
+  height: auto;
 }
 
-#descriptionimg1{
-  float:right;
-}
-
-#descriptionimg2{
-  float:left;
-}
-
-#descriptionimg3{
-  float:right;
-}
-
-#descriptiontext1, #descriptiontext2, #descriptiontext3{
-  width:60%;
-  height:auto;
+.description-text {
+  width: 60%;
   font-size: 1.8em;
-  font-weight:300;
-  font-family: 'Source Sans Pro', sans-serif;
-  padding-top:50px;
+  font-weight: 300;
+  font-family: "Source Sans Pro", sans-serif;
+  padding-top: 0;
+  margin-top: 0;
 }
 
-#descriptiontext1{
-float:left;
+.left {
+  float: left;
 }
 
-#descriptiontext2{
-float:right;
-}
-
-#descriptiontext3{
-  float:left;
+.right {
+  float: right;
 }
 
 /*
@@ -221,8 +192,12 @@ FOOTER
 ---------------------------------
 */
 
-footer{
-  height:75px;
-  color:white;
-  text-align:center;
+footer {
+  height: 75px;
+  color: white;
+  text-align: center;
+}
+
+.last {
+  padding-bottom: 100px;
 }
