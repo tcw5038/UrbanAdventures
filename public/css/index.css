@@ -6,11 +6,10 @@ body {
   margin-left:0;
   margin-right:0;
   padding: 0;
+    background: url(/images/background.jpg);
 }
 
-form{
-  text-align:center;
-}
+
 
 /*
 ---------------------------------
@@ -23,7 +22,7 @@ NAV STYLING
   position:fixed;
   top:0;
   width:100%;
-  background-color: #f1e9d8;
+  background-color: white;
   overflow: hidden;
 }
 
@@ -89,6 +88,7 @@ BRANDING AND SUBTITLE STYLING
   transform: translate(-50%, -50%);
   margin-left:auto;
   margin-right:auto;
+  
 }
 
 /* Format name and logo */
@@ -110,7 +110,7 @@ BRANDING AND SUBTITLE STYLING
 
 #subtitle{
   font-size:1.6em;
-  color:#f1e9d8;
+  color:white;
   text-align:center;
   
 }
@@ -152,7 +152,7 @@ PITCH STYLING
   width: 100%;
   height: 120vh;
   margin-top: 40px;
-  background-color:#f1e9d8; 
+  background-color:white; 
 }
 
 .descriptcontainer{
@@ -166,6 +166,7 @@ PITCH STYLING
   width:25%;
   height:auto;
   float:right;
+  margin:auto;
 
 }
 
@@ -184,9 +185,10 @@ PITCH STYLING
 #descriptiontext1, #descriptiontext2, #descriptiontext3{
   width:60%;
   height:auto;
-  font-size: 1.6em;
+  font-size: 1.8em;
   font-weight:300;
   font-family: 'Source Sans Pro', sans-serif;
+  padding-top:50px;
 }
 
 #descriptiontext1{

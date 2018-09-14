@@ -8,6 +8,7 @@ $(".close").click(function(e){
 $(".open").click(function(e){
   $(".citiescontainer").show();
 })
+
 function initMap(data) {
   let lat = 0;
   let lng = 0;

@@ -3,7 +3,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #f1e9d8;
+  background-color: white;
 }
 
 /*
@@ -76,7 +76,7 @@ body, html{
 }
 
 .citiescontainer{
-  background-color:#f1e9d8;
+  background-color:white;
   position: fixed;
   height:90%;
   width: 30%;
@@ -109,13 +109,13 @@ h1{
 
 
 @media(max-width:600px){
-  .white-box{
+  .citiescontainer{
     width: 50%;
   }
 }
 
 @media(max-width:300px){
-  .white-box{
+  .citiescontainer{
     width: 100%;
   }
 }
