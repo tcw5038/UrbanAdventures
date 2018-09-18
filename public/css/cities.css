@@ -1,57 +1,16 @@
-body {
+*{
   font-family: "Source Sans Pro", sans-serif;
+}
+
+body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   background-color: white;
 }
 
-/*
----------------------------------
-NAV STYLING
----------------------------------
-*/
 
-/* Nav bar */
-.topnav {
-  background-color: #274251;
-  overflow: hidden;
-  position: fixed;
-  z-index: 3;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-}
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-/* Style the button surrounding the links */
-
-.navbutton {
-  font-family: "Source Sans Pro", sans-serif;
-  margin-left: 10px;
-  background-color: #274251;
-  border-color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1.2em;
-  font-weight: 300;
-  color: white;
-  text-decoration: none;
-  height: 45px;
-  width: 120px;
-}
-
-/* Nav hover */
-.navbutton:hover {
-  background-color: white;
-  color: #274251;
-}
 
 /*
 ---------------------------------
@@ -80,11 +39,10 @@ html {
 .citiescontainer {
   background-color: white;
   position: fixed;
-  top: 65px;
+  top: 40px;
   bottom: 0px;
   left: 0px;
   width: 30%;
-  font-family: "Source Sans Pro", sans-serif;
   overflow: auto;
 }
 .x {
@@ -123,20 +81,31 @@ html {
 
 /*
 ---------------------------------
-LIGHT/DARK BOXES FOR CITY DETAIL PAGES
+LIGHT/DARK BOXES FOR CITY DETAIL AND ADD CITY PAGES
 ---------------------------------
 */
 
-.darken {
+.darken-detail {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
+  display:none;
 }
 
-.citydetail {
+.darken-add-city {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  display:none;
+}
+
+.city-detail-container {
   z-index: 4;
   background-color: white;
   width: 80%;
@@ -148,6 +117,21 @@ LIGHT/DARK BOXES FOR CITY DETAIL PAGES
   position: relative;
   text-align: center;
 }
+
+.add-city-container{
+  z-index: 4;
+  background-color: white;
+  width: 80%;
+  height: 800px;
+  margin: 65px auto;
+  padding: 10%;
+  box-sizing: border-box;
+  max-width: 600px;
+  position: relative;
+  text-align: center;
+
+}
+
 .x {
   position: absolute;
   top: 10px;
@@ -173,11 +157,82 @@ CITY DETAIL PAGES
   height: auto;
 }
 
-ul {
+.tag-list {
   display: flex;
   list-style-type: none;
 }
 
-li {
+.tags {
   margin-left: 10px;
+}
+
+
+/* NAV STYLING BETTER WAY */
+
+/* Nav bar container*/
+.topnav {
+  background-color: #241b1f;
+  overflow: hidden;
+  position: fixed;
+  z-index: 3;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  height:55px;
+}
+	
+.nav-ul {
+    display: flex;
+    list-style-type:none;
+  }
+  
+.navitem {
+  color: white;
+  font-weight: 300;
+  padding:15px;
+  font-size: 1.1em;
+  text-decoration: none;
+}
+  
+.logo{
+  height:30px;
+  width:auto;
+}
+
+	.nav-li {
+    flex-basis: 110px;
+    text-align:center;
+	}
+	
+	a {
+		padding: .5em;	
+	}
+	
+	.nav-li:first-child,
+  .nav-li:nth-child(n + 5) {
+		order: 3;
+	}
+	
+	.nav-li:nth-child(n + 5) {
+		text-align: right;
+	}
+
+	/* margin auto center aligns logo */
+	.nav-li:first-child {
+		margin-left: auto;
+		margin-right: auto;
+    flex-basis: auto;
+	}
+
+
+
+  /* Add new city  */
+	.nav-li:last-child {
+		margin-right:20px;
+  }
+
+/* Nav hover */
+.topnav .navitem:hover {
+  font-size: 1.4em;
+  font-weight:400;
 }
