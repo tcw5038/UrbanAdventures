@@ -193,10 +193,11 @@ FOOTER
 */
 
 footer {
-  height: 60px;
+  height: 70px;
   color: white;
   background-color:#241b1f;
   text-align: center;
+  margin-top:-20px;
 }
 
 .last {

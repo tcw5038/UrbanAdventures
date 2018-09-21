@@ -38,7 +38,7 @@ input[type=text],[type=password], select {
 
 input[type=submit] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #241b1f;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -50,17 +50,13 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #241b1fc5;
 }
 
 
-/*
----------------------------------
-NAV STYLING
----------------------------------
-*/
+/* NAV STYLING BETTER WAY */
 
-/* Nav bar */
+/* Nav bar container*/
 .topnav {
   background-color: #241b1f;
   overflow: hidden;
@@ -69,24 +65,61 @@ NAV STYLING
   top: 0px;
   right: 0px;
   left: 0px;
+  height:55px;
 }
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
+	
+.nav-ul {
+    display: flex;
+    list-style-type:none;
+  }
+  
 .navitem {
   color: white;
-  margin-left: 30px;
-  font-size: 1.2em;
-  text-decoration: none;
   font-weight: 300;
+  padding:15px;
+  font-size: 1.1em;
+  text-decoration: none;
 }
+  
+.logo{
+  height:30px;
+  width:auto;
+}
+
+	.nav-li {
+    flex-basis: 100px;
+    text-align:center;
+	}
+	
+	a {
+		padding: .5em;	
+	}
+	
+	.nav-li:first-child,
+  .nav-li:nth-child(n + 5) {
+		order: 3;
+	}
+	
+	.nav-li:nth-child(n + 5) {
+		text-align: right;
+	}
+
+	/* margin auto center aligns logo */
+	.nav-li:first-child {
+		margin-left: auto;
+		margin-right: auto;
+    flex-basis: auto;
+	}
+
+
+
+  /* Add new city  */
+	.nav-li:last-child {
+		margin-right:20px;
+  }
 
 /* Nav hover */
 .topnav .navitem:hover {
-  font-size: 1.4em;
+  font-weight:500;
 }
+

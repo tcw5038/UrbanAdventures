@@ -52,15 +52,15 @@ html {
 }
 
 .citylabel {
-  margin-left: 75px;
+  text-align:center;
   position: sticky;
 }
 
 .cityname {
-  margin-left: 75px;
+  text-align:center;
 }
 
-.testcities {
+.city-card {
   width: 70%;
   height: 15%;
   border: 1px solid black;
@@ -81,7 +81,7 @@ html {
 
 /*
 ---------------------------------
-LIGHT/DARK BOXES FOR CITY DETAIL AND ADD CITY PAGES
+LIGHT/DARK BOXES FOR CITY DETAIL
 ---------------------------------
 */
 
@@ -106,11 +106,12 @@ LIGHT/DARK BOXES FOR CITY DETAIL AND ADD CITY PAGES
   width: 80%;
   height: 800px;
   margin: 65px auto;
-  padding: 5%;
+  padding: 3%;
   box-sizing: border-box;
   max-width: 600px;
   position: relative;
   text-align: center;
+  overflow: auto;
 }
 
 .x {
@@ -148,15 +149,15 @@ LIGHT/DARK BOXES FOR ADD CITY PAGES
   background-color: white;
   width: 80%;
   height: 800px;
-  margin: 100px auto;
-  padding:5%;
+  margin: 50px auto;
+  padding:3%;
   box-sizing: border-box;
   max-width: 600px;
   position: relative;
-
+  overflow: auto;
 }
 
-input[type=text],[type=date], select {
+input[type=text],[type=date], [type=url], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
