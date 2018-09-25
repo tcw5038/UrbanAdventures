@@ -41,9 +41,9 @@ $(".x").click(function(e) {//closes out without adding the new city since the us
   $(".darken-add-city").hide();
 });
 
-$(".submit-city").click(function(e) {//closes out when the user hits submit...not sure if this is necessary or how to implement??
+/*$(".submit-city").click(function(e) {//closes out when the user hits submit...not sure if this is necessary or how to implement??
   $(".darken-add-city").hide();
-});
+});*/
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
@@ -59,14 +59,16 @@ function generateCityHTML(city){//generates the HTML for each individual city
 }
 
 function renderCities(cities){//renders all of the cities to the page using the generateCityHTML function
-  cities.forEach((city) => {
+  cities.forEach((city) => {//for each city in cities, use append to call generateCityHTML and return the HTML
     $('.citiescontainer').append(generateCityHTML(city));
   });
 }
 
 function handleCityClicked(){//brings up the city detail page, recall that the lab will be on the image so image needs to be darkened
-  $('')
+  $('.city-card').on('click', function(e){//when a city card div is clicked, open that city card
+    $(".darken-detail").show();
 
+  });
 }
 
 
@@ -76,15 +78,16 @@ function handleFormSubmit(){//empties the form and calls createCity when the use
 }
 
 function createCity(){//creates a new city using the form data inputted
-  $('.submit-city').on('click', function(){//be sure to have a condition that checks to see if all of the required fields are filled out
+  $('form').on('submit', function(){//be sure to have a condition that checks to see if all of the required fields are filled out
+    console.log('Just checking to see if anything is happening!');
     event.preventDefault();
     //set all of the variables to whatever is inside of the form submission
 
     let cityName = $("#cityName").val();
     let country = $("#country").val();
     let yearVisited = $("date").val();
-    let notes = $("notes").val();
-    let imageURL = $("imageURL").val();
+    let notes = $("#notes").val();
+    let imageURL = $("#imageURL").val();
 
     console.log(`${cityName}, ${country}, ${yearVisited}, ${notes}, ${imageURL}`)//just for testing purposes
 
@@ -96,12 +99,14 @@ function createCity(){//creates a new city using the form data inputted
       image:imageURL
     }
 
+    console.log(newCity);
+
     $.ajax({//POST request for adding the new city to the database of cities
       type: "POST",//make sure to fix these based on whatever I decide
       url: `/cities`,
       data: JSON.stringify(newCity),
       success: function(response){
-        $('.citiescontainer').append(generateCityHTML(response.data));//generates the new city based on the response data
+        $('.citiescontainer').append(generateCityHTML(response));//generates the new city based on the response data
       },
       fail: function(response) {
         console.error(response);
@@ -117,3 +122,10 @@ function generateError(){//generates an error if necessary
 }
 
 /*FUNCTIONS RELATING TO RENDERING PINS OF THE CITIES ON THE MAP */
+
+
+$(function () {
+handleCityClicked();
+handleFormSubmit();
+createCity();
+});
