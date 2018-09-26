@@ -85,7 +85,7 @@ function createCity(){//creates a new city using the form data inputted
 
     let cityName = $("#cityName").val();
     let country = $("#country").val();
-    let yearVisited = $("date").val();
+    let yearVisited = $("#date").val();
     let notes = $("#notes").val();
     let imageURL = $("#imageURL").val();
 
