@@ -24,7 +24,7 @@ NAV STYLING
   top: 0;
   width: 100%;
   overflow: hidden;
-  background-color: #241b1f8f;
+  background-color: #241b1f3b;
 }
 
 /* Style the links inside the navigation bar */
@@ -32,6 +32,11 @@ NAV STYLING
   float: left;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.topnav.scrolling {
+  background-color:#241b1f;
+  color:white;
 }
 
 /* Style the button surrounding the links */

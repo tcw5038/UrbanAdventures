@@ -86,6 +86,18 @@ function createCity(){//creates a new city using the form data inputted
     let cityName = $("#cityName").val();
     let country = $("#country").val();
     let yearVisited = $("#date").val();
+
+    //checkbox code
+    let tags = document.getElementsByClassName('checkbox');
+    console.log(tags);
+    console.log(tags.HTMLCollection[0].input.checkbox.defaultValue);
+      for(var i = 0; i < tags.length; ++i)
+      {
+          if(tags[i].checked){
+            console.log(tags[i].val());
+          }
+      }
+
     let notes = $("#notes").val();
     let imageURL = $("#imageURL").val();
 
