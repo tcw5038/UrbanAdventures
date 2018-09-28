@@ -201,10 +201,27 @@ CITY DETAIL PAGES
 .tag-list {
   display: flex;
   list-style-type: none;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .tags {
   margin-left: 10px;
+}
+
+button[type=submit] {
+  width: 100%;
+  background-color: #241b1f;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: #241b1fc5;
 }
 
 

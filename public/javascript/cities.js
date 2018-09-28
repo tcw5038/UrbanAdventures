@@ -47,15 +47,22 @@ $(".x").click(function(e) {//closes out without adding the new city since the us
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
-function getCities(){//gets all the cities associated with a given user ID
-//make a get request to cities and then render them to the page via a different function
-$.get(`/cities/` + $('.userID'.val(), (cities) => {//where should my user ID come from?
-  renderCities(cities);//once we get all the cities, we call renderCities
-}));
+function getCity(userID, callback){//gets one city that the user clicks on
+  let parameters = {
+
+  }
+}
+
+function getCities(user, callback){//gets all the cities when a signed in user goes to their dashboard
+  url:
+  type:,
+  datatype:,
+  success:,
+  error:,
 }
 
 function generateCityHTML(city){//generates the HTML for each individual city
-   return `<div class="city-card"><p class="cityname">${city.name}</p></div>`
+   return `<div class="city-card"><p class="cityname">${city.name}</p></div>`;
 }
 
 function renderCities(cities){//renders all of the cities to the page using the generateCityHTML function
@@ -71,10 +78,26 @@ function handleCityClicked(){//brings up the city detail page, recall that the l
   });
 }
 
+function handleUpdateCity(){//handles user requests to update a given city
+  $('.edit-city').on('click', function(){//when the edit city button is clicked, allow the edits to be made
+    //make all fields editable
+    //make a put request with the updated information from all of the fields
+
+  });
+}
 
 
 function handleFormSubmit(){//empties the form and calls createCity when the user decides to add a new city
 //should I call this inside of the post request?? or somewhere else? It probably shouldnt empty everything if the request fails or there is an error
+}
+
+function getCheckboxValues(){//gets the values of whatever is checked in the checkboxes
+    let checkedVals = [];
+    $('input[type=checkbox]:checked').each(function(){
+      checkedVals.push($(this).val());
+    });
+    console.log(checkedVals);
+    return checkedVals;
 }
 
 function createCity(){//creates a new city using the form data inputted
@@ -86,46 +109,38 @@ function createCity(){//creates a new city using the form data inputted
     let cityName = $("#cityName").val();
     let country = $("#country").val();
     let yearVisited = $("#date").val();
-
-    //checkbox code
-    let tags = document.getElementsByClassName('checkbox');
-    console.log(tags);
-    console.log(tags.HTMLCollection[0].input.checkbox.defaultValue);
-      for(var i = 0; i < tags.length; ++i)
-      {
-          if(tags[i].checked){
-            console.log(tags[i].val());
-          }
-      }
-
     let notes = $("#notes").val();
+    let tags = getCheckboxValues();
     let imageURL = $("#imageURL").val();
 
-    console.log(`${cityName}, ${country}, ${yearVisited}, ${notes}, ${imageURL}`)//just for testing purposes
+    console.log(`${cityName}, ${country}, ${yearVisited}, ${notes}, ${tags}, ${imageURL}`)//just for testing purposes
 
     let newCity = {//creates a new city object using the information stored above
-      name:cityName,
+      cityName:cityName,
       country:country,
       yearVisited:yearVisited,
       notes:notes,
+      tags:tags,
       image:imageURL
     }
-
     console.log(newCity);
 
-    $.ajax({//POST request for adding the new city to the database of cities
+    const addNewCity = {
       type: "POST",//make sure to fix these based on whatever I decide
-      url: `/cities`,
+      url: `/api/cities/`,//this is not working currently, something to do with localhost maybe?
       data: JSON.stringify(newCity),
       success: function(response){
         $('.citiescontainer').append(generateCityHTML(response));//generates the new city based on the response data
       },
-      fail: function(response) {
+      error: function(response) {
         console.error(response);
       }
-    });
+    };
+   $.ajax(addNewCity);
   });
 }
+
+
 
 /*FUNCTIONS RELATED TO ERROR HANDLING */
 
@@ -140,4 +155,5 @@ $(function () {
 handleCityClicked();
 handleFormSubmit();
 createCity();
+handleUpdateCity();
 });
