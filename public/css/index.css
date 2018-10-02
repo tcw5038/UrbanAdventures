@@ -138,9 +138,9 @@ BRANDING AND SUBTITLE STYLING
   font-size: 1.2em;
   font-weight: 300;
   color: white;
-  background-color: #241b1fb9;
-  border-color: white;
-  border-width: 1px;
+  background-color: #241b1f;
+  border-color: none;
+
   border-radius: 6px;
   cursor: pointer;
   margin: 10px;

@@ -9,9 +9,6 @@ body {
   background-color: white;
 }
 
-
-
-
 /*
 ---------------------------------
 MAP AND CITY LISTING
@@ -157,7 +154,7 @@ LIGHT/DARK BOXES FOR ADD CITY PAGES
   overflow: auto;
 }
 
-input[type=text],[type=date], [type=url], select {
+input[type=text],[type=url], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -167,9 +164,6 @@ input[type=text],[type=date], [type=url], select {
   box-sizing: border-box;
 }
 
-input[type=checkbox]{
-  
-}
 
 input[type=submit] {
   width: 100%;
@@ -236,7 +230,7 @@ button[type=submit]:hover {
   top: 0px;
   right: 0px;
   left: 0px;
-  height:55px;
+  height:50px;
 }
 	
 .nav-ul {
