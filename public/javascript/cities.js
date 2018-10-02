@@ -94,10 +94,22 @@ function handleUpdateCityClicked(){//handles user requests to update a given cit
   });
 }
 
-function updateCity(){
+function updateCity(updatedCity){
 //ajax put request
-
-
+  $.ajax({
+    type: 'PUT',
+    url: `/api/cities`,
+    data: JSON.stringify(updatedCity),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .done(function(response){
+    callback(response);
+  })
+  .fail(function(err){
+    generateError(err);
+  })
 }
 
 function handleDeleteCityClicked(id){//handles user requests to delete a given city
