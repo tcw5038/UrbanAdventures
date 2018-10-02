@@ -55,18 +55,35 @@ $(".x").click(function(e) {//closes out without adding the new city since the us
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
 function getCity(userID, callback){//gets one city that the user clicks on
-  
-}
-
-function getCities(user, callback){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
     type: 'GET',
-    url: `/api/cities/`,//this needs an associated id of some kind to make sure we know whos cities we are planning to get
+    url: `/api/cities`,
     headers: {
       'Content-Type': 'application/json',
     },
-    datatype: 'json',
-  });
+  })
+  .done(function(response){
+    callback(response);
+  })
+  .fail(function(err){
+    generateError(err);
+  })
+}
+
+function getCities(userID, callback){//gets all the cities when a signed in user goes to their dashboard
+  $.ajax({
+    type: 'GET',
+    url: `/api/cities`,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .done(function(response){
+    callback(response);
+  })
+  .fail(function(err){
+    generateError(err);
+  })
 }
 
 function generateCityHTML(city){//generates the HTML for each individual city
@@ -86,10 +103,36 @@ function handleCityClicked(){//brings up the city detail page, recall that the l
   });
 }
 
+function createUpdateFields(){//returns a new form that the user can use to update their city
+  //STILL NEED TO FIX THIS WITH THE PROPER VALUES AND FIGURE OUT HOW I WANT TO STORE THEM
+  return `<label for="cityName">City Name:</label>
+  <input type="text" placeholder="Enter city name" name="cityName" id="cityName" required>
+  <label for="country">Country:</label>
+  <input type="text" placeholder="Enter country" name="country" id="country" required>
+  <label for="yearVisited">Year of visit:</label>
+  <input type="text" placeholder="Enter year visited" name="yearVisited" id="yearVisited" required>
+  <label for="tags">Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
+  <input type="checkbox" value="Food" class="checkbox"> Food
+  <input type="checkbox" value="Architecture" class="checkbox"> Architecture
+  <input type="checkbox" value="Art" class="checkbox"> Art
+  <input type="checkbox" value="People" class="checkbox"> People
+  <input type="checkbox" value="Nature" class="checkbox"> Nature
+  <input type="checkbox" value="Good value" class="checkbox"> Good value
+  <input type="checkbox" value="Good value" class="checkbox"> Not sure yet<br>
+  <input type="checkbox" value="Good value" class="checkbox"> Not sure yet<br>
+  <br>
+  <label for="image">Add a link to an image of this city:</label>
+  <input type="url" placeholder="Paste image link" name="image"  id="imageURL" required>
+  <label for="notes">Add any notes about this city:</label>
+  <input type="text" placeholder="Enter notes" name="notes" id="notes">
+  <input type="submit" class="submit-city" value="Add this city">`;//include all the parts of the form, pre filled in with the previous values so that they can be updated
+}
+
 function handleUpdateCityClicked(){//handles user requests to update a given city
   $('.edit-city').on('click', function(){//when the edit city button is clicked, allow the edits to be made
     //make all fields editable
     //make a put request with the updated information from all of the fields
+    createUpdateFields();
     updateCity(updatedCityObject);
   });
 }
@@ -170,29 +213,49 @@ function createCityObject(){
     }
     //$('.darken-detail').hide();//why isnt this working?????
     console.log(newCity);
-    storeCity(newCity, generateCityHTML);
+    storeCity(newCity, generateCityHTML);//call the storeCity function to add our new city to the database
   });
 }
 
-function storeCity(city, callback){//creates a new city using the form data inputted
+function storeCity(city){//creates a new city using the form data inputted
      console.log(city);
-
     $.ajax({
       type: 'POST',
-      url: `/api/cities`,
+      url: `/api/cities/`,
       data: JSON.stringify(city),
       headers: {
         'Content-Type': 'application/json',
       },
     })
     .done(function(response){
-      callback(response);
+      console.log(response);
+      $('.citiescontainer').append(generateCityHTML(response));
     })
     .fail(function(err){
       generateError(err);
     })
 }
 
+/*
+$.ajax({//POST request for adding the new city to the database of cities
+    const addNewCity = {
+      type: "POST",//make sure to fix these based on whatever I decide
+      url: `/cities`,
+      url: `/api/cities/`,//this is not working currently, something to do with localhost maybe?
+      data: JSON.stringify(newCity),
+      success: function(response){
+        $('.citiescontainer').append(generateCityHTML(response));//generates the new city based on the response data
+      },
+      fail: function(response) {
+      error: function(response) {
+        console.error(response);
+      }
+    });
+    };
+   $.ajax(addNewCity);
+  });
+}
+*/
 
 
 /*FUNCTIONS RELATED TO ERROR HANDLING */
