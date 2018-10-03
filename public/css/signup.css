@@ -57,9 +57,6 @@ FORM STYLING
   }
   
 
-
-
-
 /* NAV STYLING BETTER WAY */
 
 /* Nav bar container*/
@@ -81,7 +78,7 @@ FORM STYLING
   
 .navitem {
   color: white;
-  font-weight: 300;
+  font-weight: 400;
   padding:15px;
   font-size: 1em;
   text-decoration: none;
@@ -126,6 +123,6 @@ FORM STYLING
 
 /* Nav hover */
 .topnav .navitem:hover {
-  font-weight:500;
+  font-weight:600;
 }
 

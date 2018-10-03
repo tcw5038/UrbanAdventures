@@ -240,7 +240,7 @@ button[type=submit]:hover {
   
 .navitem {
   color: white;
-  font-weight: 300;
+  font-weight: 400;
   padding:15px;
   font-size: 1.1em;
   text-decoration: none;
@@ -285,12 +285,12 @@ button[type=submit]:hover {
 
 /* Nav hover */
 .topnav .navitem:hover {
-  font-weight:500;
+  font-weight:600;
 }
 
-/* ADD CITY BUTTON */
+/* nav buttons */
 
-.create-city-button{
+.create-city-button, .toggle-list{
   background-color:white;
   color:black;
   border:none;

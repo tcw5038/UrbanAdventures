@@ -30,10 +30,7 @@ $(".x").click(function(e) {
 /*
 $(".submit-city").submit(function(e) {
   $(".darken-detail").toggle();
-});*/
-
-
-/*
+});
 $(".opencity").click(function(e) {
   $(".darken-detail").show();
 });*/
@@ -48,9 +45,9 @@ $(".x").click(function(e) {//closes out without adding the new city since the us
   $(".darken-add-city").hide();
 });
 
-/*$(".submit-city").click(function(e) {//closes out when the user hits submit...not sure if this is necessary or how to implement??
+$(".submit-city").click(function(e) {//closes out when the user hits submit...do we need additional user feedback here?
   $(".darken-add-city").hide();
-});*/
+});
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
@@ -70,7 +67,7 @@ function getCity(userID, callback){//gets one city that the user clicks on
   })
 }
 
-function getCities(userID, callback){//gets all the cities when a signed in user goes to their dashboard
+function getCities(userID){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
     type: 'GET',
     url: `/api/cities`,
@@ -79,7 +76,8 @@ function getCities(userID, callback){//gets all the cities when a signed in user
     },
   })
   .done(function(response){
-    callback(response);
+    console.log("Rendering cities");
+    renderCities(response);
   })
   .fail(function(err){
     generateError(err);
@@ -97,7 +95,8 @@ function renderCities(cities){//renders all of the cities to the page using the 
 }
 
 function handleCityClicked(){//brings up the city detail page, recall that the lab will be on the image so image needs to be darkened
-  $('.city-card').on('click', function(e){//when a city card div is clicked, open that city card
+  $('.city-card').on('click', function(event){//when a city card div is clicked, open that city card
+    event.preventDefault();
     console.log('city clicked');
     $('.darken-detail').show();
   });
@@ -190,7 +189,8 @@ function getCheckboxValues(){//gets the values of whatever is checked in the che
 
 
 function createCityObject(){
-  $('form').on('submit', function(){//be sure to have a condition that checks to see if all of the required fields are filled out
+  $('form').on('submit', function(event){//be sure to have a condition that checks to see if all of the required fields are filled out
+    event.preventDefault();
     console.log('Just checking to see if anything is happening!!!!');
     //set all of the variables to whatever is inside of the form submission
 
@@ -213,50 +213,46 @@ function createCityObject(){
     }
     //$('.darken-detail').hide();//why isnt this working?????
     console.log(newCity);
-    storeCity(newCity, generateCityHTML);//call the storeCity function to add our new city to the database
+    storeCity(newCity);//call the storeCity function to add our new city to the database
   });
 }
 
 function storeCity(city){//creates a new city using the form data inputted
-     console.log(city);
+    console.log(city);
     $.ajax({
-      type: 'POST',
       url: `/api/cities/`,
+      type: 'POST',
       data: JSON.stringify(city),
       headers: {
         'Content-Type': 'application/json',
       },
     })
-    .done(function(response){
-      console.log(response);
-      $('.citiescontainer').append(generateCityHTML(response));
+    .then(() => {//then or done????????
+      console.log(city);
+      getCities();
+      //$('.citiescontainer').append(generateCityHTML(response));
     })
-    .fail(function(err){
-      generateError(err);
+    .fail(error => {
+      generateError(error);
     })
-}
-
 /*
-$.ajax({//POST request for adding the new city to the database of cities
     const addNewCity = {
       type: "POST",//make sure to fix these based on whatever I decide
-      url: `/cities`,
       url: `/api/cities/`,//this is not working currently, something to do with localhost maybe?
-      data: JSON.stringify(newCity),
-      success: function(response){
-        $('.citiescontainer').append(generateCityHTML(response));//generates the new city based on the response data
+      data: JSON.stringify(city),
+      headers: {
+        'Content-Type': 'application/json',
       },
-      fail: function(response) {
+      success: function(){//took out response here since it isn't necessary
+        getCities();
+        //$('.citiescontainer').append(generateCityHTML(response));//generates the new city based on the response data
+      },
       error: function(response) {
         console.error(response);
       }
-    });
     };
-   $.ajax(addNewCity);
-  });
-}
-*/
-
+   $.ajax(addNewCity);*/
+};
 
 /*FUNCTIONS RELATED TO ERROR HANDLING */
 
