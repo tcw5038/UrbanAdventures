@@ -64,6 +64,11 @@ html {
   margin: 20px auto;
 }
 
+.city-image{
+  height:100%;
+  width:100%;
+}
+
 @media (max-width: 600px) {
   .citiescontainer {
     width: 50%;
@@ -195,6 +200,7 @@ CITY DETAIL PAGES
 .tag-list {
   display: flex;
   list-style-type: none;
+  text-align:center;
   margin-left:auto;
   margin-right:auto;
 }

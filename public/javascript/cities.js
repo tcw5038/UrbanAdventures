@@ -51,7 +51,21 @@ $(".submit-city").click(function(e) {//closes out when the user hits submit...do
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
-function getCity(userID, callback){//gets one city that the user clicks on
+function handleCityClicked(){//listener that brings up the city detail page on click, recall that the title will be on the image so image needs to be darkened
+  $('.citiescontainer').on('click', '.city-card', function(){
+    console.log('city clicked');
+    $('.darken-detail').show();
+    //get the id from this particular city
+    //getCity(id);
+    //renderCityDetailPage() in .done of getCity
+  });
+}
+
+function renderCityDetailPage(cityObject){
+//pulls data from cityObject and renders it as the detail page
+}
+
+function getCity(){//gets one city that the user clicks on
   $.ajax({
     type: 'GET',
     url: `/api/cities`,
@@ -60,14 +74,14 @@ function getCity(userID, callback){//gets one city that the user clicks on
     },
   })
   .done(function(response){
-    callback(response);
+    //need something here still
   })
   .fail(function(err){
     generateError(err);
   })
 }
 
-function getCities(userID){//gets all the cities when a signed in user goes to their dashboard
+function getCities(){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
     type: 'GET',
     url: `/api/cities`,
@@ -94,37 +108,9 @@ function renderCities(cities){//renders all of the cities to the page using the 
   });
 }
 
-function handleCityClicked(){//brings up the city detail page, recall that the lab will be on the image so image needs to be darkened
-  $('.city-card').on('click', function(event){//when a city card div is clicked, open that city card
-    event.preventDefault();
-    console.log('city clicked');
-    $('.darken-detail').show();
-  });
-}
-
 function createUpdateFields(){//returns a new form that the user can use to update their city
   //STILL NEED TO FIX THIS WITH THE PROPER VALUES AND FIGURE OUT HOW I WANT TO STORE THEM
-  return `<label for="cityName">City Name:</label>
-  <input type="text" placeholder="Enter city name" name="cityName" id="cityName" required>
-  <label for="country">Country:</label>
-  <input type="text" placeholder="Enter country" name="country" id="country" required>
-  <label for="yearVisited">Year of visit:</label>
-  <input type="text" placeholder="Enter year visited" name="yearVisited" id="yearVisited" required>
-  <label for="tags">Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
-  <input type="checkbox" value="Food" class="checkbox"> Food
-  <input type="checkbox" value="Architecture" class="checkbox"> Architecture
-  <input type="checkbox" value="Art" class="checkbox"> Art
-  <input type="checkbox" value="People" class="checkbox"> People
-  <input type="checkbox" value="Nature" class="checkbox"> Nature
-  <input type="checkbox" value="Good value" class="checkbox"> Good value
-  <input type="checkbox" value="Good value" class="checkbox"> Not sure yet<br>
-  <input type="checkbox" value="Good value" class="checkbox"> Not sure yet<br>
-  <br>
-  <label for="image">Add a link to an image of this city:</label>
-  <input type="url" placeholder="Paste image link" name="image"  id="imageURL" required>
-  <label for="notes">Add any notes about this city:</label>
-  <input type="text" placeholder="Enter notes" name="notes" id="notes">
-  <input type="submit" class="submit-city" value="Add this city">`;//include all the parts of the form, pre filled in with the previous values so that they can be updated
+  return ``;//include all the parts of the form, pre filled in with the previous values so that they can be updated
 }
 
 function handleUpdateCityClicked(){//handles user requests to update a given city
@@ -132,6 +118,7 @@ function handleUpdateCityClicked(){//handles user requests to update a given cit
     //make all fields editable
     //make a put request with the updated information from all of the fields
     createUpdateFields();
+    //then we need a function to store the updated city object
     updateCity(updatedCityObject);
   });
 }
@@ -146,8 +133,9 @@ function updateCity(updatedCity){
       'Content-Type': 'application/json',
     },
   })
-  .done(function(response){
-    callback(response);
+  .done(function(){
+    console.log(updatedCity);
+    getCities();//once the city is done being updated, call the getCities function to display the updated results
   })
   .fail(function(err){
     generateError(err);
@@ -268,5 +256,6 @@ handleFormSubmit();
 createCityObject();
 handleUpdateCityClicked();
 handleDeleteCityClicked();
+getCities();
 handleCityClicked();
 });
