@@ -1,6 +1,10 @@
 "use strict";
 /* global $ */
 
+let state = {
+  cities : []
+}
+
 /*FOR HIDING AND SHOWING THE CITIES BESIDE THE MAP */
 
 $(".toggle-list").click(function(e) {
@@ -27,15 +31,6 @@ $(".x").click(function(e) {
   $(".darken-detail").hide();
 });
 
-/*
-$(".submit-city").submit(function(e) {
-  $(".darken-detail").toggle();
-});
-$(".opencity").click(function(e) {
-  $(".darken-detail").show();
-});*/
-
-
 /* FOR ADDING A NEW CITY AND CLOSING OUT OF THE ADD PAGE */
 $(".create-city-button").click(function(e){
   $(".darken-add-city").show();
@@ -52,8 +47,12 @@ $(".submit-city").click(function(e) {//closes out when the user hits submit...do
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
 function handleCityClicked(){//listener that brings up the city detail page on click, recall that the title will be on the image so image needs to be darkened
-  $('.citiescontainer').on('click', '.city-card', function(){
-    console.log('city clicked');
+  $('.citiescontainer').on('click', '.city-card', function(event){
+    let cityIndex = $(this).attr("data-index");
+    console.log(cityIndex);
+    let selectedCity = state.cities[cityIndex];
+
+
     $('.darken-detail').show();
     //get the id from this particular city
     //getCity(id);
@@ -61,7 +60,7 @@ function handleCityClicked(){//listener that brings up the city detail page on c
   });
 }
 
-function renderCityDetailPage(cityObject){
+function renderCityDetailPage(){
 //pulls data from cityObject and renders it as the detail page
 }
 
@@ -91,21 +90,27 @@ function getCities(){//gets all the cities when a signed in user goes to their d
   })
   .done(function(response){
     console.log("Rendering cities");
-    renderCities(response);
+    state.cities = response;
+    renderCities(state.cities);
   })
   .fail(function(err){
     generateError(err);
   })
 }
 
-function generateCityHTML(city){//generates the HTML for each individual city
-   return `<div class="city-card"><p class="cityname">${city.cityName}</p></div>`;
+function generateCityHTML(city, index){//generates the HTML for each individual city
+  //what would be the best way to make the image output properly for this city?
+   return `<div class="city-card" data-index="${index}">
+   <p class="cityname">${city.cityName}</p>
+   <img src="${city.imageURL}">
+   </div>`;//make it a div with an img as a background, background size to cover
 }
 
 function renderCities(cities){//renders all of the cities to the page using the generateCityHTML function
-  cities.forEach((city) => {//for each city in cities, use append to call generateCityHTML and return the HTML
-    $('.citiescontainer').append(generateCityHTML(city));
+  let renderedCities = cities.map((city, index) => {//for each city in cities, use append to call generateCityHTML and return the HTML
+    return generateCityHTML(city, index);
   });
+  $('.citiescontainer').html(renderedCities);
 }
 
 function createUpdateFields(){//returns a new form that the user can use to update their city
@@ -213,33 +218,16 @@ function storeCity(city){//creates a new city using the form data inputted
       data: JSON.stringify(city),
       headers: {
         'Content-Type': 'application/json',
+        //'Authorization':'Bearer ' + token //token from local storage
       },
     })
-    .then(() => {//then or done????????
+    .then(() => {
       console.log(city);
       getCities();
-      //$('.citiescontainer').append(generateCityHTML(response));
     })
     .fail(error => {
       generateError(error);
     })
-/*
-    const addNewCity = {
-      type: "POST",//make sure to fix these based on whatever I decide
-      url: `/api/cities/`,//this is not working currently, something to do with localhost maybe?
-      data: JSON.stringify(city),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      success: function(){//took out response here since it isn't necessary
-        getCities();
-        //$('.citiescontainer').append(generateCityHTML(response));//generates the new city based on the response data
-      },
-      error: function(response) {
-        console.error(response);
-      }
-    };
-   $.ajax(addNewCity);*/
 };
 
 /*FUNCTIONS RELATED TO ERROR HANDLING */
