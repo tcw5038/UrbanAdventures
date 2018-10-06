@@ -31,7 +31,7 @@ $(".x").click(function(e) {
   $(".darken-detail").hide();
 });
 
-/* FOR ADDING A NEW CITY AND CLOSING OUT OF THE ADD PAGE */
+/* LISTENERS */
 $(".create-city-button").click(function(e){
   $(".darken-add-city").show();
 });
@@ -40,31 +40,38 @@ $(".x").click(function(e) {//closes out without adding the new city since the us
   $(".darken-add-city").hide();
 });
 
+
+
 $(".submit-city").click(function(e) {//closes out when the user hits submit...do we need additional user feedback here?
   $(".darken-add-city").hide();
 });
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
-function handleCityClicked(){//listener that brings up the city detail page on click, recall that the title will be on the image so image needs to be darkened
-  $('.citiescontainer').on('click', '.city-card', function(event){
-    let cityIndex = $(this).attr("data-index");
-    console.log(cityIndex);
-    let selectedCity = state.cities[cityIndex];
 
 
-    $('.darken-detail').show();
-    //get the id from this particular city
-    //getCity(id);
-    //renderCityDetailPage() in .done of getCity
-  });
+function renderCityDetailPage(city){//pulls data from cityObject and renders it as the detail page
+return `
+<span class="x">X</span>
+<h1 class="cityName">${city.cityName}</h1>
+<h2 class="cityCountry">${city.country}</h2>
+<h3 class="yearVisited">${city.yearVisited}</h3>
+<img class="detailimg" src="${city.imageURL}">
+  <ul class="tag-list">
+    <li class="tag">Food</li>
+    <li class="tag">Sports</li>
+    <li class="tag">Nature</li>
+  </ul>
+  <div class="notes">${city.notes}</div>
+ <button class="edit-city" type="submit">Edit this city</button>
+ <button class="delete-city" type="submit">Delete this city</button>
+`
+
+   //$('.darken-detail').show();
 }
 
-function renderCityDetailPage(){
-//pulls data from cityObject and renders it as the detail page
-}
-
-function getCity(){//gets one city that the user clicks on
+//seems like I might not even need this getCity function
+/*function getCity(){//gets one city that the user clicks on
   $.ajax({
     type: 'GET',
     url: `/api/cities`,
@@ -78,7 +85,7 @@ function getCity(){//gets one city that the user clicks on
   .fail(function(err){
     generateError(err);
   })
-}
+}*/
 
 function getCities(){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
@@ -113,10 +120,10 @@ function renderCities(cities){//renders all of the cities to the page using the 
   $('.citiescontainer').html(renderedCities);
 }
 
-function createUpdateFields(){//returns a new form that the user can use to update their city
+/*function createUpdateFields(){//returns a new form that the user can use to update their city
   //STILL NEED TO FIX THIS WITH THE PROPER VALUES AND FIGURE OUT HOW I WANT TO STORE THEM
   return ``;//include all the parts of the form, pre filled in with the previous values so that they can be updated
-}
+}*/
 
 function handleUpdateCityClicked(){//handles user requests to update a given city
   $('.edit-city').on('click', function(){//when the edit city button is clicked, allow the edits to be made
@@ -147,24 +154,50 @@ function updateCity(updatedCity){
   })
 }
 
-function handleDeleteCityClicked(id){//handles user requests to delete a given city
-  $('.delete-city').on('click', function(){//when the delete city button is clicked, the city will be deleted
-    deleteCity();//need to figure out how to target the specific city that we want to delete in order to pass it in...target it then store it in a variable
+function handleCityClicked(){//listener that brings up the city detail page on click, recall that the title will be on the image so image needs to be darkened
+  $('.citiescontainer').on('click', '.city-card', function(event){
+    let cityIndex = $(this).attr("data-index");//stores the index of this city in a variable
+    console.log(cityIndex);
+    let selectedCity = state.cities[cityIndex];
+    console.log(selectedCity);
+    let renderedDetailPage = renderCityDetailPage(selectedCity);//takes the data from selectedCity and uses it to populate the detail page
+    console.log(renderedDetailPage);
+    $('.city-detail-container').html(renderedDetailPage);
+    $('.darken-detail').show();
+    $(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
+      $(".darken-detail").hide();
+    });
+
+    //handleDeleteCityClicked(cityIndex);
+  });
+}
+
+function handleDeleteCityClicked(){//handles user requests to delete a given city
+  $('.city-detail-container').on('click', '.delete-city', function(event){//when the delete city button is clicked, the city will be deleted
+    //let cityIndex = $(this).attr("data-index");
+    //console.log(cityIndex);
+    //console.log(state.cities);
+    deleteCity();
     //once this is working well, consider adding an "are you sure?" kind of popup box to confirm
   });
 }
 
-function deleteCity(){
+function deleteCity(id){//still need to figure out how we are acquiring this id
   $.ajax({
     type: 'DELETE',
     url: `/api/cities/${id}`,
-    data: JSON.stringify(deleteCity),
     headers: {
       'Content-Type': 'application/json',
     },
-    datatype: 'json',
-  });
-}
+  })
+  .then(() => {
+    getCities();
+    console.log("Successfully deleted city");
+  })
+  .fail(() => {
+    console.log("Failed to delete cities");
+  })
+};
 
 
 function handleFormSubmit(){//empties the form and calls createCity when the user decides to add a new city
@@ -204,7 +237,6 @@ function createCityObject(){
       tags:tags,
       image:imageURL
     }
-    //$('.darken-detail').hide();//why isnt this working?????
     console.log(newCity);
     storeCity(newCity);//call the storeCity function to add our new city to the database
   });
