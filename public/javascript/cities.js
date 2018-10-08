@@ -2,7 +2,8 @@
 /* global $ */
 
 let state = {
-  cities : []
+  cities : [],
+  selectedCityIndex: -1//not 0 because 0 is currently a city
 }
 
 /*FOR HIDING AND SHOWING THE CITIES BESIDE THE MAP */
@@ -26,21 +27,27 @@ function initMap(data) {
   });
 }
 
-/* FOR OPENING AND CLOSING CITY DETAIL PAGES */
+/* CLICK EVENT LISTENERS*/
 $(".x").click(function(e) {
   $(".darken-detail").hide();
-});
-
-/* LISTENERS */
-$(".create-city-button").click(function(e){
-  $(".darken-add-city").show();
 });
 
 $(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
   $(".darken-add-city").hide();
 });
 
+$(".create-city-button").click(function(e){
+  $(".darken-add-city").show();
+});
 
+/*
+$(".darken-detail").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
+  $(".darken-detail").hide();
+});
+
+$(".darken-add-city").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
+  $(".darken-add-city").hide();
+});*/
 
 $(".submit-city").click(function(e) {//closes out when the user hits submit...do we need additional user feedback here?
   $(".darken-add-city").hide();
@@ -48,19 +55,29 @@ $(".submit-city").click(function(e) {//closes out when the user hits submit...do
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
+function generateTagHTML (tag){
+  return `<li class="tag">${tag}</li>`
+}
 
+function renderTags(city){
+  let checkedTags = city.tags;
+  let renderedTags = checkedTags.map((tag) => {//for each city in cities, use append to call generateCityHTML and return the HTML
+    console.log(tag);
+    return generateTagHTML(tag);
+  });
+return renderedTags;
+}
 
 function renderCityDetailPage(city){//pulls data from cityObject and renders it as the detail page
+let tagCode = renderTags(city);
+
 return `
 <span class="x">X</span>
-<h1 class="cityName">${city.cityName}</h1>
-<h2 class="cityCountry">${city.country}</h2>
+<h1 class="cityName">${city.cityName}, ${city.country}</h1>
 <h3 class="yearVisited">${city.yearVisited}</h3>
 <img class="detailimg" src="${city.imageURL}">
   <ul class="tag-list">
-    <li class="tag">Food</li>
-    <li class="tag">Sports</li>
-    <li class="tag">Nature</li>
+  ${tagCode}
   </ul>
   <div class="notes">${city.notes}</div>
  <button class="edit-city" type="submit">Edit this city</button>
@@ -108,8 +125,8 @@ function getCities(){//gets all the cities when a signed in user goes to their d
 function generateCityHTML(city, index){//generates the HTML for each individual city
   //what would be the best way to make the image output properly for this city?
    return `<div class="city-card" data-index="${index}">
-   <p class="cityname">${city.cityName}</p>
-   <img src="${city.imageURL}">
+   <p class="city-name">${city.cityName}</p>
+   <img class="city-img" src="${city.imageURL}">
    </div>`;//make it a div with an img as a background, background size to cover
 }
 
@@ -159,9 +176,9 @@ function handleCityClicked(){//listener that brings up the city detail page on c
     let cityIndex = $(this).attr("data-index");//stores the index of this city in a variable
     console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
+    state.selectedCityIndex = cityIndex;
     console.log(selectedCity);
     let renderedDetailPage = renderCityDetailPage(selectedCity);//takes the data from selectedCity and uses it to populate the detail page
-    console.log(renderedDetailPage);
     $('.city-detail-container').html(renderedDetailPage);
     $('.darken-detail').show();
     $(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
@@ -169,15 +186,19 @@ function handleCityClicked(){//listener that brings up the city detail page on c
     });
 
     //handleDeleteCityClicked(cityIndex);
+    //handleUpdateCityClicked(cityIndex);
   });
 }
 
 function handleDeleteCityClicked(){//handles user requests to delete a given city
   $('.city-detail-container').on('click', '.delete-city', function(event){//when the delete city button is clicked, the city will be deleted
-    //let cityIndex = $(this).attr("data-index");
-    //console.log(cityIndex);
+    let cityIndex = state.selectedCityIndex;
+    console.log(cityIndex);
+    let selectedCity = state.cities[cityIndex];
+    let cityID = selectedCity.id;
+    console.log(cityID);
     //console.log(state.cities);
-    deleteCity();
+    deleteCity(cityID);
     //once this is working well, consider adding an "are you sure?" kind of popup box to confirm
   });
 }
@@ -235,7 +256,7 @@ function createCityObject(){
       yearVisited:yearVisited,
       notes:notes,
       tags:tags,
-      image:imageURL
+      imageURL:imageURL
     }
     console.log(newCity);
     storeCity(newCity);//call the storeCity function to add our new city to the database

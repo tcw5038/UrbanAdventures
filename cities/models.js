@@ -26,7 +26,8 @@ CitySchema.methods.serialize = function() {
     yearVisited: this.yearVisited || 0,
     notes:this.notes || '',
     tags:this.tags || [],
-    imageURL:this.imageURL || ''
+    imageURL:this.imageURL || '',
+    id:this._id
   };
 };
 

@@ -53,20 +53,40 @@ html {
   position: sticky;
 }
 
-.cityname {
-  text-align:center;
-}
-
 .city-card {
   width: 70%;
-  height: 15%;
+  height: 20%;
   border: 1px solid black;
   margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align:center;
+  transition: transform .2s;
 }
 
-.city-image{
-  height:100%;
+.city-card:hover {
+  cursor:pointer;
+  transform: scale(1.1);
+  font-size:1.2em;
+}
+
+p {
+  position:absolute;
+  color:white;
+}
+
+/*.city-image{
   width:100%;
+  height:auto;
+}*/
+
+
+.city-card img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
 }
 
 @media (max-width: 600px) {
@@ -246,7 +266,7 @@ button[type=submit]:hover {
   
 .navitem {
   color: white;
-  font-weight: 400;
+  font-weight: 300;
   padding:15px;
   font-size: 1.1em;
   text-decoration: none;
