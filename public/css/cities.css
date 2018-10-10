@@ -54,8 +54,8 @@ html {
 }
 
 .city-card {
-  width: 70%;
-  height: 20%;
+  width: 85%;
+  height: 25%;
   border: 1px solid black;
   margin: 20px auto;
   display: flex;
@@ -86,7 +86,8 @@ p {
 .city-card img {
   flex-shrink: 0;
   min-width: 100%;
-  min-height: 100%
+  min-height: 100%;
+
 }
 
 @media (max-width: 600px) {
@@ -111,7 +112,7 @@ LIGHT/DARK BOXES FOR CITY DETAIL
   text-align:center;
 }
 
-.darken-detail {
+.darken-detail, .darken-edit {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0px;
@@ -126,7 +127,7 @@ LIGHT/DARK BOXES FOR CITY DETAIL
   z-index: 4;
   background-color: white;
   width: 80%;
-  height: 800px;
+  height: 90%;
   margin: 65px auto;
   padding: 3%;
   box-sizing: border-box;
@@ -136,10 +137,28 @@ LIGHT/DARK BOXES FOR CITY DETAIL
   overflow: auto;
 }
 
+.edit-city-container{
+  z-index: 4;
+  background-color: white;
+  width: 80%;
+  height: 800px;
+  margin: 50px auto;
+  padding:3%;
+  box-sizing: border-box;
+  max-width: 600px;
+  position: relative;
+  overflow: auto;
+}
+
+
 .x {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.x:hover{
+  cursor:pointer;
 }
 
 @media (max-width: 300px) {
@@ -229,7 +248,7 @@ CITY DETAIL PAGES
   margin-left: 10px;
 }
 
-button[type=submit] {
+.edit-city, .delete-city {
   width: 100%;
   background-color: #241b1f;
   color: white;
@@ -240,7 +259,7 @@ button[type=submit] {
   cursor: pointer;
 }
 
-button[type=submit]:hover {
+.edit-city:hover, .delete-city:hover {
   background-color: #241b1fc5;
 }
 

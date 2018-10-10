@@ -27,29 +27,22 @@
         <div id="map"></div>
          <div class="citiescontainer">
            <h1 class="citylabel">My Cities</h1>
-
-              <!-- Fake content
-              <div class="city-card"><p class="cityname">City 1</p></div>
-              <div class="city-card"><p class="cityname">City 2</p></div>
-              <div class="city-card"><p class="cityname">City 3</p></div>
-              <div class="city-card"><p class="cityname">City 4</p></div>
-              <div class="city-card"><p class="cityname">City 5</p></div>
-              <div class="city-card"><p class="cityname">City 6</p></div>
-              -->
          </div>
          
+         <div class="darken-edit">
+          <div class="edit-city-container"></div>
+        </div>
 
          <div class="darken-detail">
-           <div class="city-detail-container">
+           <div class="city-detail-container"></div>
+         </div>
 
-           </div>
-       </div>
-
+    
 
               <div class="darken-add-city">
                   <div class="add-city-container">
                       <span class="x">X</span>
-                    <form>
+                    <form id="add-city-form">
                       <h1 class="add-city-title">Add a new city</h1>
                       <label for="cityName">City Name:</label>
                       <input type="text" placeholder="Enter city name" name="cityName" id="cityName" required>
@@ -74,9 +67,6 @@
                     </form>
                   </div>
               </div>
-
-
-        
 
 <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 <script src="javascript/cities.js"></script>

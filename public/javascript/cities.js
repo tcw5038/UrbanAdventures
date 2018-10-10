@@ -28,26 +28,27 @@ function initMap(data) {
 }
 
 /* CLICK EVENT LISTENERS*/
-$(".x").click(function(e) {
-  $(".darken-detail").hide();
-});
+
 
 $(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
   $(".darken-add-city").hide();
+});
+
+$(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
+  $(".darken-edit").hide();
 });
 
 $(".create-city-button").click(function(e){
   $(".darken-add-city").show();
 });
 
-/*
-$(".darken-detail").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
-  $(".darken-detail").hide();
+$('.edit-city-container').on('click', '.x', function(event){//closes out without adding the new city since the user chose to x out of the page
+  $(".darken-edit").hide();
 });
 
-$(".darken-add-city").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
-  $(".darken-add-city").hide();
-});*/
+$('.city-detail-container').on('click', '.x', function(event){//closes out without adding the new city since the user chose to x out of the page
+  $(".darken-detail").hide();
+});
 
 $(".submit-city").click(function(e) {//closes out when the user hits submit...do we need additional user feedback here?
   $(".darken-add-city").hide();
@@ -77,32 +78,19 @@ return `
 <h3 class="yearVisited">${city.yearVisited}</h3>
 <img class="detailimg" src="${city.imageURL}">
   <ul class="tag-list">
-  ${tagCode}
+  ${tagCode.join(", ")}
   </ul>
   <div class="notes">${city.notes}</div>
- <button class="edit-city" type="submit">Edit this city</button>
- <button class="delete-city" type="submit">Delete this city</button>
-`
+ <button class="edit-city">Edit this city</button>
+ <button class="delete-city">Delete this city</button>
+`}
 
-   //$('.darken-detail').show();
+function generateCityHTML(city, index){//generates the HTML for each individual city
+   return `<div class="city-card" data-index="${index}">
+   <p class="city-name">${city.cityName}</p>
+   <img class="city-img" src="${city.imageURL}">
+   </div>`;//make it a div with an img as a background, background size to cover
 }
-
-//seems like I might not even need this getCity function
-/*function getCity(){//gets one city that the user clicks on
-  $.ajax({
-    type: 'GET',
-    url: `/api/cities`,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .done(function(response){
-    //need something here still
-  })
-  .fail(function(err){
-    generateError(err);
-  })
-}*/
 
 function getCities(){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
@@ -122,14 +110,6 @@ function getCities(){//gets all the cities when a signed in user goes to their d
   })
 }
 
-function generateCityHTML(city, index){//generates the HTML for each individual city
-  //what would be the best way to make the image output properly for this city?
-   return `<div class="city-card" data-index="${index}">
-   <p class="city-name">${city.cityName}</p>
-   <img class="city-img" src="${city.imageURL}">
-   </div>`;//make it a div with an img as a background, background size to cover
-}
-
 function renderCities(cities){//renders all of the cities to the page using the generateCityHTML function
   let renderedCities = cities.map((city, index) => {//for each city in cities, use append to call generateCityHTML and return the HTML
     return generateCityHTML(city, index);
@@ -137,42 +117,9 @@ function renderCities(cities){//renders all of the cities to the page using the 
   $('.citiescontainer').html(renderedCities);
 }
 
-/*function createUpdateFields(){//returns a new form that the user can use to update their city
-  //STILL NEED TO FIX THIS WITH THE PROPER VALUES AND FIGURE OUT HOW I WANT TO STORE THEM
-  return ``;//include all the parts of the form, pre filled in with the previous values so that they can be updated
-}*/
-
-function handleUpdateCityClicked(){//handles user requests to update a given city
-  $('.edit-city').on('click', function(){//when the edit city button is clicked, allow the edits to be made
-    //make all fields editable
-    //make a put request with the updated information from all of the fields
-    createUpdateFields();
-    //then we need a function to store the updated city object
-    updateCity(updatedCityObject);
-  });
-}
-
-function updateCity(updatedCity){
-//ajax put request
-  $.ajax({
-    type: 'PUT',
-    url: `/api/cities`,
-    data: JSON.stringify(updatedCity),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .done(function(){
-    console.log(updatedCity);
-    getCities();//once the city is done being updated, call the getCities function to display the updated results
-  })
-  .fail(function(err){
-    generateError(err);
-  })
-}
-
 function handleCityClicked(){//listener that brings up the city detail page on click, recall that the title will be on the image so image needs to be darkened
   $('.citiescontainer').on('click', '.city-card', function(event){
+    event.preventDefault();
     let cityIndex = $(this).attr("data-index");//stores the index of this city in a variable
     console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
@@ -181,17 +128,85 @@ function handleCityClicked(){//listener that brings up the city detail page on c
     let renderedDetailPage = renderCityDetailPage(selectedCity);//takes the data from selectedCity and uses it to populate the detail page
     $('.city-detail-container').html(renderedDetailPage);
     $('.darken-detail').show();
-    $(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
-      $(".darken-detail").hide();
-    });
-
-    //handleDeleteCityClicked(cityIndex);
-    //handleUpdateCityClicked(cityIndex);
   });
 }
 
+function createUpdateFields(selectedCity){//returns a new form that the user can use to update their city
+  //had to use return false in the form or it would keep refreshing the page...not sure why?
+  return `
+  <span class="x">X</span>
+  <form class="edit-city-form">
+      <h1 class="add-city-title">Edit this city</h1>
+      <label for="cityName">City Name:</label>
+      <input type="text" name="cityName" id="cityName" value="${selectedCity.cityName}"required>
+      <label for="country">Country:</label>
+      <input type="text" value="${selectedCity.country}" name="country" id="country" required>
+      <label for="yearVisited">Year of visit:</label>
+      <input type="text" value="${selectedCity.yearVisited}" name="yearVisited" id="yearVisited" required>
+      <label for="tags">Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
+      <input type="checkbox" value="food" class="checkbox"> Food
+      <input type="checkbox" value="architecture" class="checkbox"> Architecture
+      <input type="checkbox" value="art" class="checkbox"> Art
+      <input type="checkbox" value="people" class="checkbox"> People
+      <input type="checkbox" value="nature" class="checkbox"> Nature
+      <input type="checkbox" value="good-value" class="checkbox"> Good value
+      <br>
+      <label for="image">Add a link to an image of this city:</label>
+      <input type="url" value="${selectedCity.imageURL}" name="image"  id="imageURL" required>
+      <label for="notes">Add any notes about this city:</label>
+      <input type="text" value="${selectedCity.notes}" name="notes" id="notes">
+      <input type="submit" class="submit-updates" value="Update this city">
+  </form>`;//include all the parts of the form, pre filled in with the previous values so that they can be updated
+}
+
+function handleEditThisCityClicked(){//handles user requests to update a given city
+  $('.city-detail-container').on('click', '.edit-city', function(event){//when the edit city button is clicked, allow the edits to be made
+    let cityIndex = state.selectedCityIndex;
+    console.log(cityIndex);
+    let selectedCity = state.cities[cityIndex];
+    let cityID = selectedCity.id;
+    console.log(cityID);
+    let editableCityHTML = createUpdateFields(selectedCity);
+    console.log(editableCityHTML);
+    $(".edit-city-container").html(editableCityHTML);
+    $(".darken-detail").hide();//hides the detail page
+    $(".darken-edit").show();//shows the update page
+    console.log("Made it here");
+    
+  });
+}
+
+function handleUpdateCityClicked(){//used when the user decides to hit the update city button after changing data
+  $('.edit-city-form').on('submit', '.submit-updates', function(event){
+    event.preventDefault();
+    console.log("Update city button clicked!");
+    //updateCity(updatedCityObject, cityID);//put request with the id and the update data
+  });
+}
+
+function updateCity(updatedCity, cityID){//pass in the updatedCity and the cityID
+//ajax put request
+  $.ajax({
+    type: 'PUT',
+    url: `/api/cities/${cityID}`,
+    data: JSON.stringify(updatedCity),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .done(function(){
+    console.log("Updating city");
+    getCities();//once the city is done being updated, call the getCities function to display the updated results
+  })
+  .fail(function(err){
+    generateError(err);
+  })
+}
+
+
 function handleDeleteCityClicked(){//handles user requests to delete a given city
   $('.city-detail-container').on('click', '.delete-city', function(event){//when the delete city button is clicked, the city will be deleted
+    event.preventDefault();
     let cityIndex = state.selectedCityIndex;
     console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
@@ -199,7 +214,6 @@ function handleDeleteCityClicked(){//handles user requests to delete a given cit
     console.log(cityID);
     //console.log(state.cities);
     deleteCity(cityID);
-    //once this is working well, consider adding an "are you sure?" kind of popup box to confirm
   });
 }
 
@@ -220,11 +234,6 @@ function deleteCity(id){//still need to figure out how we are acquiring this id
   })
 };
 
-
-function handleFormSubmit(){//empties the form and calls createCity when the user decides to add a new city
-//should I call this inside of the post request?? or somewhere else? It probably shouldnt empty everything if the request fails or there is an error
-}
-
 function getCheckboxValues(){//gets the values of whatever is checked in the checkboxes
     let checkedVals = [];
     $('input[type=checkbox]:checked').each(function(){
@@ -236,7 +245,7 @@ function getCheckboxValues(){//gets the values of whatever is checked in the che
 
 
 function createCityObject(){
-  $('form').on('submit', function(event){//be sure to have a condition that checks to see if all of the required fields are filled out
+  $('#add-city-form').on('submit', function(event){//be sure to have a condition that checks to see if all of the required fields are filled out
     event.preventDefault();
     console.log('Just checking to see if anything is happening!!!!');
     //set all of the variables to whatever is inside of the form submission
@@ -289,14 +298,12 @@ function generateError(error){//generates an error if necessary
   console.error(error)
 }
 
-/*FUNCTIONS RELATING TO RENDERING PINS OF THE CITIES ON THE MAP */
-
 
 $(function () {
-handleFormSubmit();
 createCityObject();
 handleUpdateCityClicked();
 handleDeleteCityClicked();
+handleEditThisCityClicked();
 getCities();
 handleCityClicked();
 });
