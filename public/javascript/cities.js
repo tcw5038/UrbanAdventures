@@ -27,6 +27,23 @@ function initMap(data) {
     scrollWheel: false,
     gestureHandling: "greedy"
   });
+  var geocoder = new google.maps.Geocoder();
+  geocodeAddress(geocoder, map)
+}
+
+function geocodeAddress (geocoder, resultsMap){
+  let address = "New York";
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
 }
 
 function createMarker(latlon, pageTitle, contentString){//creates a new marker on the google map
@@ -92,7 +109,7 @@ $(".submit-city").click(function(e) {//closes out when the user hits submit...do
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
 function generateTagHTML (tag){
-  return `<li class="tag">${tag}</li>`
+  return `<li class="tag"><div class="tag-box">${tag}</div></li>`
 }
 
 function renderTags(city){
@@ -101,29 +118,32 @@ function renderTags(city){
     console.log(tag);
     return generateTagHTML(tag);
   });
+  console.log(renderedTags);
 return renderedTags;
 }
 
 function renderCityDetailPage(city){//pulls data from cityObject and renders it as the detail page
-let tagCode = renderTags(city);
+    let tagCode = renderTags(city);
+    console.log(tagCode);
 
-return `
-<span class="x">X</span>
-<h1 class="cityName">${city.cityName}, ${city.country}</h1>
-<h3 class="yearVisited">${city.yearVisited}</h3>
-<img class="detailimg" src="${city.imageURL}">
-  <ul class="tag-list">
-  ${tagCode.join(", ")}
-  </ul>
-  <div class="notes">${city.notes}</div>
- <button class="edit-city">Edit this city</button>
- <button class="delete-city">Delete this city</button>
-`}
+    return `
+    <span class="x">X</span>
+    <h1 class="cityName">${city.cityName}, ${city.country}</h1>
+    <h3 class="yearVisited">${city.yearVisited}</h3>
+    <img class="detailimg" src="${city.imageURL}">
+      <ul class="tag-list">
+      ${tagCode.join(" ")}
+      </ul>
+      <div class="notes">${city.notes}</div>
+    <button class="edit-city">Edit this city</button>
+    <button class="delete-city">Delete this city</button>
+    `
+}
 
 function generateCityHTML(city, index){//generates the HTML for each individual city
-   return `<div class="city-card" data-index="${index}">
-   <p class="city-name">${city.cityName}</p>
-   <img class="city-img" src="${city.imageURL}">
+   return `<div class="city-card" data-index="${index}" style="background-image:url(${city.imageURL})">
+   <div class="darken-filter"></div>
+   <h1 class="city-name">${city.cityName}</h1>
    </div>`;//make it a div with an img as a background, background size to cover
 }
 
@@ -234,10 +254,14 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
       yearVisited:yearVisited,
       notes:notes,
       tags:tags,
-      imageURL:imageURL
+      imageURL:imageURL,
+      id:cityID
     }
     console.log(updatedCity);
+    //state.cities[cityIndex] = updatedCity;
+    $(".darken-edit").hide();
     updateCity(updatedCity, cityID);//put request with the id and the update data
+    
   });
 }
 
@@ -253,16 +277,16 @@ function updateCity(updatedCity, cityID){//pass in the updatedCity and the cityI
       'Content-Type': 'application/json',
     },
   })
-  .done(function(){
-    console.log("Updating city");
-    getCities();//once the city is done being updated, call the getCities function to display the updated results
+  .then(() => {
+    getCities();
+    console.log("Successfully updated city");
   })
   .fail(function(err){
     generateError(err);
   })
 }
 
-
+/*FUNCTIONS FOR DELETING A CITY OBJECT */
 function handleDeleteCityClicked(){//handles user requests to delete a given city
   $('.city-detail-container').on('click', '.delete-city', function(event){//when the delete city button is clicked, the city will be deleted
     event.preventDefault();
@@ -287,12 +311,15 @@ function deleteCity(id){//still need to figure out how we are acquiring this id
   })
   .then(() => {
     getCities();
+    $(".darken-detail").hide();
     console.log("Successfully deleted city");
   })
   .fail(() => {
     console.log("Failed to delete cities");
   })
 };
+
+/*FUNCTIONS FOR CREATING A NEW CITY OBJECT*/
 
 function getCheckboxValues(){//gets the values of whatever is checked in the checkboxes
     let checkedVals = [];

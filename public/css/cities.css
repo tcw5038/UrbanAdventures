@@ -36,7 +36,7 @@ html {
 .citiescontainer {
   background-color: white;
   position: fixed;
-  top: 40px;
+  top: 60px;
   bottom: 0px;
   left: 0px;
   width: 30%;
@@ -53,35 +53,61 @@ html {
   position: sticky;
 }
 
+.darken-filter{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.darken-filter:hover{
+  background-color: rgba(0,0,0,0)
+  
+}
+
 .city-card {
-  width: 85%;
+  position:relative;
+  width: 88%;
   height: 25%;
-  border: 1px solid black;
+  min-height:200px;
+  border: none;
+  border-radius:2px;
   margin: 20px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-size:cover;
   overflow: hidden;
   text-align:center;
-  transition: transform .2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.city-name{
+  position:absolute;
+  font-size:20px;
+  top:calc(50%-10px);
+  color:white;
+  display:block;
+  text-align:center;
+  width:100%;
+  
 }
 
 .city-card:hover {
   cursor:pointer;
-  transform: scale(1.1);
-  font-size:1.2em;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-p {
-  position:absolute;
-  color:white;
-}
+
 
 /*.city-image{
   width:100%;
   height:auto;
-}*/
 
+.city-card img {
+  filter:brightness(50%);
+}
+}*/
 
 .city-card img {
   flex-shrink: 0;
@@ -235,16 +261,19 @@ CITY DETAIL PAGES
   height: auto;
 }
 
-.tag-list {
-  display: flex;
+.tag-list li{
+  display: inline-block;
   list-style-type: none;
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
+  margin-right:20px;
 }
 
-.tags {
-  margin-left: 10px;
+.tag-box{
+  border:1px solid black;
+  padding:15px;
+}
+
+.tag {
+  background-color:lightgray;
 }
 
 .edit-city, .delete-city {
@@ -274,7 +303,7 @@ CITY DETAIL PAGES
   top: 0px;
   right: 0px;
   left: 0px;
-  height:50px;
+  height:60px;
 }
 	
 .nav-ul {
@@ -289,10 +318,12 @@ CITY DETAIL PAGES
   font-size: 1.1em;
   text-decoration: none;
 }
+
   
 .logo{
   height:30px;
   width:auto;
+  margin-right:275px;
 }
 
 	.nav-li {
@@ -335,9 +366,17 @@ CITY DETAIL PAGES
 /* nav buttons */
 
 .create-city-button, .toggle-list, .logout-button{
-  background-color:white;
-  color:black;
-  border:none;
+  background-color:#241b1f;
+  color:white;
+  border:1px white solid;
+  border-radius:2px;
   height:30px;
 }
 
+.create-city-button:hover, .toggle-list:hover, .logout-button:hover{
+  background-color:white;
+  color:#241b1f;
+  border:1px white solid;
+  cursor: pointer;
+ 
+}

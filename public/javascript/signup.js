@@ -29,19 +29,25 @@ function createUserObject(){
 }
 
 function createUser(user){
+  console.log(user);
     //ajax put request
       $.ajax({
         url: `/api/users/`,
         method: 'POST',
-        data: user//JSON.stringify(user),
-        /*headers: {
+        dataType:'json',
+        data:JSON.stringify(user),
+        /*headers: {//if i put this in i get 500 if i take this out i get 422
           'Content-Type': 'application/json',
         },*/
       })
       .done(function(response){
-        console.log(`${user} added to database`)
+        console.log(`${user.firstName} added to database`)
         console.log(response);
-        //send the user back to the home page? should they be signed in or not?
+        //should call the sign in function
+        //save token to local storage so that it will still be there even if we refresh the page
+        //generate their cities
+        //take them to the dashboard
+        //make sure to add a message saying that there are no cities
       })
       .fail(function(err){
         console.error(err);
@@ -53,3 +59,5 @@ function createUser(user){
       handleUserSignup();
       
       });
+
+    

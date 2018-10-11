@@ -22,6 +22,7 @@ NAV STYLING
 .topnav {
   position: fixed;
   top: 0;
+  height:60px;
   width: 100%;
   overflow: hidden;
   background-color: #241b1f10;
