@@ -16,7 +16,11 @@ const CitySchema = mongoose.Schema({
   yearVisited: {type: Number, default: ''},
   notes: {type: String, default: ''},
   tags: {type: Array, default: [] },
-  imageURL: {type:String, default: ''}
+  imageURL: {type:String, default: ''},
+  location:{
+    lat: {type: Number, default: 0},
+    lng: {type: Number, default: 0},
+  }
 });
 
 CitySchema.methods.serialize = function() {
@@ -27,6 +31,7 @@ CitySchema.methods.serialize = function() {
     notes:this.notes || '',
     tags:this.tags || [],
     imageURL:this.imageURL || '',
+    location:this.location,
     id:this._id
   };
 };

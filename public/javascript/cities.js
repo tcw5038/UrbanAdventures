@@ -27,55 +27,46 @@ function initMap(data) {
     scrollWheel: false,
     gestureHandling: "greedy"
   });
-  var geocoder = new google.maps.Geocoder();
-  geocodeAddress(geocoder, map)
+  // var geocoder = new google.maps.Geocoder();
+  // geocodeAddress(geocoder, map)
 }
 
-function geocodeAddress (geocoder, resultsMap){
-  let address = "New York";
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
-}
+// function geocodeAddress (geocoder, resultsMap){
+//   let address = "New York";
+//   geocoder.geocode({'address': address}, function(results, status) {
+//     if (status === 'OK') {
+//       resultsMap.setCenter(results[0].geometry.location);
+//       var marker = new google.maps.Marker({
+//         map: resultsMap,
+//         position: results[0].geometry.location
+//       });
+//     } else {
+//       alert('Geocode was not successful for the following reason: ' + status);
+//     }
+//   });
+// }
 
-function createMarker(latlon, pageTitle, contentString){//creates a new marker on the google map
-  var marker = new google.maps.Marker({
-    position: latlon,//need to likely make something like getPosition() function that returns lat and longitude
-    map: map,
-    title: pageTitle,
-    infowindow: myinfowindow,
-    contentString: contentString,
-    //icon: 'images/pin.png'
-});
-}
+
 
 /*function getPosition(){
-  $.ajax({
-    type:'GET',
-    url: `https://maps.googleapis.com/maps/api/geocode/`,
-    address:'atlanta',
-    format:'json',
-    headers:{
-      'Content-type':'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
-    }
-  })
-  .done(function(response){
-    console.log(response);
-  });
+$.ajax({
+type:'GET',
+url: `https://maps.googleapis.com/maps/api/geocode/`,
+address:'atlanta',
+format:'json',
+headers:{
+'Content-type':'application/json',
+'Access-Control-Allow-Origin': '*',
+'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+}
+})
+.done(function(response){
+console.log(response);
+});
 
 }*/
 
-function displayMarkers(){//loops through and creates a marker for each country 
+function displayMarkers(){//loops through and creates a marker for each country
 
 }
 
@@ -119,32 +110,32 @@ function renderTags(city){
     return generateTagHTML(tag);
   });
   console.log(renderedTags);
-return renderedTags;
+  return renderedTags;
 }
 
 function renderCityDetailPage(city){//pulls data from cityObject and renders it as the detail page
-    let tagCode = renderTags(city);
-    console.log(tagCode);
+  let tagCode = renderTags(city);
+  console.log(tagCode);
 
-    return `
-    <span class="x">X</span>
-    <h1 class="cityName">${city.cityName}, ${city.country}</h1>
-    <h3 class="yearVisited">${city.yearVisited}</h3>
-    <img class="detailimg" src="${city.imageURL}">
-      <ul class="tag-list">
-      ${tagCode.join(" ")}
-      </ul>
-      <div class="notes">${city.notes}</div>
-    <button class="edit-city">Edit this city</button>
-    <button class="delete-city">Delete this city</button>
-    `
+  return `
+  <span class="x">X</span>
+  <h1 class="cityName">${city.cityName}, ${city.country}</h1>
+  <h3 class="yearVisited">${city.yearVisited}</h3>
+  <img class="detailimg" src="${city.imageURL}">
+  <ul class="tag-list">
+  ${tagCode.join(" ")}
+  </ul>
+  <div class="notes">${city.notes}</div>
+  <button class="edit-city">Edit this city</button>
+  <button class="delete-city">Delete this city</button>
+  `
 }
 
 function generateCityHTML(city, index){//generates the HTML for each individual city
-   return `<div class="city-card" data-index="${index}" style="background-image:url(${city.imageURL})">
-   <div class="darken-filter"></div>
-   <h1 class="city-name">${city.cityName}</h1>
-   </div>`;//make it a div with an img as a background, background size to cover
+  return `<div class="city-card" data-index="${index}" style="background-image:url(${city.imageURL})">
+  <div class="darken-filter"></div>
+  <h1 class="city-name">${city.cityName}</h1>
+  </div>`;//make it a div with an img as a background, background size to cover
 }
 
 function getCities(){//gets all the cities when a signed in user goes to their dashboard
@@ -164,9 +155,21 @@ function getCities(){//gets all the cities when a signed in user goes to their d
     generateError(err);
   })
 }
+function createMarker(city, index){//creates a new marker on the google map
+  console.log(city)
+  var marker = new google.maps.Marker({
+    position: city.location,
+    map: map,
+    title: city.cityName
+    //infowindow: myinfowindow,
+    //contentString: contentString,
+    //icon: 'images/pin.png'
+  });
+}
 
 function renderCities(cities){//renders all of the cities to the page using the generateCityHTML function
   let renderedCities = cities.map((city, index) => {//for each city in cities, use append to call generateCityHTML and return the HTML
+    createMarker(city)
     return generateCityHTML(city, index);
   });
   $('.citiescontainer').html(renderedCities);
@@ -191,26 +194,26 @@ function createUpdateFields(selectedCity){//returns a new form that the user can
   return `
   <span class="x">X</span>
   <form class="edit-city-form">
-      <h1 class="add-city-title">Edit this city</h1>
-      <label for="cityName">City Name:</label>
-      <input type="text" name="cityName" id="cityName" value="${selectedCity.cityName}"required>
-      <label for="country">Country:</label>
-      <input type="text" value="${selectedCity.country}" name="country" id="country" required>
-      <label for="yearVisited">Year of visit:</label>
-      <input type="text" value="${selectedCity.yearVisited}" name="yearVisited" id="yearVisited" required>
-      <label for="tags">Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
-      <input type="checkbox" value="food" class="checkbox"> Food
-      <input type="checkbox" value="architecture" class="checkbox"> Architecture
-      <input type="checkbox" value="art" class="checkbox"> Art
-      <input type="checkbox" value="people" class="checkbox"> People
-      <input type="checkbox" value="nature" class="checkbox"> Nature
-      <input type="checkbox" value="good-value" class="checkbox"> Good value
-      <br>
-      <label for="image">Add a link to an image of this city:</label>
-      <input type="url" value="${selectedCity.imageURL}" name="image"  id="imageURL" required>
-      <label for="notes">Add any notes about this city:</label>
-      <input type="text" value="${selectedCity.notes}" name="notes" id="notes">
-      <input type="submit" class="submit-updates" value="Update this city">
+  <h1 class="add-city-title">Edit this city</h1>
+  <label for="cityName">City Name:</label>
+  <input type="text" name="cityName" id="cityName" value="${selectedCity.cityName}"required>
+  <label for="country">Country:</label>
+  <input type="text" value="${selectedCity.country}" name="country" id="country" required>
+  <label for="yearVisited">Year of visit:</label>
+  <input type="text" value="${selectedCity.yearVisited}" name="yearVisited" id="yearVisited" required>
+  <label for="tags">Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
+  <input type="checkbox" value="food" class="checkbox"> Food
+  <input type="checkbox" value="architecture" class="checkbox"> Architecture
+  <input type="checkbox" value="art" class="checkbox"> Art
+  <input type="checkbox" value="people" class="checkbox"> People
+  <input type="checkbox" value="nature" class="checkbox"> Nature
+  <input type="checkbox" value="good-value" class="checkbox"> Good value
+  <br>
+  <label for="image">Add a link to an image of this city:</label>
+  <input type="url" value="${selectedCity.imageURL}" name="image"  id="imageURL" required>
+  <label for="notes">Add any notes about this city:</label>
+  <input type="text" value="${selectedCity.notes}" name="notes" id="notes">
+  <input type="submit" class="submit-updates" value="Update this city">
   </form>`;//include all the parts of the form, pre filled in with the previous values so that they can be updated
 }
 
@@ -227,7 +230,7 @@ function handleEditThisCityClicked(){//handles user requests to update a given c
     $(".darken-detail").hide();//hides the detail page
     $(".darken-edit").show();//shows the update page
     console.log("Made it here");
-    
+
   });
 }
 
@@ -240,7 +243,7 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
     let selectedCity = state.cities[cityIndex];
     let cityID = selectedCity.id;
     console.log(selectedCity);
-   
+
     let cityName = $("#cityName").val();
     let country = $("#country").val();
     let yearVisited = $("#yearVisited").val();
@@ -261,14 +264,14 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
     //state.cities[cityIndex] = updatedCity;
     $(".darken-edit").hide();
     updateCity(updatedCity, cityID);//put request with the id and the update data
-    
+
   });
 }
 
 function updateCity(updatedCity, cityID){//pass in the updatedCity and the cityID
   console.log(cityID);
   console.log(updatedCity);
-//ajax put request
+  //ajax put request
   $.ajax({
     type: 'PUT',
     url: `/api/cities/${cityID}`,
@@ -322,12 +325,12 @@ function deleteCity(id){//still need to figure out how we are acquiring this id
 /*FUNCTIONS FOR CREATING A NEW CITY OBJECT*/
 
 function getCheckboxValues(){//gets the values of whatever is checked in the checkboxes
-    let checkedVals = [];
-    $('input[type=checkbox]:checked').each(function(){
-      checkedVals.push($(this).val());
-    });
-    console.log(checkedVals);
-    return checkedVals;
+  let checkedVals = [];
+  $('input[type=checkbox]:checked').each(function(){
+    checkedVals.push($(this).val());
+  });
+  console.log(checkedVals);
+  return checkedVals;
 }
 
 
@@ -360,23 +363,23 @@ function createCityObject(){
 }
 
 function storeCity(city){//creates a new city using the form data inputted
+  console.log(city);
+  $.ajax({
+    url: `/api/cities/`,
+    type: 'POST',
+    data: JSON.stringify(city),
+    headers: {
+      'Content-Type': 'application/json',
+      //'Authorization':'Bearer ' + token //token from local storage
+    },
+  })
+  .then(() => {
     console.log(city);
-    $.ajax({
-      url: `/api/cities/`,
-      type: 'POST',
-      data: JSON.stringify(city),
-      headers: {
-        'Content-Type': 'application/json',
-        //'Authorization':'Bearer ' + token //token from local storage
-      },
-    })
-    .then(() => {
-      console.log(city);
-      getCities();
-    })
-    .fail(error => {
-      generateError(error);
-    })
+    getCities();
+  })
+  .fail(error => {
+    generateError(error);
+  })
 };
 
 /*FUNCTIONS RELATED TO ERROR HANDLING */
@@ -387,16 +390,16 @@ function generateError(error){//generates an error if necessary
 
 
 $(function () {
-createCityObject();
-handleCityClicked();
-handleEditThisCityClicked();
-handleUpdateCityClicked();
-handleDeleteCityClicked();
-getCities();
+  createCityObject();
+  handleCityClicked();
+  handleEditThisCityClicked();
+  handleUpdateCityClicked();
+  handleDeleteCityClicked();
+  getCities();
 
 
 
 
-//getPosition();
+  //getPosition();
 
 });
