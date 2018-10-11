@@ -216,53 +216,41 @@ function handleEditThisCityClicked(){//handles user requests to update a given c
   });
 }
 
+
+function getCityValuesFromForm(){
+  return  {//creates a new city object using the information stored above
+    cityName:$("#cityName").val();,
+    country:$("#country").val();,
+    yearVisited:$("#yearVisited").val();,
+    notes:$("#notes").val();,
+    tags:getCheckboxValues();,
+    imageURL:$("#imageURL").val();,
+    location:{}
+  }
+}
+
 function handleUpdateCityClicked(){//used when the user decides to hit the update city button after changing data
   $('.edit-city-container').on('click', '.submit-updates', function(event){
     event.preventDefault();
-    let cityIndex = state.selectedCityIndex;
-    let selectedCity = state.cities[cityIndex];
-    let cityID = selectedCity.id;
-    let cityName = $("#cityName").val();
-    let country = $("#country").val();
-    let yearVisited = $("#yearVisited").val();
-    let notes = $("#notes").val();
-    let tags = getCheckboxValues();
-    let imageURL = $("#imageURL").val();
-
-    let updatedCity = {//creates a new city object using the information stored above
-      cityName:cityName,
-      country:country,
-      yearVisited:yearVisited,
-      notes:notes,
-      tags:tags,
-      imageURL:imageURL,
-      id:cityID
-    }
-    //state.cities[cityIndex] = updatedCity;
-    $(".darken-edit").hide();
-    updateCity(updatedCity, cityID);//put request with the id and the update data
-
+    let selectedCity = state.cities[state.selectedCityIndex];
+    let updatedCity = getCityValuesFromForm()
+    let updatedCity.id = selectedCity.id;
+    findCityLocation(updatedCity)
   });
 }
 
-function updateCity(updatedCity, cityID){//pass in the updatedCity and the cityID
-
-  $.ajax({
-    type: 'PUT',
-    url: `/api/cities/${cityID}`,
-    data: JSON.stringify(updatedCity),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  .then(() => {
-    getCities();
-    console.log("Successfully updated city");
-  })
-  .fail(function(err){
-    generateError(err);
-  })
+function createCityObject(){
+  $('#add-city-form').on('submit', function(event){//be sure to have a condition that checks to see if all of the required fields are filled out
+    event.preventDefault();
+    let newCity = getCityValuesFromForm()
+    findCityLocation(newCity)
+  });
 }
+
+
+
+
+
 
 /*FUNCTIONS FOR DELETING A CITY OBJECT */
 function handleDeleteCityClicked(){//handles user requests to delete a given city
@@ -304,34 +292,6 @@ function getCheckboxValues(){//gets the values of whatever is checked in the che
 }
 
 
-function createCityObject(){
-  $('#add-city-form').on('submit', function(event){//be sure to have a condition that checks to see if all of the required fields are filled out
-    event.preventDefault();
-  //  console.log('Just checking to see if anything is happening!!!!');
-    //set all of the variables to whatever is inside of the form submission
-
-    let cityName = $("#cityName").val();
-    let country = $("#country").val();
-    let yearVisited = $("#yearVisited").val();
-    let notes = $("#notes").val();
-    let tags = getCheckboxValues();
-    let imageURL = $("#imageURL").val();
-
-    //console.log(`${cityName}, ${country}, ${yearVisited}, ${notes}, ${tags}, ${imageURL}`);
-
-    let newCity = {//creates a new city object using the information stored above
-      cityName:cityName,
-      country:country,
-      yearVisited:yearVisited,
-      notes:notes,
-      tags:tags,
-      imageURL:imageURL,
-      location:{}
-    }
-    findCityLocation(newCity)
-
-  });
-}
 
 
 function findCityLocation(city){
@@ -339,7 +299,7 @@ function findCityLocation(city){
     if (status === 'OK') {
       city.location.lat=results[0].geometry.location.lat();
       city.location.lng=results[0].geometry.location.lng();
-      storeCity(city)
+      saveCity(city, method)
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -347,10 +307,12 @@ function findCityLocation(city){
 }
 
 
-function storeCity(city){//creates a new city using the form data inputted
+function saveCity(city){//creates a new city using the form data inputted
+  let cityID = city.id ? city.id : "";
+  let method = city.id ? "PUT" : "POST";
   $.ajax({
-    url: `/api/cities/`,
-    type: 'POST',
+    type: method,
+    url: `/api/cities/${cityID}`,
     data: JSON.stringify(city),
     headers: {
       'Content-Type': 'application/json',
