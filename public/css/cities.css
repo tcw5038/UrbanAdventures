@@ -87,7 +87,6 @@ p {
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
-
 }
 
 @media (max-width: 600px) {
@@ -335,7 +334,7 @@ CITY DETAIL PAGES
 
 /* nav buttons */
 
-.create-city-button, .toggle-list{
+.create-city-button, .toggle-list, .logout-button{
   background-color:white;
   color:black;
   border:none;

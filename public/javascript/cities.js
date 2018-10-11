@@ -12,7 +12,9 @@ $(".toggle-list").click(function(e) {
   $(".citiescontainer").toggle();
 });
 
-/*FOR INITIALIZING GOOGLE MAPS */
+/*GOOGLE MAPS */
+//https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
+
 let map;
 function initMap(data) {
   let lat = 0;
@@ -25,6 +27,39 @@ function initMap(data) {
     scrollWheel: false,
     gestureHandling: "greedy"
   });
+}
+
+function createMarker(latlon, pageTitle, contentString){//creates a new marker on the google map
+  var marker = new google.maps.Marker({
+    position: latlon,//need to likely make something like getPosition() function that returns lat and longitude
+    map: map,
+    title: pageTitle,
+    infowindow: myinfowindow,
+    contentString: contentString,
+    //icon: 'images/pin.png'
+});
+}
+
+/*function getPosition(){
+  $.ajax({
+    type:'GET',
+    url: `https://maps.googleapis.com/maps/api/geocode/`,
+    address:'atlanta',
+    format:'json',
+    headers:{
+      'Content-type':'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+    }
+  })
+  .done(function(response){
+    console.log(response);
+  });
+
+}*/
+
+function displayMarkers(){//loops through and creates a marker for each country 
+
 }
 
 /* CLICK EVENT LISTENERS*/
@@ -95,7 +130,7 @@ function generateCityHTML(city, index){//generates the HTML for each individual 
 function getCities(){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
     type: 'GET',
-    url: `/api/cities`,
+    url: `/api/cities/`,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -177,14 +212,38 @@ function handleEditThisCityClicked(){//handles user requests to update a given c
 }
 
 function handleUpdateCityClicked(){//used when the user decides to hit the update city button after changing data
-  $('.edit-city-form').on('submit', '.submit-updates', function(event){
+  $('.edit-city-container').on('click', '.submit-updates', function(event){
     event.preventDefault();
     console.log("Update city button clicked!");
-    //updateCity(updatedCityObject, cityID);//put request with the id and the update data
+    let cityIndex = state.selectedCityIndex;
+    console.log(cityIndex);
+    let selectedCity = state.cities[cityIndex];
+    let cityID = selectedCity.id;
+    console.log(selectedCity);
+   
+    let cityName = $("#cityName").val();
+    let country = $("#country").val();
+    let yearVisited = $("#yearVisited").val();
+    let notes = $("#notes").val();
+    let tags = getCheckboxValues();
+    let imageURL = $("#imageURL").val();
+
+    let updatedCity = {//creates a new city object using the information stored above
+      cityName:cityName,
+      country:country,
+      yearVisited:yearVisited,
+      notes:notes,
+      tags:tags,
+      imageURL:imageURL
+    }
+    console.log(updatedCity);
+    updateCity(updatedCity, cityID);//put request with the id and the update data
   });
 }
 
 function updateCity(updatedCity, cityID){//pass in the updatedCity and the cityID
+  console.log(cityID);
+  console.log(updatedCity);
 //ajax put request
   $.ajax({
     type: 'PUT',
@@ -214,6 +273,7 @@ function handleDeleteCityClicked(){//handles user requests to delete a given cit
     console.log(cityID);
     //console.log(state.cities);
     deleteCity(cityID);
+
   });
 }
 
@@ -301,9 +361,15 @@ function generateError(error){//generates an error if necessary
 
 $(function () {
 createCityObject();
+handleCityClicked();
+handleEditThisCityClicked();
 handleUpdateCityClicked();
 handleDeleteCityClicked();
-handleEditThisCityClicked();
 getCities();
-handleCityClicked();
+
+
+
+
+//getPosition();
+
 });
