@@ -3,7 +3,8 @@
 
 let state = {
   cities : [],
-  selectedCityIndex: -1//not 0 because 0 is currently a city
+  selectedCityIndex: -1,//not 0 because 0 is currently a city
+  markers:[]
 }
 
 /*FOR HIDING AND SHOWING THE CITIES BESIDE THE MAP */
@@ -14,7 +15,7 @@ $(".toggle-list").click(function(e) {
 
 /*GOOGLE MAPS */
 //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
-
+var geocoder;
 let map;
 function initMap(data) {
   let lat = 0;
@@ -27,25 +28,16 @@ function initMap(data) {
     scrollWheel: false,
     gestureHandling: "greedy"
   });
-  // var geocoder = new google.maps.Geocoder();
+  geocoder = new google.maps.Geocoder();
   // geocodeAddress(geocoder, map)
 }
 
-// function geocodeAddress (geocoder, resultsMap){
-//   let address = "New York";
-//   geocoder.geocode({'address': address}, function(results, status) {
-//     if (status === 'OK') {
-//       resultsMap.setCenter(results[0].geometry.location);
-//       var marker = new google.maps.Marker({
-//         map: resultsMap,
-//         position: results[0].geometry.location
-//       });
-//     } else {
-//       alert('Geocode was not successful for the following reason: ' + status);
-//     }
-//   });
-// }
-
+function clearMarkers() {
+    for(var i=0; i < state.markers.length; i++){
+        state.markers[i].setMap(null);
+    }
+    state.markers = new Array();
+};
 
 
 /*function getPosition(){
@@ -93,9 +85,7 @@ $('.city-detail-container').on('click', '.x', function(event){//closes out witho
   $(".darken-detail").hide();
 });
 
-$(".submit-city").click(function(e) {//closes out when the user hits submit...do we need additional user feedback here?
-  $(".darken-add-city").hide();
-});
+
 
 /* FUNCTIONS FOR CREATING AND RENDERING THE CITIES TO THE PAGE */
 
@@ -106,16 +96,13 @@ function generateTagHTML (tag){
 function renderTags(city){
   let checkedTags = city.tags;
   let renderedTags = checkedTags.map((tag) => {//for each city in cities, use append to call generateCityHTML and return the HTML
-    console.log(tag);
     return generateTagHTML(tag);
   });
-  console.log(renderedTags);
   return renderedTags;
 }
 
 function renderCityDetailPage(city){//pulls data from cityObject and renders it as the detail page
   let tagCode = renderTags(city);
-  console.log(tagCode);
 
   return `
   <span class="x">X</span>
@@ -149,6 +136,7 @@ function getCities(){//gets all the cities when a signed in user goes to their d
   .done(function(response){
     console.log("Rendering cities");
     state.cities = response;
+
     renderCities(state.cities);
   })
   .fail(function(err){
@@ -156,7 +144,6 @@ function getCities(){//gets all the cities when a signed in user goes to their d
   })
 }
 function createMarker(city, index){//creates a new marker on the google map
-  console.log(city)
   var marker = new google.maps.Marker({
     position: city.location,
     map: map,
@@ -165,9 +152,11 @@ function createMarker(city, index){//creates a new marker on the google map
     //contentString: contentString,
     //icon: 'images/pin.png'
   });
+  state.markers.push(marker)
 }
 
 function renderCities(cities){//renders all of the cities to the page using the generateCityHTML function
+  clearMarkers()
   let renderedCities = cities.map((city, index) => {//for each city in cities, use append to call generateCityHTML and return the HTML
     createMarker(city)
     return generateCityHTML(city, index);
@@ -179,10 +168,8 @@ function handleCityClicked(){//listener that brings up the city detail page on c
   $('.citiescontainer').on('click', '.city-card', function(event){
     event.preventDefault();
     let cityIndex = $(this).attr("data-index");//stores the index of this city in a variable
-    console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
     state.selectedCityIndex = cityIndex;
-    console.log(selectedCity);
     let renderedDetailPage = renderCityDetailPage(selectedCity);//takes the data from selectedCity and uses it to populate the detail page
     $('.city-detail-container').html(renderedDetailPage);
     $('.darken-detail').show();
@@ -220,30 +207,21 @@ function createUpdateFields(selectedCity){//returns a new form that the user can
 function handleEditThisCityClicked(){//handles user requests to update a given city
   $('.city-detail-container').on('click', '.edit-city', function(event){//when the edit city button is clicked, allow the edits to be made
     let cityIndex = state.selectedCityIndex;
-    console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
     let cityID = selectedCity.id;
-    console.log(cityID);
     let editableCityHTML = createUpdateFields(selectedCity);
-    console.log(editableCityHTML);
     $(".edit-city-container").html(editableCityHTML);
     $(".darken-detail").hide();//hides the detail page
     $(".darken-edit").show();//shows the update page
-    console.log("Made it here");
-
   });
 }
 
 function handleUpdateCityClicked(){//used when the user decides to hit the update city button after changing data
   $('.edit-city-container').on('click', '.submit-updates', function(event){
     event.preventDefault();
-    console.log("Update city button clicked!");
     let cityIndex = state.selectedCityIndex;
-    console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
     let cityID = selectedCity.id;
-    console.log(selectedCity);
-
     let cityName = $("#cityName").val();
     let country = $("#country").val();
     let yearVisited = $("#yearVisited").val();
@@ -260,7 +238,6 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
       imageURL:imageURL,
       id:cityID
     }
-    console.log(updatedCity);
     //state.cities[cityIndex] = updatedCity;
     $(".darken-edit").hide();
     updateCity(updatedCity, cityID);//put request with the id and the update data
@@ -269,9 +246,7 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
 }
 
 function updateCity(updatedCity, cityID){//pass in the updatedCity and the cityID
-  console.log(cityID);
-  console.log(updatedCity);
-  //ajax put request
+
   $.ajax({
     type: 'PUT',
     url: `/api/cities/${cityID}`,
@@ -294,13 +269,9 @@ function handleDeleteCityClicked(){//handles user requests to delete a given cit
   $('.city-detail-container').on('click', '.delete-city', function(event){//when the delete city button is clicked, the city will be deleted
     event.preventDefault();
     let cityIndex = state.selectedCityIndex;
-    console.log(cityIndex);
     let selectedCity = state.cities[cityIndex];
     let cityID = selectedCity.id;
-    console.log(cityID);
-    //console.log(state.cities);
     deleteCity(cityID);
-
   });
 }
 
@@ -329,7 +300,6 @@ function getCheckboxValues(){//gets the values of whatever is checked in the che
   $('input[type=checkbox]:checked').each(function(){
     checkedVals.push($(this).val());
   });
-  console.log(checkedVals);
   return checkedVals;
 }
 
@@ -337,7 +307,7 @@ function getCheckboxValues(){//gets the values of whatever is checked in the che
 function createCityObject(){
   $('#add-city-form').on('submit', function(event){//be sure to have a condition that checks to see if all of the required fields are filled out
     event.preventDefault();
-    console.log('Just checking to see if anything is happening!!!!');
+  //  console.log('Just checking to see if anything is happening!!!!');
     //set all of the variables to whatever is inside of the form submission
 
     let cityName = $("#cityName").val();
@@ -347,7 +317,7 @@ function createCityObject(){
     let tags = getCheckboxValues();
     let imageURL = $("#imageURL").val();
 
-    console.log(`${cityName}, ${country}, ${yearVisited}, ${notes}, ${tags}, ${imageURL}`);
+    //console.log(`${cityName}, ${country}, ${yearVisited}, ${notes}, ${tags}, ${imageURL}`);
 
     let newCity = {//creates a new city object using the information stored above
       cityName:cityName,
@@ -355,15 +325,29 @@ function createCityObject(){
       yearVisited:yearVisited,
       notes:notes,
       tags:tags,
-      imageURL:imageURL
+      imageURL:imageURL,
+      location:{}
     }
-    console.log(newCity);
-    storeCity(newCity);//call the storeCity function to add our new city to the database
+    findCityLocation(newCity)
+
   });
 }
 
+
+function findCityLocation(city){
+  geocoder.geocode({'address': `${city.cityName}, ${city.country}`}, function(results, status) {
+    if (status === 'OK') {
+      city.location.lat=results[0].geometry.location.lat();
+      city.location.lng=results[0].geometry.location.lng();
+      storeCity(city)
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+
 function storeCity(city){//creates a new city using the form data inputted
-  console.log(city);
   $.ajax({
     url: `/api/cities/`,
     type: 'POST',
@@ -374,7 +358,7 @@ function storeCity(city){//creates a new city using the form data inputted
     },
   })
   .then(() => {
-    console.log(city);
+    $(".darken-add-city").hide();
     getCities();
   })
   .fail(error => {

@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const requiredFields = ['cityName', 'country', 'yearVisited', 'notes', 'tags'];
+  const requiredFields = ['cityName', 'country', 'yearVisited', 'notes', 'tags', 'location'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -50,7 +50,8 @@ router.post('/', (req, res) => {
       yearVisited: req.body.yearVisited,
       notes:req.body.notes,
       tags:req.body.tags,
-      imageURL:req.body.imageURL
+      imageURL:req.body.imageURL,
+      location:req.body.location
     })
     .then(city => res.status(201).json(city.serialize()))
     .catch(err => {
@@ -82,7 +83,7 @@ router.put('/:id', (req, res) => {//commenting this out fixed the bad request, b
   }
 
   const updated = {};
-  const updateableFields = ['cityName', 'country', 'yearVisited', 'notes', 'tags', 'imageURL'];
+  const updateableFields = ['cityName', 'location', 'country', 'yearVisited', 'notes', 'tags', 'imageURL'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
