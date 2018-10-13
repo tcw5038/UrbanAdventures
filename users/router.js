@@ -21,7 +21,6 @@ router.post('/', jsonParser, (req, res) => {
       location: missingField
     });
   }
-
   const stringFields = ['firstName', 'lastName','email', 'password' ];
   const nonStringField = stringFields.find(
     field => field in req.body && typeof req.body[field] !== 'string'
@@ -98,13 +97,13 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-  let {username, password, firstName = '', lastName = ''} = req.body;
+  let {email, password, firstName = '', lastName = ''} = req.body;
   // Username and password come in pre-trimmed, otherwise we throw an error
   // before this
   firstName = firstName.trim();
   lastName = lastName.trim();
 
-  return User.find({username})
+  return User.find({email})
     .count()
     .then(count => {
       if (count > 0) {
@@ -112,8 +111,8 @@ router.post('/', jsonParser, (req, res) => {
         return Promise.reject({
           code: 422,
           reason: 'ValidationError',
-          message: 'Username already taken',
-          location: 'username'
+          message: 'Email already taken',
+          location: 'email'
         });
       }
       // If there is no existing user, hash the password
@@ -121,7 +120,7 @@ router.post('/', jsonParser, (req, res) => {
     })
     .then(hash => {
       return User.create({
-        username,
+        email,
         password: hash,
         firstName,
         lastName
@@ -144,10 +143,10 @@ router.post('/', jsonParser, (req, res) => {
 // we're just doing this so we have a quick way to see
 // if we're creating users. keep in mind, you can also
 // verify this in the Mongo shell.
-/*router.get('/', (req, res) => {
+router.get('/', (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
-});*/
+});
 
 module.exports = {router};

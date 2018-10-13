@@ -39,29 +39,6 @@ function clearMarkers() {
     state.markers = new Array();
 };
 
-
-/*function getPosition(){
-$.ajax({
-type:'GET',
-url: `https://maps.googleapis.com/maps/api/geocode/`,
-address:'atlanta',
-format:'json',
-headers:{
-'Content-type':'application/json',
-'Access-Control-Allow-Origin': '*',
-'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
-}
-})
-.done(function(response){
-console.log(response);
-});
-
-}*/
-
-function displayMarkers(){//loops through and creates a marker for each country
-
-}
-
 /* CLICK EVENT LISTENERS*/
 
 

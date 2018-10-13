@@ -34,15 +34,13 @@ function createUser(user){
       $.ajax({
         url: `/api/users/`,
         method: 'POST',
-        dataType:'json',
         data:JSON.stringify(user),
-        /*headers: {//if i put this in i get 500 if i take this out i get 422
+        headers: {//if i put this in i get 500 if i take this out i get 422
           'Content-Type': 'application/json',
-        },*/
+        },
       })
-      .done(function(response){
-        console.log(`${user.firstName} added to database`)
-        console.log(response);
+      .then(() => {
+        console.log(`User with the email address: ${user.email} added to database`)
         //should call the sign in function
         //save token to local storage so that it will still be there even if we refresh the page
         //generate their cities
