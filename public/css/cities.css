@@ -109,10 +109,19 @@ html {
 }
 }*/
 
+
+
 .city-card img {
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
+}
+
+.toggle-button-div {
+  /*width: 50%;
+  margin: 0 auto;
+  padding-top:100px;*/
+  position: absolute; top: 100px; right: 20px; z-index: 99;
 }
 
 @media (max-width: 600px) {
@@ -304,6 +313,7 @@ CITY DETAIL PAGES
   right: 0px;
   left: 0px;
   height:60px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 	
 .nav-ul {
@@ -323,7 +333,7 @@ CITY DETAIL PAGES
 .logo{
   height:30px;
   width:auto;
-  margin-right:275px;
+  /*margin-right:275px;*/
 }
 
 	.nav-li {
@@ -336,7 +346,7 @@ CITY DETAIL PAGES
 	}
 	
 	.nav-li:first-child,
-  .nav-li:nth-child(n + 5) {
+  .nav-li:nth-child(n + 3) {
 		order: 3;
 	}
 	
@@ -365,17 +375,42 @@ CITY DETAIL PAGES
 
 /* nav buttons */
 
-.create-city-button, .toggle-list, .logout-button{
+.create-city-button, .toggle-list{
+  background-color:white;
+  color:#241b1f;
+  border:1px white solid;
+  border-radius:20px;
+  height:30px;
+  width:100px;
+}
+
+.logout-button{
   background-color:#241b1f;
   color:white;
   border:1px white solid;
-  border-radius:2px;
+  border-radius:20px;
   height:30px;
+  width:100px;
 }
 
-.create-city-button:hover, .toggle-list:hover, .logout-button:hover{
+.toggle-list{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border:1px #241b1f solid;
+
+}
+
+.logout-button:hover{
   background-color:white;
   color:#241b1f;
+  border:1px white solid;
+  border-radius:20px;
+  height:30px;
+  width:100px;
+}
+
+.create-city-button:hover, .toggle-list:hover{
+  background-color:#241b1f;
+  color:white;
   border:1px white solid;
   cursor: pointer;
  

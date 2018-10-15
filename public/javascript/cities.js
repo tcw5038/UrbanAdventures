@@ -7,6 +7,14 @@ let state = {
   markers:[]
 }
 
+
+const token = localStorage.getItem('authToken');
+const username = localStorage.getItem('username');
+
+
+console.log(`${token} , ${username}`);
+
+
 /*FOR HIDING AND SHOWING THE CITIES BESIDE THE MAP */
 
 $(".toggle-list").click(function(e) {
@@ -105,15 +113,15 @@ function generateCityHTML(city, index){//generates the HTML for each individual 
 function getCities(){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
     type: 'GET',
-    url: `/api/cities/`,
+    url: `/api/cities/${username}`,
     headers: {
       'Content-Type': 'application/json',
+      'Authorization':`Bearer ${localStorage.getItem('Token')}`
     },
   })
   .done(function(response){
     console.log("Rendering cities");
     state.cities = response;
-
     renderCities(state.cities);
   })
   .fail(function(err){
@@ -331,7 +339,8 @@ function storeCity(city){//creates a new city using the form data inputted
     data: JSON.stringify(city),
     headers: {
       'Content-Type': 'application/json',
-      //'Authorization':'Bearer ' + token //token from local storage
+      'Authorization':`Bearer ${localStorage.getItem('Token')}`
+      //'Authorization':'Bearer ' + token //token from local storage...need to figure out how to get it and where it is coming from
     },
   })
   .then(() => {
@@ -349,6 +358,34 @@ function generateError(error){//generates an error if necessary
   console.error(error)
 }
 
+function logoutUser(){
+  //makes the request to logout the user, delete relevant session tokens, etc.
+  $.ajax({
+    url: '/api/auth/logout',
+    type:'GET',
+    headers:{
+      'Authorization':`Bearer ${localStorage.getItem('Token')}`,
+      //authorization token
+    },
+  }).then (() => {
+    console.log(`User successfully logged out`);
+    localStorage.removeItem('Token');
+    //how to redirect back to the index page?
+    window.location.href = "index.html";//this isn't doing anything
+  })
+  .fail(error => {
+    generateError(error);
+  })
+}
+
+function handleLogOutClicked(){//handles user click to logout
+  $('nav').on('click','.logout-button', function(event){
+    event.preventDefault();
+    console.log("Logout button is listening!");
+    logoutUser();
+    //delete session tokens
+  })
+}
 
 $(function () {
   createCityObject();
@@ -357,6 +394,7 @@ $(function () {
   handleUpdateCityClicked();
   handleDeleteCityClicked();
   getCities();
+  handleLogOutClicked();
 
 
 

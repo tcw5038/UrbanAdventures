@@ -36,11 +36,13 @@ function createUser(user){
         method: 'POST',
         data:JSON.stringify(user),
         headers: {//if i put this in i get 500 if i take this out i get 422
-          'Content-Type': 'application/json',
+          'content-type': 'application/json',
         },
       })
       .then(() => {
-        console.log(`User with the email address: ${user.email} added to database`)
+        console.log(`User with the email address: ${user.email} added to database`);
+        window.location.href = "cities.html";
+        
         //should call the sign in function
         //save token to local storage so that it will still be there even if we refresh the page
         //generate their cities

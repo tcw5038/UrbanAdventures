@@ -8,6 +8,12 @@ body {
     padding: 0;
     background-color: white;
   }
+
+  .signup-link{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+  }
   
 
   /* FORM STYLING */
@@ -66,6 +72,8 @@ input[type=submit]:hover {
   right: 0px;
   left: 0px;
   height:60px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
 }
 	
 .nav-ul {
@@ -95,14 +103,14 @@ input[type=submit]:hover {
 		padding: .5em;	
 	}
 	
-	.nav-li:first-child,
+	/*.nav-li:first-child,
   .nav-li:nth-child(n + 5) {
 		order: 3;
 	}
 	
 	.nav-li:nth-child(n + 5) {
 		text-align: right;
-	}
+	}*/
 
 	/* margin auto center aligns logo */
 	.nav-li:first-child {
@@ -112,11 +120,6 @@ input[type=submit]:hover {
 	}
 
 
-
-  /* Add new city  */
-	.nav-li:last-child {
-		margin-right:20px;
-  }
 
 /* Nav hover */
 .topnav .navitem:hover {

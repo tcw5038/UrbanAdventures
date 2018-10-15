@@ -26,6 +26,7 @@ NAV STYLING
   width: 100%;
   overflow: hidden;
   background-color: #241b1f10;
+
 }
 
 /* Style the links inside the navigation bar */
@@ -140,9 +141,8 @@ BRANDING AND SUBTITLE STYLING
   font-weight: 300;
   color: white;
   background-color: #241b1f;
-  border-color: none;
-
-  border-radius: 6px;
+  border:1px white solid;
+  border-radius:50px;
   cursor: pointer;
   margin: 10px;
 }
