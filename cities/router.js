@@ -60,6 +60,8 @@ router.post('/', jwtAuth, (req, res) => {
     }
   }
 
+console.log("HII", req.user.id)
+
   City
     .create({
       cityName: req.body.cityName,
@@ -70,7 +72,6 @@ router.post('/', jwtAuth, (req, res) => {
       imageURL:req.body.imageURL,
       location:req.body.location,
       user:req.user.id
-
     })
     .then(city => res.status(201).json(city.serialize()))
     .catch(err => {
