@@ -24,7 +24,7 @@ function logInUser(username, password){//makes ajax call to get the users inform
         })
     }).then((res) => {
         console.log("User successfully logged in");
-        localStorage.setItem('Token', res.authToken);
+        localStorage.setItem('authToken', res.authToken);
         localStorage.setItem('username', username);
         window.location.href = "cities.html";
       })

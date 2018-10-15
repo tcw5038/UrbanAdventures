@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 const {City} = require('./models');
 
 const router = express.Router();
-
+const passport = require('passport');
 const jsonParser = bodyParser.json();
+const jwtAuth = passport.authenticate("jwt", { session: false });
 
 // Post to register a new city
 
@@ -24,10 +25,10 @@ router.get('/', (req, res) => {
 });
 
 //gets all cities for a given user
-router.get('/:username', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
   City
     //.findById(req.params.id)//is this what i should be using? or should it be find({ username: req.params.username })
-    .find({username: req.params.username})
+    .find({user:req.user.id})
     .then(cities => {
       res.json(cities.map(city => city.serialize()));
     })
@@ -38,7 +39,7 @@ router.get('/:username', (req, res) => {
 });
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', jwtAuth, (req, res) => {
   City
     .findById(req.params.id)
     .then(city => res.json(city.serialize()))
@@ -48,7 +49,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', jwtAuth, (req, res) => {
   const requiredFields = ['cityName', 'country', 'yearVisited', 'notes', 'tags', 'location'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -67,7 +68,9 @@ router.post('/', (req, res) => {
       notes:req.body.notes,
       tags:req.body.tags,
       imageURL:req.body.imageURL,
-      location:req.body.location
+      location:req.body.location,
+      user:req.user.id
+
     })
     .then(city => res.status(201).json(city.serialize()))
     .catch(err => {
@@ -78,7 +81,7 @@ router.post('/', (req, res) => {
 });
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', jwtAuth, (req, res) => {
   City
     .findByIdAndRemove(req.params.id)
     .then(() => {
@@ -91,7 +94,7 @@ router.delete('/:id', (req, res) => {
 });
 
 
-router.put('/:id', (req, res) => {//commenting this out fixed the bad request, but didn't hurt anything else in my app
+router.put('/:id', jwtAuth, (req, res) => {//commenting this out fixed the bad request, but didn't hurt anything else in my app
  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'

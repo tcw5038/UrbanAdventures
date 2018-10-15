@@ -381,7 +381,7 @@ CITY DETAIL PAGES
   border:1px white solid;
   border-radius:20px;
   height:30px;
-  width:100px;
+  width:120px;
 }
 
 .logout-button{
@@ -390,7 +390,7 @@ CITY DETAIL PAGES
   border:1px white solid;
   border-radius:20px;
   height:30px;
-  width:100px;
+  width:120px;
 }
 
 .toggle-list{
@@ -405,7 +405,7 @@ CITY DETAIL PAGES
   border:1px white solid;
   border-radius:20px;
   height:30px;
-  width:100px;
+  width:120px;
 }
 
 .create-city-button:hover, .toggle-list:hover{

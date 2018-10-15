@@ -8,10 +8,15 @@ let state = {
 }
 
 
-const token = localStorage.getItem('authToken');
-const username = localStorage.getItem('username');
+let token = localStorage.getItem('authToken');
+let username = localStorage.getItem('username');
+//https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
 
 
+//if there is no token, redirect to landing page
+//if there is a token, try to refresh the token
+//if successful, continue as normal
+//if unsucessful, redirect to login and delete the token from local storage
 console.log(`${token} , ${username}`);
 
 
@@ -113,10 +118,10 @@ function generateCityHTML(city, index){//generates the HTML for each individual 
 function getCities(){//gets all the cities when a signed in user goes to their dashboard
   $.ajax({
     type: 'GET',
-    url: `/api/cities/${username}`,
+    url: `/api/cities/`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':`Bearer ${localStorage.getItem('Token')}`
+      'Authorization':`Bearer ${token}`
     },
   })
   .done(function(response){
@@ -339,7 +344,7 @@ function storeCity(city){//creates a new city using the form data inputted
     data: JSON.stringify(city),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':`Bearer ${localStorage.getItem('Token')}`
+      'Authorization':`Bearer ${token}`
       //'Authorization':'Bearer ' + token //token from local storage...need to figure out how to get it and where it is coming from
     },
   })
@@ -364,7 +369,7 @@ function logoutUser(){
     url: '/api/auth/logout',
     type:'GET',
     headers:{
-      'Authorization':`Bearer ${localStorage.getItem('Token')}`,
+      'Authorization':`Bearer ${token}`,
       //authorization token
     },
   }).then (() => {
@@ -388,17 +393,11 @@ function handleLogOutClicked(){//handles user click to logout
 }
 
 $(function () {
+  getCities();
   createCityObject();
   handleCityClicked();
   handleEditThisCityClicked();
   handleUpdateCityClicked();
   handleDeleteCityClicked();
-  getCities();
   handleLogOutClicked();
-
-
-
-
-  //getPosition();
-
 });

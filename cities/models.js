@@ -20,7 +20,8 @@ const CitySchema = mongoose.Schema({
   location:{
     lat: {type: Number, default: 0},
     lng: {type: Number, default: 0},
-  }
+  },
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},//references another collection (users)
 });
 
 CitySchema.methods.serialize = function() {
@@ -32,7 +33,8 @@ CitySchema.methods.serialize = function() {
     tags:this.tags || [],
     imageURL:this.imageURL || '',
     location:this.location,
-    id:this._id
+    id:this._id,
+    user:this.user
   };
 };
 

@@ -41,7 +41,7 @@ function createUser(user){
       })
       .then(() => {
         console.log(`User with the email address: ${user.email} added to database`);
-        window.location.href = "cities.html";
+        //window.location.href = "cities.html";
         
         //should call the sign in function
         //save token to local storage so that it will still be there even if we refresh the page
