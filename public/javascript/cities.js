@@ -9,14 +9,12 @@ let state = {
 
 
 let token = localStorage.getItem('authToken');
-let username = localStorage.getItem('username');
 //https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
 
 //if there is no token, redirect to landing page
 //if there is a token, try to refresh the token
 //if successful, continue as normal
 //if unsucessful, redirect to login and delete the token from local storage
-console.log(`${token} , ${username}`);
 
 /*GOOGLE MAPS */
 //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
@@ -260,9 +258,7 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
       }
       $(".darken-edit").hide();
       updateCity(updatedCity, cityID);
-    }
-
-
+    } 
   });
 }
 
@@ -347,8 +343,7 @@ function createCityObject(){//creates a new city object so that it can be used b
         imageURL:imageURL,
         location:{}
       }
-      findCityLocation(newCity)
-
+      findCityLocation(newCity);
     }
   });
 }

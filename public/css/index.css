@@ -10,6 +10,7 @@ body {
   margin-right: 0;
   padding: 0;
   background: url(/images/background.jpg) no-repeat;
+ 
 }
 
 /*
@@ -226,4 +227,12 @@ footer {
   margin: 10px;
 }
 
+}
+
+/* TABLET */
+@media (max-width: 800px) {
+  .description-text {
+    width: 70%;
+    font-size: 1.4em;
+  }
 }
