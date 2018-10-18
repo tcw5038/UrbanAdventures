@@ -100,7 +100,7 @@ function handleToggleClicked(){//toggles list view and changes text of button ba
         button.innerHTML = 'Show List View';
         button.value="2";
         $(".citiescontainer").toggle();
-      } 
+      }
       else {
         button.value="1";
         button.innerHTML = 'Hide List View';
@@ -261,8 +261,8 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
       $(".darken-edit").hide();
       updateCity(updatedCity, cityID);
     }
-    
-    
+
+
   });
 }
 
@@ -406,7 +406,8 @@ function logoutUser(){//makes the request to logout the user/delete relevant tok
   })
 }
 
-$(function () {
+function init() {
+  initMap();
   getCities();
   createCityObject();
   handleCityClicked();
@@ -415,4 +416,4 @@ $(function () {
   handleDeleteCityClicked();
   handleLogOutClicked();
   handleToggleClicked();
-});
+};

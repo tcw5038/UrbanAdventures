@@ -21,14 +21,14 @@
     <li class="nav-li"><button class="create-city-button">+ Add a new city</button></li>
     <li class="nav-li"><button class="logout-button">Logout</button></li>
   </ul>
-</nav>	
+</nav>
 </div>
 
 <body>
         <div id="map"></div>
         <div id="toggle-button-div"><button id="toggle-list" value="1">Hide List View</button></div>
          <div class="citiescontainer">
-         </div>         
+         </div>
          <div class="darken-edit">
           <div class="edit-city-container"></div>
         </div>
@@ -36,7 +36,7 @@
          <div class="darken-detail">
            <div class="city-detail-container"></div>
          </div>
-    
+
 
               <div class="darken-add-city">
                   <div class="add-city-container">
@@ -58,11 +58,11 @@
                         <li><input type="checkbox" value="Nature" class="checkbox"> Nature</li>
                         <li><input type="checkbox" value="Good-value" class="checkbox"> Good Value</li>
                       </ul>
-                      
+
 
                       <br><br><br>
                       <label for="image">Add a link to an image of this city:</label>
-                      <input type="url" placeholder="Paste image link" name="image" value="https://images.pexels.com/photos/161893/seattle-washington-city-cities-161893.jpeg" id="imageURL" required> 
+                      <input type="url" placeholder="Paste image link" name="image" value="https://images.pexels.com/photos/161893/seattle-washington-city-cities-161893.jpeg" id="imageURL" required>
                       <label for="notes">Add any notes about this city:</label>
                       <input type="text" placeholder="Enter notes" name="notes" id="notes">
                       <input type="submit" class="submit-city" value="Add this city">
@@ -73,7 +73,7 @@
 
 <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 <script src="javascript/cities.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI2A8_VzuQHiqaxv9L4mKuYkA7AFFTehk&callback=initMap"  async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI2A8_VzuQHiqaxv9L4mKuYkA7AFFTehk&callback=init"  async defer></script>
 
 </body>
 </html>
