@@ -15,6 +15,12 @@ body {
     text-align:center;
   }
   
+  .error-message{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    padding-bottom:10px;
+  }
 
   /* FORM STYLING */
 h1{
@@ -126,3 +132,10 @@ input[type=submit]:hover {
   font-weight:600;
 }
 
+/* MOBILE */
+@media (max-width: 600px) {
+  .form-container {
+    width:60%;
+    margin-top:50px;
+  }
+}

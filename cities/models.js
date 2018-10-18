@@ -21,7 +21,7 @@ const CitySchema = mongoose.Schema({
     lat: {type: Number, default: 0},
     lng: {type: Number, default: 0},
   },
-  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},//references another collection (users)
+  user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 });
 
 CitySchema.methods.serialize = function() {

@@ -11,7 +11,7 @@ const jwtAuth = passport.authenticate("jwt", { session: false });
 
 // Post to register a new city
 
-//gets all cities regardless of user
+/*gets all cities regardless of user
 router.get('/', (req, res) => {
   City
     .find()
@@ -22,12 +22,11 @@ router.get('/', (req, res) => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
     });
-});
+});*/
 
 //gets all cities for a given user
 router.get('/', jwtAuth, (req, res) => {
   City
-    //.findById(req.params.id)//is this what i should be using? or should it be find({ username: req.params.username })
     .find({user:req.user.id})
     .then(cities => {
       res.json(cities.map(city => city.serialize()));

@@ -51,23 +51,6 @@ NAV STYLING
   font-weight: 300;
 }
 
-/*.navbutton{
-  font-family: 'Source Sans Pro', sans-serif;
-  margin-left:10px;
-  background-color:#274251b0;
-  border-color:white;
-  border-radius: 6px;
-  border-width:thin;
-  cursor:pointer;
-  font-size:1.2em;
-  font-weight:300;
-  color:white;
-  text-decoration: none;
-  height:45px;
-  width:120px;
-
-}*/
-
 #dashboard {
   float: left;
 }
@@ -98,9 +81,6 @@ BRANDING AND SUBTITLE STYLING
 .logoContainer {
   height: 400px;
   width: auto;
-  /*top: 40%;
-  left: 50%;*/
-  /* bring your own prefixes */
   transform: translate(-50%, -50%);
   margin-left: auto;
   margin-right: auto;
@@ -208,4 +188,42 @@ footer {
 
 .last {
   padding-bottom: 100px;
+}
+
+/* MOBILE */
+@media (max-width: 450px) {
+  .description-text {
+    width: 70%;
+    font-size: 1em;
+    font-weight: 300;
+    padding-top: 0;
+    margin-top: 0;
+  }
+
+
+.logoContainer {
+  height: 400px;
+  width: auto;
+  transform: translate(-50%, -50%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centered {
+  display: block;
+  height: auto;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bodybutton {
+  height: 50px;
+  width: 150px;
+  font-size: 1em;
+  border-radius:50px;
+  cursor: pointer;
+  margin: 10px;
+}
+
 }

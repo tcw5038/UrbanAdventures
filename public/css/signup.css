@@ -15,6 +15,13 @@ body {
   text-align:center;
 }
  
+.error-message{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  padding-bottom:10px;
+}
+
  /*
 ---------------------------------
 FORM STYLING
@@ -105,17 +112,7 @@ FORM STYLING
 	a {
 		padding: .5em;	
 	}
-	/*
-	.nav-li:first-child,
-  .nav-li:nth-child(n + 5) {
-		order: 3;
-	}
-	
-	.nav-li:nth-child(n + 5) {
-		text-align: right;
-	}*/
 
-	/* margin auto center aligns logo */
 	.nav-li:first-child {
 		margin-left: auto;
 		margin-right: auto;
@@ -127,3 +124,11 @@ FORM STYLING
   font-weight:600;
 }
 
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .form-container {
+    margin-top:50px;
+    width:60%;
+  }
+}

@@ -1,21 +1,18 @@
 'use strict';
 /* global $ */
 
-function handleLoginClicked(){//handles when the user clicks to login
+function handleLoginClicked(){//takes values for username/password when the user clicks to login and then calls logInUser
     $('form').on('submit', function(event){//listens for the user to click sign in
         event.preventDefault();
         let username = $("#email").val();
         let password = $("#password").val();
-
-        console.log(username , password);
         logInUser(username, password);
-
      });
 }
 
-function logInUser(username, password){//makes ajax call to get the users information
+function logInUser(username, password){//makes ajax request to get the user's information and then takes them to their dashboard
     $.ajax({
-        url:'/api/auth/login/',//go back and check to make sure this is right
+        url:'/api/auth/login/',
         method: 'POST',
         headers: {
             'content-type':'application/json'
@@ -23,18 +20,18 @@ function logInUser(username, password){//makes ajax call to get the users inform
         data: JSON.stringify({username, password
         })
     }).then((res) => {
-        console.log("User successfully logged in");
         localStorage.setItem('authToken', res.authToken);
         localStorage.setItem('username', username);
         window.location.href = "cities.html";
       })
       .fail(error => {
-        //insert error message in a div that tells the user to insert a valid username
-        console.log("Please insert a valid username and password combination!");
-        console.error(error);
+        generateHTMLError();
       })
 }
 
+function generateHTMLError(){
+    $('.error-message').html("That email address is already in use. Please enter a different email address.");
+}
 
 $(function () {
     handleLoginClicked();
