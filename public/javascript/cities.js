@@ -46,7 +46,7 @@ function findCityLocation(city){//gets latitude and longitude of a given city th
     if (status === 'OK') {
       city.location.lat=results[0].geometry.location.lat();
       city.location.lng=results[0].geometry.location.lng();
-      storeCity(city)
+      saveCity(city)
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -181,6 +181,28 @@ function renderCities(cities){//maps through all of the cities generating HTML c
   
 }
 
+/*FUNCTION FOR CREATING AND UPDATING CITY (PUT/POST) */
+function saveCity(city){//creates a new city using the form data inputted
+  let cityID = city.id ? city.id : "";
+  let method = city.id ? "PUT" : "POST";
+  $.ajax({
+    type: method,
+    url: `/api/cities/${cityID}`,
+    data: JSON.stringify(city),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization':`Bearer ${token}`
+    },
+  })
+  .then(() => {
+    $(".darken-add-city").hide();
+    getCities();
+  })
+  .fail(error => {
+    generateError(error);
+  })
+};
+
 /* FUNCTIONS FOR TARGETING AND CHANGING INDIVIDUAL CITIES */
 
 function handleCityClicked(){//listener that brings up the city detail page on click
@@ -265,27 +287,9 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
           id:cityID
       }
       $(".darken-edit").hide();
-      updateCity(updatedCity, cityID);
+      saveCity(updatedCity);
     } 
   });
-}
-
-function updateCity(updatedCity, cityID){//ajax request to update a city with a given id
-  $.ajax({
-    type: 'PUT',
-    url: `/api/cities/${cityID}`,
-    data: JSON.stringify(updatedCity),
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization':`Bearer ${token}`
-    },
-  })
-  .then(() => {
-    getCities();
-  })
-  .fail(function(err){
-    generateError(err);
-  })
 }
 
 /*FUNCTIONS FOR DELETING A CITY OBJECT */
@@ -357,27 +361,6 @@ function createCityObject(){//creates a new city object so that it can be used b
 }
 
 
-
-
-function storeCity(city){//ajax request to post a new city using the object created in the createCityObject function
-  $.ajax({
-    url: `/api/cities/`,
-    type: 'POST',
-    data: JSON.stringify(city),
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization':`Bearer ${token}`
-    },
-  })
-  .then(() => {
-    $(".darken-add-city").hide();
-    getCities();
-  })
-  .fail(error => {
-    generateError(error);
-  })
-};
-
 /*FUNCTIONS RELATED TO ERROR HANDLING */
 
 function generateError(error){//generates an error if necessary
@@ -387,7 +370,7 @@ function generateError(error){//generates an error if necessary
 /* FUNCTIONS RELATED TO LOGGING OUT */
 
 function handleLogOutClicked(){//handles user click to logout
-  $('nav').on('click','.logout-button', function(event){
+  $('.topnav').on('click','.logout-button', function(event){
     event.preventDefault();
     logoutUser();
   })
