@@ -180,11 +180,11 @@ FOOTER
 */
 
 footer {
-  height: 70px;
+  height: 50px;
   color: white;
   background-color:#241b1f;
   text-align: center;
-  padding-top:40px;
+  padding-top:20px;
 }
 
 .last {

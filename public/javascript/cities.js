@@ -67,41 +67,43 @@ function createMarker(city, index){//creates a new marker on the google map usin
 
 $(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
   $(".darken-add-city").hide();
-  $("#toggle-button-div").show();
+  $(".toggle-button-div").show();
 });
 
 $(".x").click(function(e) {//closes out without editing the city since the user chose to x out of the page
   $(".darken-edit").hide();
-  $("#toggle-button-div").show();
+  $(".toggle-button-div").show();
 });
 
 $(".create-city-button").click(function(e){//opens modal for adding a new city
   $(".darken-add-city").show();
-  $("#toggle-button-div").hide();
+  $(".toggle-button-div").hide();
 });
 
 $('.edit-city-container').on('click', '.x', function(event){//closes out without editing the new city since the user chose to x out of the page
   $(".darken-edit").hide();
-  $("#toggle-button-div").show();
+  $(".toggle-button-div").show();
 });
 
 $('.city-detail-container').on('click', '.x', function(event){//closes out without adding the city since the user chose to x out of the page
   $(".darken-detail").hide();
-  $("#toggle-button-div").show();
+  $(".toggle-button-div").show();
 });
 
 
-function handleToggleClicked(){//toggles list view and changes text of button based on current state
-  $("#toggle-button-div").on('click', '#toggle-list', function(e) {
-    let button = document.getElementById("toggle-list");
-      if (button.value=="1"){
-        button.innerHTML = 'Show List View';
-        button.value="2";
+function handleToggleClicked(){
+  $(".toggle-button-div").on('click', '#toggle-list', function(e) {
+    let button = $("#toggle-list");
+      if (button.attr("data-value")==="show"){
+		    $(".toggle-button-div").addClass("button-left");
+        button.html('Show List View');
+        button.attr("data-value", "hide");
         $(".citiescontainer").toggle();
       }
       else {
-        button.value="1";
-        button.innerHTML = 'Hide List View';
+		    $(".toggle-button-div").removeClass("button-left");
+        button.attr("data-value", "show");
+        button.html('Hide List View');
         $(".citiescontainer").toggle();
       }
   });
@@ -170,7 +172,13 @@ function renderCities(cities){//maps through all of the cities generating HTML c
     createMarker(city)
     return generateCityHTML(city, index);
   });
-  $('.citiescontainer').html(renderedCities);
+  if(renderedCities.length){
+    $('.citiescontainer').html(renderedCities);
+  }
+  else{
+    $('.citiescontainer').html(`<div class="empty-state">Start by creating a city using the add city button above.</div>`);
+  }
+  
 }
 
 /* FUNCTIONS FOR TARGETING AND CHANGING INDIVIDUAL CITIES */
@@ -183,7 +191,7 @@ function handleCityClicked(){//listener that brings up the city detail page on c
     state.selectedCityIndex = cityIndex;
     let renderedDetailPage = renderCityDetailPage(selectedCity);//takes the data from selectedCity and uses it to populate the detail page
     $('.city-detail-container').html(renderedDetailPage);
-    $("#toggle-button-div").hide();
+    $(".toggle-button-div").hide();
     $('.darken-detail').show();
   });
 }
@@ -333,7 +341,7 @@ function createCityObject(){//creates a new city object so that it can be used b
       let yearVisited = $("#yearVisited").val();
       let notes = $("#notes").val();
       let tags = getCheckboxValues();
-      let imageURL = $("#imageURL").val();
+      let imageURL = $("#imageURL").val() || "https://images.pexels.com/photos/161893/seattle-washington-city-cities-161893.jpeg";
       let newCity = {
         cityName:cityName,
         country:country,

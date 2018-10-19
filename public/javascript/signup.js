@@ -2,10 +2,38 @@
 /* global $ */
 
 function handleUserSignup(){//handles new user submissions and then calls the createUserObject function to store the data in each form field
-  $('form').on('click', '.signupbutton', function(event){
+  $('#signup-form').on('submit', function(event){
     event.preventDefault();
     createUserObject();
   });
+}
+
+function handleDemoClicked(){//
+  $('.demo-account-button').on('click', function(event){//listens for the user to click the demo account button
+      event.preventDefault();
+      let username = "demoaccount@gmail.com";
+      let password = "mydemopassword";
+      logInUser(username, password);
+   });
+}
+
+function logInUser(username, password){//makes ajax request to get the user's information and then takes them to their dashboard
+    $.ajax({
+        url:'/api/auth/login/',
+        method: 'POST',
+        headers: {
+            'content-type':'application/json'
+        },
+        data: JSON.stringify({username, password
+        })
+    }).then((res) => {
+        localStorage.setItem('authToken', res.authToken);
+        localStorage.setItem('username', username);
+        window.location.href = "cities.html";
+      })
+      .fail(error => {
+        generateHTMLError();
+      })
 }
 
 function createUserObject(){//creates a user object using the form information from handleUserSignup
@@ -55,4 +83,5 @@ function generateHTMLError(){
 
 $(function () {
   handleUserSignup();
+  handleDemoClicked()
 });

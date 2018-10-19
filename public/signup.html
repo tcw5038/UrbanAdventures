@@ -21,20 +21,21 @@
     </div>
 <body>
 <div class="form-container">
-    <form>
+    <form id="signup-form">
             <h1>Sign up</h1>
             <label for="firstname">First Name:</label>
             <input type="text" placeholder="Enter First Name" name="firstname" id="firstName" required>
             <label for="lastname">Last Name:</label>
             <input type="text" placeholder="Enter Last Name" name="lastname" id="lastName" required>
             <label for="email">Email address:</label>
-            <input type="text" placeholder="Enter Email Address" name="email" id="email" required>
+            <input type="email" placeholder="Enter Email Address" name="email" id="email" required>
             <label for="password">Password:</label>
             <input type="password" placeholder="Enter Password" name="password" id="password" required>
-            <input type="button" class="signupbutton" value="Sign up">
+            <input type="submit" class="signupbutton" value="Sign up">
     </form>
 </div>
 <div class="error-message"></div>
+<div class="demo-container"><input type="button" class="demo-account-button" value="Use a demo account"></div>
 <div class="signin-link"><a href="login.html">Already have an account? Sign in by clicking here!</a></div>
 <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
 <script src="javascript/signup.js"></script>

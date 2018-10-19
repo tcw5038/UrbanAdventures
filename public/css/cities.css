@@ -43,6 +43,13 @@ html {
   overflow: auto;
 }
 
+.empty-state{
+  font-size: 1.5em;
+  text-align:center;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:50px;
+}
 
 .x {
   position: absolute;
@@ -111,10 +118,13 @@ html {
   min-height: 100%;
 }
 
-#toggle-button-div {
+.toggle-button-div {
   position: absolute; top: 70px; left:33%;  z-index: 99;
 }
 
+.button-left{
+  left:4%;
+}
 
 
 /*
@@ -212,7 +222,7 @@ LIGHT/DARK BOXES FOR ADD CITY PAGES
   z-index: 4;
   background-color: white;
   width: 80%;
-  height: 800px;
+  height: 600px;
   margin: 50px auto;
   padding:3%;
   box-sizing: border-box;
@@ -223,7 +233,7 @@ LIGHT/DARK BOXES FOR ADD CITY PAGES
 
 }
 
-input[type=text],[type=url], select {
+input[type=text],[type=url], [type=number], select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -320,6 +330,11 @@ CITY DETAIL PAGES
     display: flex;
     list-style-type:none;
   }
+
+  .nav-li:first-child {
+		margin-left: auto;
+		margin-right: auto;
+  }
   
 .navitem {
   color: white;
@@ -335,11 +350,7 @@ CITY DETAIL PAGES
   width:auto;
 }
 
-	.nav-li {
 
-    text-align:center;
-	}
-	
 	a {
 		padding: .5em;	
 	}
@@ -348,23 +359,9 @@ CITY DETAIL PAGES
   .nav-li:nth-child(n + 3) {
 		order: 3;
 	}
-	
-	.nav-li:nth-child(n + 5) {
-		text-align: right;
-	}
 
-	/* margin auto center aligns logo */
-	.nav-li:first-child {
-		margin-left: auto;
-		margin-right: auto;
-    flex-basis: auto;
-	}
-
-
-
-  /* Add new city  */
 	.nav-li:last-child {
-		margin-right:20px;
+		margin-right:40px;
   }
 
 /* Nav hover */
@@ -415,17 +412,27 @@ CITY DETAIL PAGES
  
 }
 
+
 /* MOBILE */
 @media (max-width: 800px) {
   .citiescontainer {
     width: 50%;
   }
-  #toggle-button-div{
+  .toggle-button-div{
     position: absolute; top: 70px; left: 53%;  z-index: 99;
+  }
+  .button-left{
+    left:5%;
   }
 }
 
 @media (max-width: 450px) {
+  .checkbox-grid li {
+    display: block;
+    float: left;
+    width: 50%;
+  }
+  
   .citiescontainer {
     width: 100%;
   }
@@ -437,27 +444,63 @@ CITY DETAIL PAGES
   }
   .create-city-button{
     height:35px;
-    width:90px;
-  }
-
-  #toggle-list{
-    height:30px;
-    width:95%;
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  
-  #toggle-button-div{
-    position: absolute; top: 70px; left:10px;right:10px;   z-index: 99;
-    width:100%;
+    width:100px;
+    border-radius:2px;
   }
 
   .logout-button{
     height:35px;
-    width:90px;
-    
+    width:100px;
+    border-radius:5px;
+
   }
+
+  #toggle-list{
+    height:30px;
+    width:45%;
+    text-align:center;
+    border-radius:2px;
+    margin-left:5%;
+  }
+  
+  .toggle-button-div{
+    position: absolute; top: 70px; left:10px;right:10px;   z-index: 99;
+    width:90%;
+  }
+
+  .tag-box{
+    padding:10px;
+    font-size:.8em;
+  }
+}
+
+@media(max-width:375px){
+  .logo{
+    max-width:120px;
+    height:auto;
+  }
+  .create-city-button{
+    height:30px;
+    width:70px;
+  }
+
+  #toggle-list{
+    height:30px;
+    width:40%;
+    text-align:center;
+    border-radius:2px;
+  }
+  
+  .toggle-button-div{
+    position: absolute; top: 70px;    z-index: 99;
+    width:100%;
+  }
+
+  .logout-button{
+    height:30px;
+    width:70px;
+  }
+
   .tag-box{
     padding:10px;
     font-size:.8em;
@@ -465,39 +508,17 @@ CITY DETAIL PAGES
 
 }
 
-@media(max-width:375px){
-  .logo{
-    height:20px;
-    width:auto;
-    padding-right:5px;
-    padding-left:5px;
-  }
+@media(max-width:330px){
   .create-city-button{
-    height:40px;
-    width:70px;
-  }
-
-  #toggle-list{
     height:30px;
-    width:95%;
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-  }
-  
-  #toggle-button-div{
-    position: absolute; top: 70px; left:10px;right:10px;   z-index: 99;
-    width:100%;
-  }
-
-  .logout-button{
-    height:40px;
     width:70px;
   }
-
-  .tag-box{
-    padding:10px;
-    font-size:.8em;
+  .logout-button{
+    height:30px;
+    width:70px;
+  }
+  .logo{
+    height:0px;
   }
 
 }
