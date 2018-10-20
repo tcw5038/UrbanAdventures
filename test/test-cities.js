@@ -25,7 +25,7 @@ function tearDownDb() {
   }
 
   function seedCityData() {
-    console.info('seeding blog city data');
+    console.info('seeding city data');
     const seedData = [];
     for (let i = 1; i <= 10; i++) {
       seedData.push({
@@ -39,7 +39,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          //user: faker.internet.userName(),
+          user: faker.internet.userName(),
       });
     }
     return City.insertMany(seedData);
