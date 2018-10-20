@@ -443,27 +443,7 @@ describe('/api/user', function () {
           expect(res.body).to.have.length(0);
         });
       });
-      it('Should return an array of users', function () {
-        return User.create(
-          {
-            email,
-            password,
-            firstName,
-            lastName
-          },
-        )
-          .then(() => chai.request(app).get('/api/users'))
-          .then(res => {
-            expect(res).to.have.status(200);
-            expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(1);
-            expect(res.body[0]).to.deep.equal({
-              email,
-              firstName,
-              lastName,
-            });
-          });
-      });
+      
     });
   });
 });
