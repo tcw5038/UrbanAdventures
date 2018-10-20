@@ -11,7 +11,7 @@ const jwtAuth = passport.authenticate("jwt", { session: false });
 
 // Post to register a new city
 
-/*gets all cities regardless of user
+//gets all cities regardless of user
 router.get('/', (req, res) => {
   City
     .find()
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
     });
-});*/
+});
 
 //gets all cities for a given user
 router.get('/', jwtAuth, (req, res) => {
