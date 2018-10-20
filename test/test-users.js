@@ -382,6 +382,7 @@ describe('/api/user', function () {
             expect(res.body).to.have.keys(
               'email',
               'firstName',
+              'id',
               'lastName'
             );
             expect(res.body.email).to.equal(email);
@@ -465,13 +466,11 @@ describe('/api/user', function () {
             expect(res.body[0]).to.deep.equal({
               email,
               firstName,
-              id,
               lastName
             });
             expect(res.body[1]).to.deep.equal({
               email: emailB,
               firstName: firstNameB,
-              id:id,
               lastName: lastNameB
             });
           });
