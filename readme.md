@@ -16,10 +16,4 @@ https://vast-sea-41391.herokuapp.com/
 
 ## Project images:
 
-Description
-
-<img src="https://github.com/tcw5038/API-Capstone/blob/master/screenshots/LandingPage.PNG?raw=true"/>
-
-Description
-
-<img src="https://github.com/tcw5038/API-Capstone/blob/master/screenshots/ResultsPage.PNG?raw=true"/>
+Coming soon
