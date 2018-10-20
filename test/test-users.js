@@ -451,12 +451,6 @@ describe('/api/user', function () {
             firstName,
             lastName
           },
-          {
-            email: emailB,
-            password: passwordB,
-            firstName: firstNameB,
-            lastName: lastNameB
-          }
         )
           .then(() => chai.request(app).get('/api/users'))
           .then(res => {
@@ -466,12 +460,8 @@ describe('/api/user', function () {
             expect(res.body[0]).to.deep.equal({
               email,
               firstName,
-              lastName
-            });
-            expect(res.body[1]).to.deep.equal({
-              email: emailB,
-              firstName: firstNameB,
-              lastName: lastNameB
+              lastName,
+              id
             });
           });
       });
