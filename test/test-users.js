@@ -361,7 +361,7 @@ describe('/api/user', function () {
             expect(res).to.have.status(422);
             expect(res.body.reason).to.equal('ValidationError');
             expect(res.body.message).to.equal(
-              'email already taken'
+              'Email already taken'
             );
             expect(res.body.location).to.equal('email');
           });
@@ -465,11 +465,13 @@ describe('/api/user', function () {
             expect(res.body[0]).to.deep.equal({
               email,
               firstName,
+              id,
               lastName
             });
             expect(res.body[1]).to.deep.equal({
               email: emailB,
               firstName: firstNameB,
+              id:id,
               lastName: lastNameB
             });
           });
