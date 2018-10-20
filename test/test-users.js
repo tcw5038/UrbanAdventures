@@ -461,7 +461,6 @@ describe('/api/user', function () {
               email,
               firstName,
               lastName,
-              id
             });
           });
       });
