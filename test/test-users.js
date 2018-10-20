@@ -456,7 +456,7 @@ describe('/api/user', function () {
           .then(res => {
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
-            expect(res.body).to.have.length(2);
+            expect(res.body).to.have.length(1);
             expect(res.body[0]).to.deep.equal({
               email,
               firstName,
