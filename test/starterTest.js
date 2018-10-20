@@ -19,7 +19,7 @@ describe('Starter test', function(){
     return chai
       .request(app)
       .get('/')
-      .then(function(res){
+      .done(function(res){
         expect(res).to.have.status(200);
       });
   });

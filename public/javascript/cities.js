@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 /* global $ */
 
 let state = {
@@ -23,13 +23,13 @@ let map;
 function initMap(data) {//initializes google maps for use with cities
   let lat = 0;
   let lng = 0;
-  map = new google.maps.Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: lat, lng: lng },
     zoom: 4,
     draggable: true,
     zoomControl: true,
     scrollWheel: false,
-    gestureHandling: "greedy"
+    gestureHandling: 'greedy'
   });
   geocoder = new google.maps.Geocoder();
 }
@@ -65,46 +65,46 @@ function createMarker(city, index){//creates a new marker on the google map usin
 /* CLICK EVENT LISTENERS*/
 
 
-$(".x").click(function(e) {//closes out without adding the new city since the user chose to x out of the page
-  $(".darken-add-city").hide();
-  $(".toggle-button-div").show();
+$('.x').click(function(e) {//closes out without adding the new city since the user chose to x out of the page
+  $('.darken-add-city').hide();
+  $('.toggle-button-div').show();
 });
 
-$(".x").click(function(e) {//closes out without editing the city since the user chose to x out of the page
-  $(".darken-edit").hide();
-  $(".toggle-button-div").show();
+$('.x').click(function(e) {//closes out without editing the city since the user chose to x out of the page
+  $('.darken-edit').hide();
+  $('.toggle-button-div').show();
 });
 
-$(".create-city-button").click(function(e){//opens modal for adding a new city
-  $(".darken-add-city").show();
-  $(".toggle-button-div").hide();
+$('.create-city-button').click(function(e){//opens modal for adding a new city
+  $('.darken-add-city').show();
+  $('.toggle-button-div').hide();
 });
 
 $('.edit-city-container').on('click', '.x', function(event){//closes out without editing the new city since the user chose to x out of the page
-  $(".darken-edit").hide();
-  $(".toggle-button-div").show();
+  $('.darken-edit').hide();
+  $('.toggle-button-div').show();
 });
 
 $('.city-detail-container').on('click', '.x', function(event){//closes out without adding the city since the user chose to x out of the page
-  $(".darken-detail").hide();
-  $(".toggle-button-div").show();
+  $('.darken-detail').hide();
+  $('.toggle-button-div').show();
 });
 
 
 function handleToggleClicked(){
-  $(".toggle-button-div").on('click', '#toggle-list', function(e) {
-    let button = $("#toggle-list");
-      if (button.attr("data-value")==="show"){
-		    $(".toggle-button-div").addClass("button-left");
+  $('.toggle-button-div').on('click', '#toggle-list', function(e) {
+    let button = $('#toggle-list');
+      if (button.attr('data-value')==='show'){
+		    $('.toggle-button-div').addClass('button-left');
         button.html('Show List View');
-        button.attr("data-value", "hide");
-        $(".citiescontainer").toggle();
+        button.attr('data-value', 'hide');
+        $('.citiescontainer').toggle();
       }
       else {
-		    $(".toggle-button-div").removeClass("button-left");
-        button.attr("data-value", "show");
+		    $('.toggle-button-div').removeClass('button-left');
+        button.attr('data-value', 'show');
         button.html('Hide List View');
-        $(".citiescontainer").toggle();
+        $('.citiescontainer').toggle();
       }
   });
 }
@@ -112,7 +112,7 @@ function handleToggleClicked(){
 /* FUNCTIONS FOR RENDERING THE CITIES TO THE PAGE */
 
 function generateTagHTML (tag){//generates HTML for a given tag
-  return `<li class="tag"><div class="tag-box">${tag}</div></li>`;
+  return `<li class='tag'><div class='tag-box'>${tag}</div></li>`;
 }
 
 function renderTags(city){//returns HTML code for each tag that was checked for a given city
@@ -127,23 +127,23 @@ function renderCityDetailPage(city){//pulls data from the city object and render
   let tagCode = renderTags(city);
 
   return `
-  <span class="x">X</span>
-  <h1 class="cityName">${city.cityName}, ${city.country}</h1>
-  <h3 class="yearVisited">${city.yearVisited}</h3>
-  <img class="detailimg" src="${city.imageURL}">
-  <ul class="tag-list">
-  ${tagCode.join(" ")}
+  <span class='x'>X</span>
+  <h1 class='cityName'>${city.cityName}, ${city.country}</h1>
+  <h3 class='yearVisited'>${city.yearVisited}</h3>
+  <img class='detailimg' src='${city.imageURL}'>
+  <ul class='tag-list'>
+  ${tagCode.join(' ')}
   </ul>
-  <div class="notes">${city.notes}</div>
-  <button class="edit-city">Edit this city</button>
-  <button class="delete-city">Delete this city</button>
+  <div class='notes'>${city.notes}</div>
+  <button class='edit-city'>Edit this city</button>
+  <button class='delete-city'>Delete this city</button>
   `
 }
 
 function generateCityHTML(city, index){//generates the HTML for each individual city
-  return `<div class="city-card" data-index="${index}" style="background-image:url(${city.imageURL})">
-  <div class="darken-filter"></div>
-  <h1 class="city-name">${city.cityName}</h1>
+  return `<div class='city-card' data-index='${index}' style='background-image:url(${city.imageURL})'>
+  <div class='darken-filter'></div>
+  <h1 class='city-name'>${city.cityName}</h1>
   </div>`;//make it a div with an img as a background, background size to cover
 }
 
@@ -176,15 +176,15 @@ function renderCities(cities){//maps through all of the cities generating HTML c
     $('.citiescontainer').html(renderedCities);
   }
   else{
-    $('.citiescontainer').html(`<div class="empty-state">Start by creating a city using the add city button above.</div>`);
+    $('.citiescontainer').html(`<div class='empty-state'>Start by creating a city using the add city button above.</div>`);
   }
   
 }
 
 /*FUNCTION FOR CREATING AND UPDATING CITY (PUT/POST) */
 function saveCity(city){//creates a new city using the form data inputted
-  let cityID = city.id ? city.id : "";
-  let method = city.id ? "PUT" : "POST";
+  let cityID = city.id ? city.id : ';
+  let method = city.id ? 'PUT' : 'POST';
   $.ajax({
     type: method,
     url: `/api/cities/${cityID}`,
@@ -195,7 +195,7 @@ function saveCity(city){//creates a new city using the form data inputted
     },
   })
   .then(() => {
-    $(".darken-add-city").hide();
+    $('.darken-add-city').hide();
     getCities();
   })
   .fail(error => {
@@ -208,44 +208,44 @@ function saveCity(city){//creates a new city using the form data inputted
 function handleCityClicked(){//listener that brings up the city detail page on click
   $('.citiescontainer').on('click', '.city-card', function(event){
     event.preventDefault();
-    let cityIndex = $(this).attr("data-index");//stores the index of this city in a variable
+    let cityIndex = $(this).attr('data-index');//stores the index of this city in a variable
     let selectedCity = state.cities[cityIndex];
     state.selectedCityIndex = cityIndex;
     let renderedDetailPage = renderCityDetailPage(selectedCity);//takes the data from selectedCity and uses it to populate the detail page
     $('.city-detail-container').html(renderedDetailPage);
-    $(".toggle-button-div").hide();
+    $('.toggle-button-div').hide();
     $('.darken-detail').show();
   });
 }
 
 function createUpdateFields(selectedCity){//returns a new form that the user can use to update their city
   return `
-  <span class="x">X</span>
-  <form class="edit-city-form">
-  <h1 class="add-city-title">Edit this city</h1>
-  <label for="cityName">City Name:</label>
-  <input type="text" name="cityName" id="cityName" value="${selectedCity.cityName}"required>
-  <label for="country">Country:</label>
-  <input type="text" value="${selectedCity.country}" name="country" id="country" required>
-  <label for="yearVisited">Year of visit:</label>
-  <input type="text" value="${selectedCity.yearVisited}" name="yearVisited" id="yearVisited" required>
-  <label for="tags">Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
-    <ul class="checkbox-grid">
-                        <li><input type="checkbox" value="Food" class="checkbox"> Food</li>
-                        <li><input type="checkbox" value="Architecture" class="checkbox"> Architecture</li>
-                        <li><input type="checkbox" value="Art" class="checkbox"> Art</li>
-                        <li><input type="checkbox" value="People" class="checkbox"> People</li>
-                        <li><input type="checkbox" value="Nature" class="checkbox"> Nature</li>
-                        <li><input type="checkbox" value="Good-value" class="checkbox"> Good Value</li>
+  <span class='x'>X</span>
+  <form class='edit-city-form'>
+  <h1 class='add-city-title'>Edit this city</h1>
+  <label for='cityName'>City Name:</label>
+  <input type='text' name='cityName' id='cityName' value='${selectedCity.cityName}'required>
+  <label for='country'>Country:</label>
+  <input type='text' value='${selectedCity.country}' name='country' id='country' required>
+  <label for='yearVisited'>Year of visit:</label>
+  <input type='text' value='${selectedCity.yearVisited}' name='yearVisited' id='yearVisited' required>
+  <label for='tags'>Tag this city with things you will remember it for by checking boxes below (as many as you would like):</label>
+    <ul class='checkbox-grid'>
+                        <li><input type='checkbox' value='Food' class='checkbox'> Food</li>
+                        <li><input type='checkbox' value='Architecture' class='checkbox'> Architecture</li>
+                        <li><input type='checkbox' value='Art' class='checkbox'> Art</li>
+                        <li><input type='checkbox' value='People' class='checkbox'> People</li>
+                        <li><input type='checkbox' value='Nature' class='checkbox'> Nature</li>
+                        <li><input type='checkbox' value='Good-value' class='checkbox'> Good Value</li>
     </ul>
   <br><br><br>
-  <label for="image">Add a link to an image of this city:</label>
-  <input type="url" value="${selectedCity.imageURL}" name="image"  id="imageURL" required>
-  <label for="notes">Add any notes about this city:</label>
-  <input type="text" value="${selectedCity.notes}" name="notes" id="notes">
-  <input type="submit" class="submit-updates" value="Update this city">
+  <label for='image'>Add a link to an image of this city:</label>
+  <input type='url' value='${selectedCity.imageURL}' name='image'  id='imageURL' required>
+  <label for='notes'>Add any notes about this city:</label>
+  <input type='text' value='${selectedCity.notes}' name='notes' id='notes'>
+  <input type='submit' class='submit-updates' value='Update this city'>
   </form>
-  <div class="error-message-update"></div>`;
+  <div class='error-message-update'></div>`;
 }
 
 function handleEditThisCityClicked(){//handles user clicks on the detail page for editing a given city
@@ -254,9 +254,9 @@ function handleEditThisCityClicked(){//handles user clicks on the detail page fo
     let selectedCity = state.cities[cityIndex];
     let cityID = selectedCity.id;
     let editableCityHTML = createUpdateFields(selectedCity);
-    $(".edit-city-container").html(editableCityHTML);
-    $(".darken-detail").hide();//hides the detail page
-    $(".darken-edit").show();//shows the update page
+    $('.edit-city-container').html(editableCityHTML);
+    $('.darken-detail').hide();//hides the detail page
+    $('.darken-edit').show();//shows the update page
   });
 }
 
@@ -266,16 +266,16 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
     let cityIndex = state.selectedCityIndex;
     let selectedCity = state.cities[cityIndex];
     let cityID = selectedCity.id;
-    let cityName = $("#cityName").val();
-    let country = $("#country").val();
-    if(isNaN($("#yearVisited").val())){
-      $('.error-message-update').html("Please insert a valid year.");
+    let cityName = $('#cityName').val();
+    let country = $('#country').val();
+    if(isNaN($('#yearVisited').val())){
+      $('.error-message-update').html('Please insert a valid year.');
     }
     else{
-        let yearVisited = $("#yearVisited").val();
-        let notes = $("#notes").val();
+        let yearVisited = $('#yearVisited').val();
+        let notes = $('#notes').val();
         let tags = getCheckboxValues();
-        let imageURL = $("#imageURL").val();
+        let imageURL = $('#imageURL').val();
 
         let updatedCity = {
           cityName:cityName,
@@ -286,7 +286,7 @@ function handleUpdateCityClicked(){//used when the user decides to hit the updat
           imageURL:imageURL,
           id:cityID
       }
-      $(".darken-edit").hide();
+      $('.darken-edit').hide();
       saveCity(updatedCity);
     } 
   });
@@ -315,7 +315,7 @@ function deleteCity(id){//ajax request to delete the city with a given id
   })
   .then(() => {
     getCities();
-    $(".darken-detail").hide();
+    $('.darken-detail').hide();
   })
   .fail((error) => {
     generateError(error);
@@ -336,16 +336,16 @@ function getCheckboxValues(){//gets the values of whatever is checked among the 
 function createCityObject(){//creates a new city object so that it can be used by the google maps functions and stored successfully via the storeCity function
   $('#add-city-form').on('submit', function(event){
     event.preventDefault();
-    let cityName = $("#cityName").val();
-    let country = $("#country").val();
-    if(isNaN($("#yearVisited").val())){
-      $('.error-message-add').html("Please insert a valid year.");
+    let cityName = $('#cityName').val();
+    let country = $('#country').val();
+    if(isNaN($('#yearVisited').val())){
+      $('.error-message-add').html('Please insert a valid year.');
     }
     else{
-      let yearVisited = $("#yearVisited").val();
-      let notes = $("#notes").val();
+      let yearVisited = $('#yearVisited').val();
+      let notes = $('#notes').val();
       let tags = getCheckboxValues();
-      let imageURL = $("#imageURL").val() || "https://images.pexels.com/photos/161893/seattle-washington-city-cities-161893.jpeg";
+      let imageURL = $('#imageURL').val() || 'https://images.pexels.com/photos/161893/seattle-washington-city-cities-161893.jpeg';
       let newCity = {
         cityName:cityName,
         country:country,
@@ -385,7 +385,7 @@ function logoutUser(){//makes the request to logout the user/delete relevant tok
     },
   }).then (() => {
     localStorage.removeItem('Token');
-    window.location.href = "index.html";
+    window.location.href = 'index.html';
   })
   .fail(error => {
     generateError(error);

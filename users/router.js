@@ -63,13 +63,11 @@ router.post('/', jsonParser, (req, res) => {
     lastName:{
       min:1
     },
-    email: {//how should i handle email validation later?
+    email: {
       min: 1
     },
     password: {
       min: 8,
-      // bcrypt truncates after 72 characters, so let's not give the illusion
-      // of security by storing extra (unused) info
       max: 72
     }
   };

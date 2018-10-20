@@ -11,8 +11,8 @@ function handleUserSignup(){//handles new user submissions and then calls the cr
 function handleDemoClicked(){//
   $('.demo-account-button').on('click', function(event){//listens for the user to click the demo account button
       event.preventDefault();
-      let username = "demoaccount@gmail.com";
-      let password = "mydemopassword";
+      let username = 'demoaccount@gmail.com';
+      let password = 'mydemopassword';
       logInUser(username, password);
    });
 }
@@ -29,7 +29,7 @@ function logInUser(username, password){//makes ajax request to get the user's in
     }).then((res) => {
         localStorage.setItem('authToken', res.authToken);
         localStorage.setItem('username', username);
-        window.location.href = "cities.html";
+        window.location.href = 'cities.html';
       })
       .fail(error => {
         generateHTMLError();
@@ -37,10 +37,10 @@ function logInUser(username, password){//makes ajax request to get the user's in
 }
 
 function createUserObject(){//creates a user object using the form information from handleUserSignup
-  let firstName = $("#firstName").val();
-  let lastName = $("#lastName").val();
-  let email = $("#email").val();
-  let password = $("#password").val();
+  let firstName = $('#firstName').val();
+  let lastName = $('#lastName').val();
+  let email = $('#email').val();
+  let password = $('#password').val();
 
   let user = {
     firstName:firstName,
@@ -66,7 +66,7 @@ function createUser(user){//ajax requests to create a new user and then send the
     .done((res) => {
       localStorage.setItem('authToken', res.authToken);
       localStorage.setItem('username', email);
-      window.location.href = "cities.html";
+      window.location.href = 'cities.html';
     })
     .fail(function(err){
       generateHTMLError();
@@ -78,7 +78,7 @@ function createUser(user){//ajax requests to create a new user and then send the
 }
 
 function generateHTMLError(){
-  $('.error-message').html("Please insert a valid email and password combination!");
+  $('.error-message').html('Please insert a valid email and password combination!');
 }
 
 $(function () {
