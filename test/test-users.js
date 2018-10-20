@@ -466,7 +466,6 @@ describe('/api/user', function () {
             expect(res.body[0]).to.deep.equal({
               email,
               firstName,
-              id,
               lastName
             });
             expect(res.body[1]).to.deep.equal({
