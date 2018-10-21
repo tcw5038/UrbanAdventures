@@ -63,7 +63,7 @@ describe('Auth endpoints', function () {
       return chai
         .request(app)
         .post('/api/auth/login')
-        .send({ email: 'wrongemailjiojij', password })
+        .send({ username: 'wrongemailjiojij', password })
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
         )
@@ -80,7 +80,7 @@ describe('Auth endpoints', function () {
       return chai
         .request(app)
         .post('/api/auth/login')
-        .send({ email, password: 'wrongPassword' })
+        .send({ username, password: 'wrongPassword' })
         .then(() =>
           expect.fail(null, null, 'Request should not succeed')
         )

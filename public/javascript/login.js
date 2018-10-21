@@ -1,36 +1,36 @@
 'use strict';
 /* global $ */
 
-function handleLoginClicked(){//takes values for email/password when the user clicks to login and then calls logInUser
+function handleLoginClicked(){//takes values for username/password when the user clicks to login and then calls logInUser
     $('form').on('submit', function(event){//listens for the user to click sign in
         event.preventDefault();
-        let email = $("#email").val();
+        let username = $("#email").val();
         let password = $("#password").val();
-        logInUser(email, password);
+        logInUser(username, password);
      });
 }
 
 function handleDemoClicked(){//
     $('.demo-account-button').on('click', function(event){//listens for the user to click the demo account button
         event.preventDefault();
-        let email = "demoaccount@gmail.com";
+        let username = "demoaccount@gmail.com";
         let password = "mydemopassword";
-        logInUser(email, password);
+        logInUser(username, password);
      });
 }
 
-function logInUser(email, password){//makes ajax request to get the user's information and then takes them to their dashboard
+function logInUser(username, password){//makes ajax request to get the user's information and then takes them to their dashboard
     $.ajax({
         url:'/api/auth/login/',
         method: 'POST',
         headers: {
             'content-type':'application/json'
         },
-        data: JSON.stringify({email, password
+        data: JSON.stringify({username, password
         })
     }).then((res) => {
         localStorage.setItem('authToken', res.authToken);
-        localStorage.setItem('email', email);
+        localStorage.setItem('username', username);
         window.location.href = "cities.html";
       })
       .fail(error => {
