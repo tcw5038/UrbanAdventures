@@ -98,7 +98,7 @@ describe('Auth endpoints', function () {
       return chai
         .request(app)
         .post('/api/auth/login')
-        .send({ email, password })
+        .send({ username, password })
         .then(res => {
           expect(res).to.have.status(200);
           expect(res.body).to.be.an('object');
