@@ -183,7 +183,7 @@ function renderCities(cities){//maps through all of the cities generating HTML c
 
 /*FUNCTION FOR CREATING AND UPDATING CITY (PUT/POST) */
 function saveCity(city){//creates a new city using the form data inputted
-  let cityID = city.id ? city.id : ';
+  let cityID = city.id ? city.id : '';
   let method = city.id ? 'PUT' : 'POST';
   $.ajax({
     type: method,
