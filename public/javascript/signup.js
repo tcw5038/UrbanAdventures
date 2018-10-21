@@ -11,7 +11,7 @@ function handleUserSignup(){//handles new user submissions and then calls the cr
 function handleDemoClicked(){//
   $('.demo-account-button').on('click', function(event){//listens for the user to click the demo account button
       event.preventDefault();
-      let username = 'demoaccount@gmail.com';
+      let username = 'mydemoaccount@gmail.com';
       let password = 'mydemopassword';
       logInUser(username, password);
    });

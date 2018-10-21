@@ -13,7 +13,7 @@ function handleLoginClicked(){//takes values for username/password when the user
 function handleDemoClicked(){//
     $('.demo-account-button').on('click', function(event){//listens for the user to click the demo account button
         event.preventDefault();
-        let username = "demoaccount@gmail.com";
+        let username = "mydemoaccount@gmail.com";
         let password = "mydemopassword";
         logInUser(username, password);
      });
