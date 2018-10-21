@@ -18,6 +18,7 @@ describe('Auth endpoints', function () {
   const password = 'examplePass';
   const firstName = 'Example';
   const lastName = 'User';
+  const username = 'testuser';
 
   before(function () {
     return runServer(TEST_DATABASE_URL);
