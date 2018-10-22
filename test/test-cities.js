@@ -10,7 +10,7 @@ const { User } = require('../users');//double check that these paths are right
 const { City } = require('../cities');
 const { TEST_DATABASE_URL } = require('../config');
 
-var id = require('mongoose').Types.ObjectId();
+
 
 const expect = chai.expect;
 const should = chai.should();
@@ -69,9 +69,9 @@ describe('Cities API resource', function () {
 
     describe('GET endpoint', function(){
 
-    it('should return cities with right fields', function () {  
+    it('should return cities', function () {  
         return chai.request(app)
-          .get('/cities')
+          .get(`/cities/${user}`)
           .then(function (res) {
             res.should.have.status(200);
             res.should.be.json;
