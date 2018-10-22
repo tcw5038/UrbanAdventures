@@ -8,6 +8,8 @@ let state = {
   token:localStorage.getItem('authToken')
 }
 
+console.log(state.token);
+
 
 
 //if there is no token, redirect to landing page

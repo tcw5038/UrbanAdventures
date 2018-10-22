@@ -1,8 +1,10 @@
+'use strict';
+
 function checkToken(){
-  var token = localStorage.getItem('authToken');
-  if(state.token){
+  let token = localStorage.getItem('authToken');
+  if(token){
     window.location.href = "cities.html";
   }
 }
 
-checkToken()
+checkToken();

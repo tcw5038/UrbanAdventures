@@ -2,15 +2,6 @@
 /* global $ */
 
 
-function checkToken(){
-  var token = localStorage.getItem('authToken');
-  if(state.token){
-    window.location.href = "cities.html";
-  }
-}
-
-
-
 function handleLoginClicked(){//takes values for username/password when the user clicks to login and then calls logInUser
   $('form').on('submit', function(event){//listens for the user to click sign in
     event.preventDefault();
@@ -52,7 +43,6 @@ function generateHTMLError(){
 }
 
 $(function () {
-  checkToken()
   handleLoginClicked();
   handleDemoClicked();
 });
