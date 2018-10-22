@@ -1,6 +1,7 @@
 'use strict';
 /* global $ */
 
+
 function handleUserSignup(){//handles new user submissions and then calls the createUserObject function to store the data in each form field
   $('#signup-form').on('submit', function(event){
     event.preventDefault();
