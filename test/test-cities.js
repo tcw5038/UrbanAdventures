@@ -39,7 +39,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          
+          user: faker.internet.userName(),
       });
     }
     return City.insertMany(seedData);
@@ -80,7 +80,7 @@ describe('Cities API resource', function () {
   
             res.body.forEach(function (city) {
               city.should.be.a('object');
-              city.should.include.keys('id','cityName', 'country', 'yearVisited', 'notes', 'tags', 'imageURL', 'location', );
+              city.should.include.keys('id','cityName', 'country', 'yearVisited', 'notes', 'tags', 'imageURL', 'location', 'user');
             });
             // just check one of the citys that its values match with those in db
             // and we'll assume it's true for rest
