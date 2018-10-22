@@ -10,6 +10,18 @@ const jsonParser = bodyParser.json();
 const jwtAuth = passport.authenticate("jwt", { session: false });
 
 
+router.get('/', (req, res) => {
+  City
+    .find()
+    .then(cities => {
+      res.json(cities.map(city => city.serialize()));
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
 //gets all cities for a given user
 router.get('/', jwtAuth, (req, res) => {
   City

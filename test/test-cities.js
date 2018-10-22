@@ -4,34 +4,17 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 
 const { app, runServer, closeServer } = require('../server');
 const { User } = require('../users');//double check that these paths are right
 const { City } = require('../cities');
-const { JWT_SECRET, TEST_DATABASE_URL } = require('../config');
-
-var id = require('mongoose').Types.ObjectId();
+const { TEST_DATABASE_URL } = require('../config');
 
 const expect = chai.expect;
 const should = chai.should();
 chai.use(chaiHttp);
 
-const username = 'exampleuser';
 
-const token = jwt.sign(
-  {
-    user: {
-      username
-    }
-  },
-  JWT_SECRET,
-  {
-    algorithm: 'HS256',
-    subject: username,
-    expiresIn: '7d'
-  }
-);
 
 function tearDownDb() {
     return new Promise((resolve, reject) => {
@@ -57,7 +40,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          user: username
+          user: faker.random.number(),
       });
     }
     return City.insertMany(seedData);
@@ -87,8 +70,7 @@ describe('Cities API resource', function () {
 
     it('should return cities', function () {  
         return chai.request(app)
-          .get(`/cities/${username}`)
-          .set('Authorization', `Bearer ${token}`)
+          .get('/cities')
           .then(function (res) {
             res.should.have.status(200);
             res.should.be.json;
