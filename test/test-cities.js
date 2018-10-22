@@ -6,7 +6,7 @@ const faker = require('faker');
 const mongoose = require('mongoose');
 
 const { app, runServer, closeServer } = require('../server');
-const { User } = require('../users');//double check that these paths are right
+const { User } = require('../users');
 const { City } = require('../cities');
 const { TEST_DATABASE_URL } = require('../config');
 
@@ -41,7 +41,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          user
+          user:id
       });
     }
     return City.insertMany(seedData);
