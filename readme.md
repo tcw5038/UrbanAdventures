@@ -4,7 +4,7 @@
 
 ## Technologies used:
 * Front End - HTML5, CSS3, Javascript, jQuery
-* Back End - Node.js, Express, MongoDB, Mongoose, Mocha
+* Back End - Node, Express, MongoDB, Mongoose, Mocha, Passport, BCrypt
 
 
 ## Summary of functionality:
