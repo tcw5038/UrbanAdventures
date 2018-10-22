@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const { app, runServer, closeServer } = require('../server');
 const { User } = require('../users');//double check that these paths are right
 const { City } = require('../cities');
-const { TEST_DATABASE_URL } = require('../config');
+const { JWT_SECRET, TEST_DATABASE_URL } = require('../config');
 
 var id = require('mongoose').Types.ObjectId();
 
