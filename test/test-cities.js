@@ -10,12 +10,27 @@ const { User } = require('../users');//double check that these paths are right
 const { City } = require('../cities');
 const { TEST_DATABASE_URL } = require('../config');
 
-
+var id = require('mongoose').Types.ObjectId();
 
 const expect = chai.expect;
 const should = chai.should();
 chai.use(chaiHttp);
 
+const username = 'exampleuser';
+
+const token = jwt.sign(
+  {
+    user: {
+      username
+    }
+  },
+  JWT_SECRET,
+  {
+    algorithm: 'HS256',
+    subject: user,
+    expiresIn: '7d'
+  }
+);
 
 function tearDownDb() {
     return new Promise((resolve, reject) => {
@@ -41,7 +56,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          user: faker.random.number(),
+          user: user
       });
     }
     return City.insertMany(seedData);
@@ -71,7 +86,8 @@ describe('Cities API resource', function () {
 
     it('should return cities', function () {  
         return chai.request(app)
-          .get(`/cities/${user}`)
+          .get(`/cities/${username}`)
+          .set('Authorization', `Bearer ${token}`)
           .then(function (res) {
             res.should.have.status(200);
             res.should.be.json;
