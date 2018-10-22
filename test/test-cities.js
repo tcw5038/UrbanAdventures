@@ -42,7 +42,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          user: objId,//using object ID from above
+          user: req.user.id,//using object ID from above
       });
     }
     return City.insertMany(seedData);
@@ -72,7 +72,7 @@ describe('Cities API resource', function () {
 
     it('should return cities', function () {  
         return chai.request(app)
-          .get(`/cities/${user}`)
+          .get(`/cities/`)
           .then(function (res) {
             res.should.have.status(200);
             res.should.be.json;
