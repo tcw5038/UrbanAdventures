@@ -28,7 +28,7 @@ const token = jwt.sign(
   JWT_SECRET,
   {
     algorithm: 'HS256',
-    subject: user,
+    subject: username,
     expiresIn: '7d'
   }
 );
