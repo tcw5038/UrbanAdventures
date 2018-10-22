@@ -57,7 +57,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          user: user
+          user: username
       });
     }
     return City.insertMany(seedData);
