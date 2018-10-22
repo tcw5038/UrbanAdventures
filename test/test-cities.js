@@ -10,6 +10,8 @@ const { User } = require('../users');//double check that these paths are right
 const { City } = require('../cities');
 const { TEST_DATABASE_URL } = require('../config');
 
+var id = require('mongoose').Types.ObjectId();
+
 const expect = chai.expect;
 const should = chai.should();
 chai.use(chaiHttp);
@@ -39,7 +41,7 @@ function tearDownDb() {
             lat: faker.address.latitude(),
             lng: faker.address.longitude(),
           },
-          user: faker.random.number(),
+          user: id,
       });
     }
     return City.insertMany(seedData);
