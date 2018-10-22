@@ -168,7 +168,7 @@ describe('Auth endpoints', function () {
         JWT_SECRET,
         {
           algorithm: 'HS256',
-          subject: user.email,
+          subject: email,
           expiresIn: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
         }
       );
