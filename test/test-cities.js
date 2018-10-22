@@ -10,6 +10,7 @@ const { User } = require('../users');//double check that these paths are right
 const { City } = require('../cities');
 const { TEST_DATABASE_URL } = require('../config');
 
+const { ObjectID } = require('mongodb');
 const myid = new ObjectID();
 
 const expect = chai.expect;
