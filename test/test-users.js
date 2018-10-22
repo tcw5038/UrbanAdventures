@@ -402,37 +402,6 @@ describe('/api/user', function () {
             expect(passwordIsCorrect).to.be.true;
           });
       });
-      it('Should trim firstName and lastName', function () {
-        return chai
-          .request(app)
-          .post('/api/users')
-          .send({
-            email,
-            password,
-            firstName: ` ${firstName} `,
-            lastName: ` ${lastName} `
-          })
-          .then(res => {
-            expect(res).to.have.status(201);
-            expect(res.body).to.be.an('object');
-            expect(res.body).to.have.keys(
-              'email',
-              'firstName',
-              'lastName'
-            );
-            expect(res.body.email).to.equal(email);
-            expect(res.body.firstName).to.equal(firstName);
-            expect(res.body.lastName).to.equal(lastName);
-            return User.findOne({
-              email
-            });
-          })
-          .then(user => {
-            expect(user).to.not.be.null;
-            expect(user.firstName).to.equal(firstName);
-            expect(user.lastName).to.equal(lastName);
-          });
-      });
     });
 
     describe('GET', function () {
