@@ -66,21 +66,6 @@ describe('Cities API resource', function () {
       });
 
     describe('GET endpoint', function(){
-        it('should return all existing cities', function () {
-            let res;
-            return chai.request(app)
-            .get('/cities')
-            .then(_res => {
-            res = _res;
-            res.should.have.status(200);
-            res.body.should.have.lengthOf.at.least(1);
-
-            return City.count();
-            })
-            .then(count => {
-            res.body.should.have.lengthOf(count);
-            });
-    });
 
     it('should return cities with right fields', function () {  
         let resCity;

@@ -162,15 +162,13 @@ describe('Auth endpoints', function () {
       const token = jwt.sign(
         {
           user: {
-            email,
-            firstName,
-            lastName
+            email
           },
         },
         JWT_SECRET,
         {
           algorithm: 'HS256',
-          subject: email,
+          subject: user.email,
           expiresIn: Math.floor(Date.now() / 1000) - 10 // Expired ten seconds ago
         }
       );
