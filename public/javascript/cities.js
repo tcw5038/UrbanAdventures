@@ -4,10 +4,11 @@
 let state = {
   cities : [],
   selectedCityIndex: -1,//not 0 because 0 is currently a city
-  markers:[]
+  markers:[],
+  token:localStorage.getItem('authToken')
 }
 
-let token = localStorage.getItem('authToken');
+
 
 //if there is no token, redirect to landing page
 //if there is a token, try to refresh the token
@@ -15,19 +16,21 @@ let token = localStorage.getItem('authToken');
 //if unsucessful, redirect to login and delete the token from local storage
 
 function checkToken(){//checks for a valid token and refreshes if necessary, if one doesn't exist or is expired it will take user back to index.html
-  if(token){//if there is a token, refresh it
+
+  if(state.token){//if there is a token, refresh it
     $.ajax({
       url:'/api/auth/refresh/',
       method: 'POST',
       headers:{
-        'Authorization':`Bearer ${token}`,
+        'Authorization':`Bearer ${state.token}`,
       }
   }).done((res) => {
-      localStorage.setItem(token, res.authToken);
+      localStorage.setItem('authToken', res.authToken);
+      state.token = res.authToken;
     })
     .fail(error => {//if we fail to refresh token, redirect to landing page
       window.location.href = "index.html";
-      localStorage.removeItem(token);
+      localStorage.removeItem('authToken');
     })
   }
     else{//else redirect to landing page
@@ -172,7 +175,7 @@ function getCities(){//gets all the cities when a signed in user goes to their d
     url: `/api/cities/`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':`Bearer ${token}`
+      'Authorization':`Bearer ${state.token}`
     },
   })
   .done(function(response){
@@ -210,7 +213,7 @@ function saveCity(city){//creates a new city using the form data inputted
     data: JSON.stringify(city),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':`Bearer ${token}`
+      'Authorization':`Bearer ${state.token}`
     },
   })
   .then(() => {
@@ -330,7 +333,7 @@ function deleteCity(id){//ajax request to delete the city with a given id
     url: `/api/cities/${id}`,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization':`Bearer ${token}`
+      'Authorization':`Bearer ${state.token}`
     },
   })
   .then(() => {
@@ -401,10 +404,10 @@ function logoutUser(){//makes the request to logout the user/delete relevant tok
     url: '/api/auth/logout',
     type:'GET',
     headers:{
-      'Authorization':`Bearer ${token}`,
+      'Authorization':`Bearer ${state.token}`,
     },
   }).then (() => {
-    localStorage.removeItem('Token');
+    localStorage.removeItem('authToken');
     window.location.href = 'index.html';
   })
   .fail(error => {

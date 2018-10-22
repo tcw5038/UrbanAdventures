@@ -30,7 +30,6 @@ function logInUser(username, password){//makes ajax request to get the user's in
         })
     }).then((res) => {
         localStorage.setItem('authToken', res.authToken);
-        localStorage.setItem('username', username);
         window.location.href = "cities.html";
       })
       .fail(error => {
