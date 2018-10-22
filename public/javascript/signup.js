@@ -78,7 +78,7 @@ function createUser(user){//ajax requests to create a new user and then send the
 }
 
 function generateHTMLError(){
-  $('.error-message').html('Please insert a valid email and password combination!');
+  $('.error-message').html('That email address may be already in use. Please sign up with a different email address.');
 }
 
 $(function () {

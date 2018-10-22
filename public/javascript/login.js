@@ -39,7 +39,7 @@ function logInUser(username, password){//makes ajax request to get the user's in
 }
 
 function generateHTMLError(){
-    $('.error-message').html("That email address is already in use. Please enter a different email address.");
+    $('.error-message').html("We couldn't find a user with that email/password combination. Please try again or sign up for a new account.");
 }
 
 $(function () {

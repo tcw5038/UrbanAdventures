@@ -7,14 +7,33 @@ let state = {
   markers:[]
 }
 
-
 let token = localStorage.getItem('authToken');
-//https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
 
 //if there is no token, redirect to landing page
 //if there is a token, try to refresh the token
 //if successful, continue as normal
 //if unsucessful, redirect to login and delete the token from local storage
+
+function checkToken(){//checks for a valid token and refreshes if necessary, if one doesn't exist or is expired it will take user back to index.html
+  if(token){//if there is a token, refresh it
+    $.ajax({
+      url:'/api/auth/refresh/',
+      method: 'POST',
+      headers:{
+        'Authorization':`Bearer ${token}`,
+      }
+  }).done((res) => {
+      localStorage.setItem(token, res.authToken);
+    })
+    .fail(error => {//if we fail to refresh token, redirect to landing page
+      window.location.href = "index.html";
+      localStorage.removeItem(token);
+    })
+  }
+    else{//else redirect to landing page
+      window.location.href = "index.html";
+    }
+}
 
 /*GOOGLE MAPS */
 //https://developers.google.com/maps/documentation/javascript/examples/geocoding-simple
@@ -91,7 +110,7 @@ $('.city-detail-container').on('click', '.x', function(event){//closes out witho
 });
 
 
-function handleToggleClicked(){
+function handleToggleClicked(){//Toggles between hide/show of the city container and also changes the text in the button to reflect current view
   $('.toggle-button-div').on('click', '#toggle-list', function(e) {
     let button = $('#toggle-list');
       if (button.attr('data-value')==='show'){
@@ -402,4 +421,5 @@ function init() {
   handleDeleteCityClicked();
   handleLogOutClicked();
   handleToggleClicked();
+  checkToken();
 };
