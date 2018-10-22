@@ -72,7 +72,7 @@ describe('Cities API resource', function () {
 
     it('should return cities', function () {  
         return chai.request(app)
-          .get('/cities')
+          .get(`/cities/${user}`)
           .then(function (res) {
             res.should.have.status(200);
             res.should.be.json;
