@@ -65,7 +65,7 @@ function findCityLocation(city){//gets latitude and longitude of a given city th
     if (status === 'OK') {
       city.location.lat=results[0].geometry.location.lat();
       city.location.lng=results[0].geometry.location.lng();
-      saveCity(city)
+      saveCity(city);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -215,6 +215,7 @@ function saveCity(city){//creates a new city using the form data inputted
   })
   .then(() => {
     $('.darken-add-city').hide();
+    $("#add-city-form").trigger('reset'); 
     getCities();
   })
   .fail(error => {
