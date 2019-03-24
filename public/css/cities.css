@@ -223,10 +223,10 @@ LIGHT/DARK BOXES FOR ADD CITY PAGES
   background-color: white;
   width: 80%;
   height: 600px;
-  margin: 50px auto;
+  margin: 80px auto;
   padding:3%;
   box-sizing: border-box;
-  max-width: 600px;
+  max-width: 650px;
   position: relative;
   overflow: auto;
   border-radius:2px;
@@ -375,7 +375,7 @@ CITY DETAIL PAGES
   background-color:white;
   color:#241b1f;
   border:1px white solid;
-  border-radius:20px;
+  border-radius:4px;
   height:30px;
   width:120px;
 }
@@ -384,7 +384,7 @@ CITY DETAIL PAGES
   background-color:#241b1f;
   color:white;
   border:1px white solid;
-  border-radius:20px;
+  border-radius:4px;
   height:30px;
   width:120px;
 }
@@ -399,7 +399,7 @@ CITY DETAIL PAGES
   background-color:white;
   color:#241b1f;
   border:1px white solid;
-  border-radius:20px;
+  border-radius:4px;
   height:30px;
   width:120px;
 }
@@ -444,13 +444,13 @@ CITY DETAIL PAGES
   }
   .create-city-button{
     height:35px;
-    width:100px;
+    width:100%;
     border-radius:2px;
   }
 
   .logout-button{
     height:35px;
-    width:100px;
+    width:100%;
     border-radius:2px;
 
   }
