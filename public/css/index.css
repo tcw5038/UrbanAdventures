@@ -1,19 +1,17 @@
-*{
+* {
   font-family: "Source Sans Pro", sans-serif;
 }
 
 body {
-  background-color: #274251;
   box-sizing: border-box;
   margin-top: 50px;
   margin-left: 0;
   margin-right: 0;
-  margin-bottom:0;
+  margin-bottom: 0;
   padding: 0;
   background: url(/images/background.jpg) no-repeat;
-  background-position:center top;
+  background-position: center top;
   background-size: 100%;
- 
 }
 
 /*
@@ -26,11 +24,10 @@ NAV STYLING
 .topnav {
   position: fixed;
   top: 0;
-  height:60px;
+  height: 60px;
   width: 100%;
   overflow: hidden;
   background-color: #241b1f10;
-
 }
 
 /* Style the links inside the navigation bar */
@@ -41,8 +38,8 @@ NAV STYLING
 }
 
 .topnav.scrolling {
-  background-color:#241b1f;
-  color:white;
+  background-color: #241b1f;
+  color: white;
 }
 
 /* Style the button surrounding the links */
@@ -119,22 +116,21 @@ BRANDING AND SUBTITLE STYLING
 }
 
 .bodybutton {
-  height: 60px;
+  height: 45px;
   width: 180px;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 500;
   color: white;
-  background-color: #241b1f00;
-  border:4px white solid;
-  border-radius:10px;
+  background-color: #2f2024;
+  border: 1px white solid;
+  border-radius: 6px;
   cursor: pointer;
   margin: 10px;
 }
 
 /* Button hover */
 .bodybutton:hover {
-  background-color: white;
-  color: black;
+  background-color: #312327;
 }
 
 /*
@@ -145,25 +141,25 @@ PITCH STYLING
 
 .main-container {
   width: 100%;
-  margin-top: 40px;
+  margin-top: 70px;
+  padding-top: 30px;
   background-color: white;
 }
 
 .descriptcontainer {
-  min-height: 200px;
-  padding: 25px 20% 0 20%;
-  
+  min-height: 150px;
+  padding: 15px 20% 0 20%;
 }
 
 .description-img {
-  width: 20%;
+  width: 15%;
   margin: auto;
   height: auto;
 }
 
 .description-text {
   width: 70%;
-  font-size: 1.6em;
+  font-size: 1.4em;
   font-weight: 300;
   padding-top: 0;
   margin-top: 0;
@@ -184,17 +180,16 @@ FOOTER
 */
 
 footer {
-  height: 50px;
+  height: 70px;
   color: white;
-  background-color:#241b1f;
+  background-color: #2f2024;
   text-align: center;
-  padding-top:20px;
+  padding-top: 20px;
 }
 
 .last {
   padding-bottom: 100px;
 }
-
 
 /* iPhone5/SE */
 @media (max-width: 350px) {
@@ -210,46 +205,48 @@ footer {
     min-height: 170px;
     padding: 50px 20% 0 20%;
   }
+  .main-container {
+    margin-top: 0;
+    padding-top: 0;
+  }
 
   footer {
     height: 50px;
     color: white;
-    background-color:#241b1f;
+    background-color: #241b1f;
     text-align: center;
-    padding-top:20px;
+    padding-top: 20px;
   }
 
+  .logoContainer {
+    height: 400px;
+    width: auto;
+    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.logoContainer {
-  height: 400px;
-  width: auto;
-  transform: translate(-50%, -50%);
-  margin-left: auto;
-  margin-right: auto;
-}
+  .centered {
+    display: block;
+    height: auto;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.centered {
-  display: block;
-  height: auto;
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
+  .bodybutton {
+    height: 40px;
+    width: 100px;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    border: 2px white solid;
+  }
 }
-
-.bodybutton {
-  height: 40px;
-  width: 100px;
-  font-size: 1em;
-  border-radius:10px;
-  cursor: pointer;
-  margin: 10px;
-  border:2px white solid;
-}
-}
-
 
 /* MOBILE */
-@media (min-width:351px) and (max-width: 450px) {
+@media (min-width: 351px) and (max-width: 450px) {
   .description-text {
     width: 75%;
     font-size: 1.1em;
@@ -272,45 +269,43 @@ footer {
   footer {
     height: 50px;
     color: white;
-    background-color:#241b1f;
+    background-color: #241b1f;
     text-align: center;
-    padding-top:20px;
+    padding-top: 20px;
   }
 
+  .logoContainer {
+    height: 400px;
+    width: auto;
+    transform: translate(-50%, -50%);
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.logoContainer {
-  height: 400px;
-  width: auto;
-  transform: translate(-50%, -50%);
-  margin-left: auto;
-  margin-right: auto;
-}
+  .centered {
+    display: block;
+    height: auto;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.centered {
-  display: block;
-  height: auto;
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.bodybutton {
-  height: 40px;
-  width: 100px;
-  font-size: 1em;
-  border-radius:10px;
-  cursor: pointer;
-  margin: 10px;
-  border:2px white solid;
-}
-
+  .bodybutton {
+    height: 40px;
+    width: 100px;
+    font-size: 1em;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    border: 2px white solid;
+  }
 }
 
 /* TABLET */
-@media (min-width: 700px) and (max-width:1000px) {
+@media (min-width: 700px) and (max-width: 1000px) {
   .description-text {
     width: 70%;
-    font-size:1.4em;
+    font-size: 1.4em;
   }
 
   .descriptcontainer {
@@ -318,6 +313,3 @@ footer {
     padding: 50px 20% 0 20%;
   }
 }
-
-
-
