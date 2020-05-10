@@ -4,14 +4,12 @@
 
 body {
   box-sizing: border-box;
-  margin-top: 50px;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 0;
+  margin: 0;
   padding: 0;
-  background: url(/images/background.jpg) no-repeat;
-  background-position: center top;
-  background-size: 100%;
+}
+
+.background-image {
+  width: 100%;
 }
 
 /*
@@ -27,7 +25,7 @@ NAV STYLING
   height: 60px;
   width: 100%;
   overflow: hidden;
-  background-color: #241b1f10;
+  background-color: #fddeec10;
 }
 
 /* Style the links inside the navigation bar */
@@ -38,7 +36,7 @@ NAV STYLING
 }
 
 .topnav.scrolling {
-  background-color: #241b1f;
+  background-color: #3f5057;
   color: white;
 }
 
@@ -78,11 +76,14 @@ BRANDING AND SUBTITLE STYLING
   flex: 1 100%;
 }
 
+.absolute-container {
+  position: absolute;
+  top: 4%;
+  width: 100%;
+}
+
 /* Position name and logo */
 .logoContainer {
-  height: 400px;
-  width: auto;
-  transform: translate(-50%, -50%);
   margin-left: auto;
   margin-right: auto;
 }
@@ -94,6 +95,7 @@ BRANDING AND SUBTITLE STYLING
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 
 .subtitlecontainer {
@@ -113,25 +115,30 @@ BRANDING AND SUBTITLE STYLING
   margin-top: 3%;
   display: block;
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
 }
 
-.bodybutton {
-  height: 50px;
-  width: 180px;
+a.CTA {
+  padding: 1.2em;
+  width: 35%;
   font-size: 1em;
   font-weight: 500;
   color: white;
-  background-color: #221D27;
-  border: 1.5px white solid;
-  border-radius:24px;
-
+  background-color: #274251;
+  border-radius: 5px;
   cursor: pointer;
-  margin: 10px;
+  margin: 0.5em;
+  text-decoration: none;
 }
 
 /* Button hover */
-.bodybutton:hover {
-  background-color: rgb(61, 53, 70);
+.CTA:hover {
+  background-color: #274251c4;
 }
 
 /*
@@ -142,9 +149,8 @@ PITCH STYLING
 
 .main-container {
   width: 100%;
-  margin-top: 70px;
-  padding-top: 30px;
   background-color: white;
+  margin-top: 2em;
 }
 
 .descriptcontainer {
@@ -183,7 +189,7 @@ FOOTER
 footer {
   height: 60px;
   color: white;
-  background-color: #221D27;
+  background-color: #274251;
   text-align: center;
   padding-top: 20px;
 }
@@ -193,7 +199,7 @@ footer {
 }
 
 /* iPhone5/SE */
-@media (max-width: 350px) {
+/* @media (max-width: 350px) {
   .description-text {
     width: 75%;
     font-size: 1em;
@@ -235,7 +241,7 @@ footer {
     margin-right: auto;
   }
 
-  .bodybutton {
+  .CTA {
     height: 40px;
     width: 100px;
     font-size: 1em;
@@ -244,10 +250,10 @@ footer {
     margin: 10px;
     border: 2px white solid;
   }
-}
+} */
 
 /* MOBILE */
-@media (min-width: 351px) and (max-width: 450px) {
+@media screen and (max-width: 700px) {
   .description-text {
     width: 75%;
     font-size: 1.1em;
@@ -263,35 +269,33 @@ footer {
   }
 
   .descriptcontainer {
-    min-height: 170px;
-    padding: 50px 20% 0 20%;
+    min-height: 8em;
+    padding: 2em 10% 0 10%;
   }
 
   footer {
     height: 50px;
     color: white;
-    background-color: #241b1f;
+    background-color: #274251;
     text-align: center;
     padding-top: 20px;
   }
 
-  .logoContainer {
-    height: 400px;
-    width: auto;
-    transform: translate(-50%, -50%);
-    margin-left: auto;
-    margin-right: auto;
+  .buttoncontainer {
+    margin-top: 3%;
+    flex-direction: row;
+    width: 90%;
   }
 
-  .centered {
-    display: block;
-    height: auto;
-    width: 85%;
-    margin-left: auto;
-    margin-right: auto;
+  a.CTA {
+    width: 35%;
   }
 
-  .bodybutton {
+  .absolute-container {
+    top: 2%;
+  }
+
+  /* .CTA {
     height: 40px;
     width: 100px;
     font-size: 1em;
@@ -299,7 +303,7 @@ footer {
     cursor: pointer;
     margin: 10px;
     border: 2px white solid;
-  }
+  } */
 }
 
 /* TABLET */
