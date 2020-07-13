@@ -1,42 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Signup Page</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/signup.css" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
-</head>
-<div class="topnav">
-    <nav>
-      <ul class="nav-ul">
-        <li class="nav-li"><img class="logo" src="images/LogoWords.png"></li>
-      </ul>
-    </nav>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="css/loginAndSignup.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400"
+      rel="stylesheet"
+    />
+  </head>
+  <div class="logo-wrapper">
+    <img class="logo" src="images/LogoWordsOnly.svg" />
+  </div>
+  <body>
+    <div class="form-container">
+      <form id="signup-form">
+        <h1>Sign up</h1>
+        <label for="firstname">First Name:</label>
+        <input
+          type="text"
+          placeholder="Enter First Name"
+          name="firstname"
+          id="firstName"
+          required
+        />
+        <label for="lastname">Last Name:</label>
+        <input
+          type="text"
+          placeholder="Enter Last Name"
+          name="lastname"
+          id="lastName"
+          required
+        />
+        <label for="email">Email address:</label>
+        <input
+          type="email"
+          placeholder="Enter Email Address"
+          name="email"
+          id="email"
+          required
+        />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          placeholder="Enter Password"
+          name="password"
+          id="password"
+          required
+        />
+        <input type="submit" class="signupbutton" value="Sign up" />
+      </form>
     </div>
-<body>
-<div class="form-container">
-    <form id="signup-form">
-            <h1>Sign up</h1>
-            <label for="firstname">First Name:</label>
-            <input type="text" placeholder="Enter First Name" name="firstname" id="firstName" required>
-            <label for="lastname">Last Name:</label>
-            <input type="text" placeholder="Enter Last Name" name="lastname" id="lastName" required>
-            <label for="email">Email address:</label>
-            <input type="email" placeholder="Enter Email Address" name="email" id="email" required>
-            <label for="password">Password:</label>
-            <input type="password" placeholder="Enter Password" name="password" id="password" required>
-            <input type="submit" class="signupbutton" value="Sign up">
-    </form>
-</div>
-<div class="error-message"></div>
-<div class="signin-link"><a href="login.html">Already have an account? Sign in by clicking here!</a></div><br>
-<div class="demo-container"><input type="button" class="demo-account-button" value="Use a demo account"></div>
+    <div class="error-message"></div>
+    <div class="signin-link">
+      <a href="login.html"
+        >Already have an account?<br />
+        Sign in here</a
+      >
+    </div>
+    <br />
+    <div class="demo-container">
+      <input
+        type="button"
+        class="demo-account-button"
+        value="Use a demo account"
+      />
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.0.0.js"></script>
-<script src="javascript/signup.js"></script>
-<script src="javascript/auth.js"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.0.0.js"></script>
+    <script src="javascript/signup.js"></script>
+    <script src="javascript/auth.js"></script>
+  </body>
 </html>
